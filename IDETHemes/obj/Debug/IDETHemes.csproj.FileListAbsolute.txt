@@ -1,0 +1,9 @@
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\bin\Debug\IDETHemes.dll
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\bin\Debug\IDETHemes.pdb
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.csprojAssemblyReference.cache
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.csproj.CoreCompileInputs.cache
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.csproj.CopyComplete
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
+C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb

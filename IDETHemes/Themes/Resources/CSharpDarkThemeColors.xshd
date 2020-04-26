@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<SyntaxDefinition name="C#" extensions=".cs" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment"             foreground="#FF55FF00" />
+  <Color name="String"              foreground="#FFFFFF00" />
+  <Color name="StringInterpolation" foreground="White" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
+  <Color name="Char"                foreground="#FFFFEF00" />
+  <Color name="Preprocessor"        foreground="#FFFF8080" />
+  <Color name="Punctuation"         foreground="#FFFFCF00" />
+
+  <Color name="ValueTypeKeywords"     foreground="#FF00A0FF" fontWeight="normal" exampleText="bool b = true;" />
+
+  <Color name="ReferenceTypeKeywords" foreground="#FF00A0FF" fontWeight="normal" exampleText="object o;" />
+  <Color name="MethodCall"            foreground="#FF00A0FF" fontWeight="normal" />
+  <Color name="NumberLiteral"         foreground="#FFFFCF00" />
+  <Color name="ThisOrBaseReference"   foreground="#FF00A0FF" fontWeight="normal" />
+  <Color name="NullOrValueKeywords"   foreground="#FF0080FF" fontWeight="normal" />
+  <Color name="Keywords"              foreground="#FF00E0FF" fontWeight="normal" />
+  <Color name="GotoKeywords"          foreground="#FF00E0FF" fontWeight="normal" />
+  <Color name="ContextKeywords"       foreground="#FF0080FF" fontWeight="normal" />
+  <Color name="ExceptionKeywords"     foreground="#FF0060FF" fontWeight="normal" />
+  <Color name="CheckedKeyword"        foreground="#FF0040FF" fontWeight="normal" />
+  <Color name="UnsafeKeywords"        foreground="#FF00C0FF" fontWeight="normal" />
+  <Color name="OperatorKeywords"      foreground="#FF00E0FF" fontWeight="normal" />
+  <Color name="ParameterModifiers"    foreground="#FF0080FF" fontWeight="normal" />
+  <Color name="Modifiers"             foreground="#FF0060FF" fontWeight="normal" />
+  <Color name="Visibility"            foreground="#FF0060FF" fontWeight="normal" />
+  <Color name="NamespaceKeywords"     foreground="#FF0040FF" fontWeight="normal" />
+  <Color name="GetSetAddRemove"       foreground="#FF00C0FF" fontWeight="normal" />
+  <Color name="TrueFalse"             foreground="#FF0040FF" fontWeight="normal" />
+  <Color name="TypeKeywords"          foreground="#FF00C0FF" fontWeight="normal" />
+  <Color name="SemanticKeywords"      foreground="DarkCyan" fontWeight="bold" exampleText="if (args == null) throw new ArgumentNullException(nameof(args));" />
+
+  <Color name="CommentMarkerSetTodo"       foreground="#FFFF8080" fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#FFFF6060" fontWeight="bold" />
+
+  <Property name="Background"  Value="#1b1c1b"/>
+</SyntaxDefinition>
