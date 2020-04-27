@@ -4,15 +4,13 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:typicalIDE"
+        xmlns:cntrl="clr-namespace:typicalIDE.CodeBox"
         xmlns:avalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <avalonEdit:TextEditor Name="textEditor"
-                               FontFamily="Consolas" 
-                               FontSize="12pt"
-                               ShowLineNumbers="True"/>
 
+        <cntrl:CodeBoxControl/>
 
     </Grid>
 </Window>

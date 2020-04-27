@@ -21,3 +21,6 @@ C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\HL.pdb
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\HL.xml
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\IDETHemes.dll
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\IDETHemes.pdb
+C:\Users\typical\Desktop\typicalIDE\typicalIDE\obj\Debug\CodeBox\CodeBoxControl.g.cs
+C:\Users\typical\Desktop\typicalIDE\typicalIDE\obj\Debug\GeneratedInternalTypeHelper.g.cs
+C:\Users\typical\Desktop\typicalIDE\typicalIDE\obj\Debug\CodeBox\CodeBoxControl.baml

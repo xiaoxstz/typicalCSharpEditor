@@ -50,27 +50,16 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Themes\AppTheme.cs" />
-    <Compile Include="Themes\CSharpCodeThemes\CSharpThemeBase.cs" />
-    <Compile Include="Themes\CSharpCodeThemes\DarkCodeTheme.cs" />
-    <Compile Include="Themes\Helper\CustomizedBrush.cs" />
-    <Compile Include="Themes\Interfaces\IRuleSet.cs" />
+    <Compile Include="Themes\CSharpThemes\CSharpThemeBase.cs" />
+    <Compile Include="Themes\CSharpThemes\DarkTheme.cs" />
     <Compile Include="Themes\Interfaces\ITheme.cs" />
-    <Compile Include="Themes\Interfaces\IThemeColors.cs" />
-    <Compile Include="Themes\RuleSets\CSharpRuleset.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Themes\XMLRuleSets\CSharp.xshd">
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <Compile Include="Themes\Enums\DefaultThemesEnum.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Themes\Resources\CSharpDarkThemeColors.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Themes\CSharp\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -3,6 +3,7 @@ using System.Linq;
 using System.Reflection;
 using System.Windows.Media;
 using System.Xml;
+using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using IDEThemes.Themes.Interfaces;
@@ -34,11 +35,13 @@ namespace IDEThemes.Themes.CSharpThemes
             Colors = definition.NamedHighlightingColors.ToList();
         }
 
-        public IHighlightingDefinition GetTheme()
+        public void SetTheme(TextEditor editor)
         {
             SetDefinitionColors(definition);
             SetDefinitionSpans(definition);
-            return definition;
+            editor.SyntaxHighlighting = definition;
+            editor.Background = Background;
+            editor.Foreground = Foreground;
         }
         private void SetDefinitionSpans(IHighlightingDefinition definition)
         {
