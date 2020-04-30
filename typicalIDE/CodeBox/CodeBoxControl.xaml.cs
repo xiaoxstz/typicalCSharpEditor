@@ -7,23 +7,39 @@ using System.Windows;
 using System.Windows.Controls;
 using typicalIDE.CodeBox.Enums;
 using typicalIDE.CodeBox.Folding;
+using System.Linq;
+using typicalIDE.CodeBox.Indents;
+using ICSharpCode.AvalonEdit.Document;
 
 namespace typicalIDE.CodeBox
 {
     public partial class CodeBoxControl : UserControl
     {
-        BraceFoldingStrategy braceFolding { get; set; } = new BraceFoldingStrategy();
+        private BraceFoldingStrategy braceFolding { get; set; } = new BraceFoldingStrategy();
         private FoldingManager foldingManager { get; set; }
 
         public CodeBoxControl()
         {
             InitializeComponent();
+            textEditor.TextArea.IndentationStrategy = new CSharpIndent();
             foldingManager = FoldingManager.Install(textEditor.TextArea);
             Theme.SetTheme(textEditor);
         }
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
+            CheckBraces();
             braceFolding.UpdateFoldings(foldingManager, textEditor.Document);  
+        }
+
+        private void CheckBraces()
+        {
+            DocumentLine currentLine = textEditor.Document.GetLineByNumber(textEditor.TextArea.Caret.Line);
+            string currentText = textEditor.Document.GetText(currentLine.Offset, currentLine.EndOffset - currentLine.Offset);
+            if (currentText.Length > 0 && currentText.Last() == '{')
+            {
+                textEditor.Document.Insert(currentLine.EndOffset, "  }");
+                textEditor.TextArea.Caret.Column--;
+            }
         }
 
         #region DependencyProperties
@@ -72,7 +88,9 @@ namespace typicalIDE.CodeBox
 
         #endregion
 
+
         #endregion
+
     }
 }
 
