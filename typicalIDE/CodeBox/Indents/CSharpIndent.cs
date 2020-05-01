@@ -10,7 +10,7 @@ using ICSharpCode.AvalonEdit.Indentation.CSharp;
 
 namespace typicalIDE.CodeBox.Indents
 {
-    public class CSharpIndent : DefaultIndentationStrategy
+    public class CSharpIndent : CSharpIndentationStrategy
     {
         public const string INDENT_STRING = "   ";
         private const char OPEN_BRACKET = '{';
@@ -31,26 +31,38 @@ namespace typicalIDE.CodeBox.Indents
                 indentationSegment = TextUtilities.GetWhitespaceAfter(document, line.Offset);
                 document.Replace(indentationSegment.Offset, indentationSegment.Length, indentation,
                                  OffsetChangeMappingType.RemoveAndInsert);
+                SetCloseBracketIndent(line, document, indentation);
             }
         }
 
         private string GetSharpIndentation(string indentation, DocumentLine prevLine, TextDocument doc)
         {
             string prevLineText = doc.GetText(prevLine.Offset, prevLine.EndOffset - prevLine.Offset);
-            char lastChar = prevLineText.Replace(" ", "").Last();
-            if (lastChar == OPEN_BRACKET)
-                indentation += INDENT_STRING;
-            if (lastChar == CLOSE_BRACKET && indentation.Length > 0)
+            string noSpacesText = prevLineText.Replace(" ", "");
+            if (noSpacesText.Length > 0)
             {
-                indentation = indentation.Remove(indentation.IndexOf(INDENT_STRING), INDENT_STRING.Length);
-                SetLastLineIndent(prevLine, doc);
+                char lastChar = noSpacesText.Last();
+                if (lastChar == OPEN_BRACKET)
+                    indentation += INDENT_STRING;
+                if (lastChar == CLOSE_BRACKET && indentation.Length > 0)
+                {
+                    indentation = indentation.Remove(indentation.IndexOf(INDENT_STRING), INDENT_STRING.Length);
+                    SetLastLineIndent(prevLine, doc);
+                }
             }
             return indentation;
         }
 
-        private void SetCloseBracketIndent()
+        private void SetCloseBracketIndent(DocumentLine line, TextDocument document, string indentation)
         {
-
+            string currentLineText = document.GetText(line.Offset, line.Length);
+            string noSpacesText = currentLineText.Replace(" ", "");
+            if (noSpacesText.Length > 0 && noSpacesText.Last() == CLOSE_BRACKET)
+            {
+                indentation = indentation.Remove(indentation.IndexOf(INDENT_STRING), INDENT_STRING.Length);
+                currentLineText = currentLineText.Replace(" ", "").Insert(0, indentation);
+                document.Replace(line.Offset, line.Length, currentLineText, OffsetChangeMappingType.RemoveAndInsert);
+            }
         }
 
         private void SetLastLineIndent(DocumentLine prevLine, TextDocument doc)

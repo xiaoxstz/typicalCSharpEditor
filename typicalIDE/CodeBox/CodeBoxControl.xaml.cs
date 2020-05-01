@@ -10,6 +10,7 @@ using typicalIDE.CodeBox.Folding;
 using System.Linq;
 using typicalIDE.CodeBox.Indents;
 using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Editing;
 
 namespace typicalIDE.CodeBox
 {
@@ -22,25 +23,60 @@ namespace typicalIDE.CodeBox
         {
             InitializeComponent();
             textEditor.TextArea.IndentationStrategy = new CSharpIndent();
+            textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             foldingManager = FoldingManager.Install(textEditor.TextArea);
             Theme.SetTheme(textEditor);
         }
+
+        #region Methods
+        #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
             CheckBraces();
-            braceFolding.UpdateFoldings(foldingManager, textEditor.Document);  
+            braceFolding.UpdateFoldings(foldingManager, textEditor.Document);
         }
+
+        #endregion
+
+        #region Caret_PositionChanged
+        private int lastXPosition = 1;
+        private int lastYPosition = 1;
+        private void Caret_PositionChanged(object sender, EventArgs e)
+        {
+            Caret caret = sender as Caret;
+            if (lastYPosition != caret.Line)
+            {
+                DocumentLine line = textEditor.Document.GetLineByNumber(caret.Line);
+                if (line.Length > 0 && lastXPosition > caret.Column &&
+                   line.Length >= lastXPosition)
+                {
+                    lastXPosition = line.Length - 1;
+                    caret.Column = lastXPosition;
+                }
+            }
+            lastYPosition = caret.Line;
+            lastXPosition = caret.Column;
+        }
+        #endregion
+
+        #region CheckBraces
+
+        private const char OPEN_BRACKET = '{';
+        private const string CLOSE_BRACKET = "  }";
 
         private void CheckBraces()
         {
             DocumentLine currentLine = textEditor.Document.GetLineByNumber(textEditor.TextArea.Caret.Line);
             string currentText = textEditor.Document.GetText(currentLine.Offset, currentLine.EndOffset - currentLine.Offset);
-            if (currentText.Length > 0 && currentText.Last() == '{')
+            if (currentText.Length > 0 && currentText.Last() == OPEN_BRACKET)
             {
-                textEditor.Document.Insert(currentLine.EndOffset, "  }");
+                textEditor.Document.Insert(currentLine.EndOffset, CLOSE_BRACKET;
                 textEditor.TextArea.Caret.Column--;
             }
         }
+
+        #endregion
+        #endregion
 
         #region DependencyProperties
 
