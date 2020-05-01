@@ -37,7 +37,7 @@ namespace typicalIDE.CodeBox.Indents
 
         private string GetSharpIndentation(string indentation, DocumentLine prevLine, TextDocument doc)
         {
-            string prevLineText = doc.GetText(prevLine.Offset, prevLine.EndOffset - prevLine.Offset);
+            string prevLineText = doc.GetText(prevLine.Offset, prevLine.Length);
             string noSpacesText = prevLineText.Replace(" ", "");
             if (noSpacesText.Length > 0)
             {
@@ -67,7 +67,7 @@ namespace typicalIDE.CodeBox.Indents
 
         private void SetLastLineIndent(DocumentLine prevLine, TextDocument doc)
         {
-            string prevLineText = doc.GetText(prevLine.Offset, prevLine.EndOffset - prevLine.Offset);
+            string prevLineText = doc.GetText(prevLine.Offset, prevLine.Length);
             string indentedText = prevLineText.Remove(prevLineText.IndexOf(INDENT_STRING), INDENT_STRING.Length);
             doc.Replace(prevLine.Offset, prevLine.Length, indentedText);
         }
