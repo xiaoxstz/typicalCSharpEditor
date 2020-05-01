@@ -8,6 +8,7 @@ using System.Windows.Controls;
 using typicalIDE.CodeBox.Enums;
 using typicalIDE.CodeBox.Folding;
 using System.Linq;
+using System.Windows.Input;
 using typicalIDE.CodeBox.Indents;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
@@ -25,6 +26,7 @@ namespace typicalIDE.CodeBox
             textEditor.TextArea.IndentationStrategy = new CSharpIndent(textEditor.TextArea.Caret);
             textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             foldingManager = FoldingManager.Install(textEditor.TextArea);
+            Theme = new LightTheme();
             Theme.SetTheme(textEditor);
         }
         
@@ -61,24 +63,31 @@ namespace typicalIDE.CodeBox
 
         #region AutoSymbols
 
+        private bool IsBracket { get; set; }
+        private bool IsBrace { get; set; }
+
         private void CheckAutoSymbols()
         {
             CheckBraces();
             CheckBrackets();
+            IsBrace = false;
+            IsBracket = false;
         }
 
         private const char OPEN_BRACE = '{';
         private const string CLOSE_BRACE = "  }";
         private void CheckBraces()
         {
-            AutoSymbolsPattern(OPEN_BRACE, CLOSE_BRACE);
+            if(IsBrace)
+               AutoSymbolsPattern(OPEN_BRACE, CLOSE_BRACE);
         }
 
         private const char OPEN_BRACKET = '(';
         private const string CLOSE_BRACKET = ")";
         private void CheckBrackets()
         {
-            AutoSymbolsPattern(OPEN_BRACKET, CLOSE_BRACKET);
+            if(IsBracket)
+               AutoSymbolsPattern(OPEN_BRACKET, CLOSE_BRACKET);
         }
 
         private void AutoSymbolsPattern(char ch, string insertString)
@@ -93,7 +102,6 @@ namespace typicalIDE.CodeBox
             }
 
         }
-
         #endregion
 
         #endregion
@@ -142,11 +150,16 @@ namespace typicalIDE.CodeBox
             }
         }
 
-        #endregion
-
 
         #endregion
 
+        #endregion
+
+        private void TextEditor_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            IsBrace = e.Text == "{";
+            IsBracket = e.Text == "(";
+        }
     }
 
 }
