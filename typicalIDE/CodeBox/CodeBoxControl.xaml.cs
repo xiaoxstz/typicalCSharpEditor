@@ -22,17 +22,17 @@ namespace typicalIDE.CodeBox
         public CodeBoxControl()
         {
             InitializeComponent();
-            textEditor.TextArea.IndentationStrategy = new CSharpIndent();
+            textEditor.TextArea.IndentationStrategy = new CSharpIndent(textEditor.TextArea.Caret);
             textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
             foldingManager = FoldingManager.Install(textEditor.TextArea);
             Theme.SetTheme(textEditor);
         }
-
+        
         #region Methods
         #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
-            CheckBraces();
+            CheckAutoSymbols();
             braceFolding.UpdateFoldings(foldingManager, textEditor.Document);
         }
 
@@ -59,23 +59,43 @@ namespace typicalIDE.CodeBox
         }
         #endregion
 
-        #region CheckBraces
+        #region AutoSymbols
 
-        private const char OPEN_BRACKET = '{';
-        private const string CLOSE_BRACKET = "  }";
+        private void CheckAutoSymbols()
+        {
+            CheckBraces();
+            CheckBrackets();
+        }
 
+        private const char OPEN_BRACE = '{';
+        private const string CLOSE_BRACE = "  }";
         private void CheckBraces()
         {
+            AutoSymbolsPattern(OPEN_BRACE, CLOSE_BRACE);
+        }
+
+        private const char OPEN_BRACKET = '(';
+        private const string CLOSE_BRACKET = ")";
+        private void CheckBrackets()
+        {
+            AutoSymbolsPattern(OPEN_BRACKET, CLOSE_BRACKET);
+        }
+
+        private void AutoSymbolsPattern(char ch, string insertString)
+        {
             DocumentLine currentLine = textEditor.Document.GetLineByNumber(textEditor.TextArea.Caret.Line);
-            string currentText = textEditor.Document.GetText(currentLine.Offset, currentLine.EndOffset - currentLine.Offset);
-            if (currentText.Length > 0 && currentText.Last() == OPEN_BRACKET)
+            string currentText = textEditor.Document.GetText(currentLine.Offset, currentLine.Length);
+            string noSpacesText = currentText.Replace(" ", "");
+            if (noSpacesText.Length > 0 && noSpacesText.Last() == ch)
             {
-                textEditor.Document.Insert(currentLine.EndOffset, CLOSE_BRACKET;
-                textEditor.TextArea.Caret.Column--;
+                textEditor.Document.Insert(currentLine.EndOffset, insertString);
+                textEditor.TextArea.Caret.Column = textEditor.Document.GetLineByNumber(currentLine.LineNumber).Length;
             }
+
         }
 
         #endregion
+
         #endregion
 
         #region DependencyProperties
@@ -128,5 +148,6 @@ namespace typicalIDE.CodeBox
         #endregion
 
     }
+
 }
 
