@@ -11,6 +11,5 @@
     <Grid>
 
         <cntrl:CodeBoxControl/>
-
     </Grid>
 </Window>

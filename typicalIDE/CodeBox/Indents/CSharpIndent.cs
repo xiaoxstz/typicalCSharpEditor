@@ -48,9 +48,10 @@ namespace typicalIDE.CodeBox.Indents
                 char lastChar = noSpacesText.Last();
                 if (lastChar == OPEN_BRACE)
                     indentation += INDENT_STRING;
-                if (lastChar == CLOSE_BRACE && indentation.Length > 0)
+                int index = indentation.IndexOf(INDENT_STRING);
+                if (lastChar == CLOSE_BRACE && indentation.Length > 0 && index > -1)
                 {
-                    indentation = indentation.Remove(indentation.IndexOf(INDENT_STRING), INDENT_STRING.Length);
+                    indentation = indentation.Remove(index, INDENT_STRING.Length);
                     SetLastLineIndent(prevLine, doc);
                 }
             }
@@ -61,9 +62,10 @@ namespace typicalIDE.CodeBox.Indents
         {
             string currentLineText = document.GetText(line.Offset, line.Length);
             string noSpacesText = currentLineText.Replace(" ", "");
-            if (noSpacesText.Length > 0 && noSpacesText.Last() == CLOSE_BRACE)
+            int index = indentation.IndexOf(INDENT_STRING);
+            if (noSpacesText.Length > 0 && noSpacesText.Last() == CLOSE_BRACE && index > -1)
             {
-                string tempIndent = indentation.Remove(indentation.IndexOf(INDENT_STRING), INDENT_STRING.Length);
+                string tempIndent = indentation.Remove(index, INDENT_STRING.Length);
                 currentLineText = currentLineText.Replace(" ", "").Insert(0, $"\n{tempIndent}");
                 document.Replace(line.Offset, line.Length, currentLineText, OffsetChangeMappingType.RemoveAndInsert);
                 document.Replace(line.Offset, line.Length, indentation);

@@ -12,9 +12,9 @@ namespace IDEThemes.Themes.Interfaces
         void SetTheme(TextEditor editor);
         Brush Background { get;}
         Brush Foreground { get; }
-        HighlightingColor LineNumbersForeground { get; }
+        Brush LineNumbersForeground { get; }
         Brush Selection { get; }
-        HighlightingColor Hyperlink { get; }
-        HighlightingColor NonPrintabelCharacters { get; }
+        Brush Hyperlink { get; }
+        Brush NonPrintabelCharacters { get; }
     }
 }

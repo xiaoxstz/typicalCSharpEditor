@@ -9,9 +9,10 @@
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>IDETHemes</RootNamespace>
     <AssemblyName>IDETHemes</AssemblyName>
-    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <Deterministic>true</Deterministic>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -50,16 +51,28 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Themes\CheckFiles\CSharpCheckFile.cs" />
+    <Compile Include="Themes\CSharpThemes\BlueTheme.cs" />
     <Compile Include="Themes\CSharpThemes\CSharpThemeBase.cs" />
     <Compile Include="Themes\CSharpThemes\DarkTheme.cs" />
+    <Compile Include="Themes\CSharpThemes\LightTheme.cs" />
     <Compile Include="Themes\Interfaces\ITheme.cs" />
     <Compile Include="Themes\Enums\DefaultThemesEnum.cs" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Themes\Resources\CSharpDarkThemeColors.xshd">
+    <EmbeddedResource Include="Themes\Resources\CSharpDarkTheme.xshd">
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\Resources\CSharpBlueTheme.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Themes\Resources\CSharpLightTheme.xshd">
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

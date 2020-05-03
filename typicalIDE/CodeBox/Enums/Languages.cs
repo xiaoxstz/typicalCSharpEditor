@@ -1,4 +1,4 @@
-﻿namespace typicalIDE.CodeBox.Enums
+﻿namespace typicalIDE.CodeBox
 {
     /// <summary>
     /// Programming language.

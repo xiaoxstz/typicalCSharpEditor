@@ -2,7 +2,7 @@
 using ICSharpCode.AvalonEdit.Folding;
 using System.Collections.Generic;
 
-namespace typicalIDE.CodeBox.Folding
+namespace typicalIDE.CodeBox.Foldings
 {
     public class BraceFoldingStrategy
     {

@@ -12,6 +12,8 @@
                                FontFamily="Consolas" 
                                FontSize="12pt"
                                ShowLineNumbers="True"
-                               TextChanged="TextEditor_TextChanged"/>
+                               TextChanged="TextEditor_TextChanged"
+                               PreviewTextInput="TextEditor_PreviewTextInput">
+        </avalonEdit:TextEditor>
     </Grid>
 </UserControl>

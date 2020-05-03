@@ -5,13 +5,15 @@ using IDETHemes.Themes.Enums;
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using typicalIDE.CodeBox.Enums;
-using typicalIDE.CodeBox.Folding;
+using typicalIDE.CodeBox.Foldings;
 using System.Linq;
 using System.Windows.Input;
 using typicalIDE.CodeBox.Indents;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using System.Collections.Generic;
+using typicalIDE.CodeBox.Completions.CSharpCompletion;
 
 namespace typicalIDE.CodeBox
 {
@@ -28,9 +30,13 @@ namespace typicalIDE.CodeBox
             foldingManager = FoldingManager.Install(textEditor.TextArea);
             Theme = new LightTheme();
             Theme.SetTheme(textEditor);
+            textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
+            textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
+
         }
         
         #region Methods
+
         #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
@@ -59,6 +65,17 @@ namespace typicalIDE.CodeBox
             lastYPosition = caret.Line;
             lastXPosition = caret.Column;
         }
+        #endregion
+
+        #region TextEditor_PreviewTextInput
+
+
+        private void TextEditor_PreviewTextInput(object sender, TextCompositionEventArgs e)
+        {
+            IsBrace = e.Text == "{";
+            IsBracket = e.Text == "(";
+        }
+
         #endregion
 
         #region AutoSymbols
@@ -100,8 +117,76 @@ namespace typicalIDE.CodeBox
                 textEditor.Document.Insert(currentLine.EndOffset, insertString);
                 textEditor.TextArea.Caret.Column = textEditor.Document.GetLineByNumber(currentLine.LineNumber).Length;
             }
-
         }
+        #endregion
+
+        #region Completion
+        private CompletionWindow completionWindow { get; set; }
+
+        #region Events
+        void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+        {
+            if (completionWindow == null && char.IsLetterOrDigit(e.Text[0]))
+            {
+                completionWindow = new CompletionWindow(textEditor.TextArea);
+                IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+                SetCompletionWindowOffset();
+                data.Add(new CSharpCompletion("as", CompletionTypes.Keyword));
+                completionWindow.Show();
+                completionWindow.Closed += delegate
+                {
+                    completionWindow = null;
+                };
+            }
+        }
+
+        void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
+        {
+            if (e.Text.Length > 0 && completionWindow != null)
+            {
+                if (!char.IsLetterOrDigit(e.Text[0]))
+                {
+                    completionWindow.CompletionList.RequestInsertion(e);
+                }
+            }
+        }
+        #endregion
+
+        #region WordOffset
+        private void SetCompletionWindowOffset()
+        {
+            string text = GetCurrentLineText();
+            completionWindow.StartOffset = GetWordStartOffset(completionWindow.StartOffset, text);
+            completionWindow.EndOffset = GetWordEndOffset(completionWindow.EndOffset, text);
+        }
+
+
+        private string GetCurrentLineText()
+        {
+            int line = textEditor.TextArea.Caret.Line;
+            int column = textEditor.TextArea.Caret.Column;
+            DocumentLine currentLine = textEditor.Document.GetLineByNumber(line);
+            string text = textEditor.Document.GetText(currentLine.Offset, currentLine.Length);
+            return text;
+        }
+
+        private int GetWordStartOffset(int startOffset, string text)
+        {
+            int i = startOffset - 1;
+            while (i > -1 && char.IsLetterOrDigit(text[i]))
+                i--;
+            return i + 1;
+        }
+
+        private int GetWordEndOffset(int endOffset, string text)
+        {
+            int i = endOffset - 1;
+            while (i < text.Length && char.IsLetterOrDigit(text[i]))
+                i++;
+            return i;
+        }
+        #endregion
+
         #endregion
 
         #endregion
@@ -155,11 +240,6 @@ namespace typicalIDE.CodeBox
 
         #endregion
 
-        private void TextEditor_PreviewTextInput(object sender, TextCompositionEventArgs e)
-        {
-            IsBrace = e.Text == "{";
-            IsBracket = e.Text == "(";
-        }
     }
 
 }

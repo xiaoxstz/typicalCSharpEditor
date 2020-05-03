@@ -7,3 +7,12 @@ C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.csproj.CoreCom
 C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.csproj.CopyComplete
 C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
 C:\Users\typical\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
+D:\typicalIDE\IDETHemes\bin\Debug\IDETHemes.dll
+D:\typicalIDE\IDETHemes\bin\Debug\IDETHemes.pdb
+D:\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+D:\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+D:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csprojAssemblyReference.cache
+D:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
+D:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
+D:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
+D:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb

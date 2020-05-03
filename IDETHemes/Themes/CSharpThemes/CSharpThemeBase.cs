@@ -1,6 +1,9 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
+using System.Windows;
+using System.Windows.Documents;
 using System.Windows.Media;
 using System.Xml;
 using ICSharpCode.AvalonEdit;
@@ -12,28 +15,44 @@ namespace IDEThemes.Themes.CSharpThemes
 {
     public abstract class CSharpThemeBase: ITheme
     {
+
         #region InterfaceProperties
         public IList<HighlightingColor> Colors { get; protected set; } = new List<HighlightingColor>();
         public HighlightingRuleSet RuleSet { get; }
         public Brush Background { get; protected set; }
         public Brush Foreground { get; protected set; }
-        public HighlightingColor LineNumbersForeground { get; protected set; }
+        public Brush LineNumbersForeground { get; protected set; }
         public Brush Selection { get; protected set; }
-        public HighlightingColor Hyperlink { get; protected set; }
-        public HighlightingColor NonPrintabelCharacters { get; protected set; }
+        public Brush Hyperlink { get; protected set; }
+        public Brush NonPrintabelCharacters { get; protected set; }
         #endregion
 
+        #region Override Properties
+
+        public abstract string FilePath { get; set; }
         protected IHighlightingDefinition definition { get; set; }
 
+        #endregion
+
+        #region Ctor
+        private const string DEFAULT_RESOURCE = "CSharpDarkTheme.xshd";
         public CSharpThemeBase()
         {
+            if (string.IsNullOrEmpty(FilePath))
+                FilePath = DEFAULT_RESOURCE;
             Assembly assembly = Assembly.GetExecutingAssembly();
             string xmlCSharpFile = assembly.GetManifestResourceNames()
-                .First(fp => fp.Contains("CSharpDarkThemeColors.xshd"));
+                .First(fp => fp.Contains(FilePath));
             definition = GetDefiniion(xmlCSharpFile, assembly);
             RuleSet = definition.MainRuleSet;
             Colors = definition.NamedHighlightingColors.ToList();
+            SetProperties();
         }
+
+
+        #endregion
+
+        #region SetTheme
 
         public void SetTheme(TextEditor editor)
         {
@@ -42,7 +61,15 @@ namespace IDEThemes.Themes.CSharpThemes
             editor.SyntaxHighlighting = definition;
             editor.Background = Background;
             editor.Foreground = Foreground;
+            editor.TextArea.SelectionBrush = Selection;
+            editor.TextArea.TextView.NonPrintableCharacterBrush = NonPrintabelCharacters;
+            editor.TextArea.TextView.LinkTextBackgroundBrush = Hyperlink;
+            editor.TextArea.TextView.LinkTextUnderline = true;
+            editor.LineNumbersForeground = LineNumbersForeground;
         }
+        #endregion
+
+        #region Definition manipulation methods
         private void SetDefinitionSpans(IHighlightingDefinition definition)
         {
             List<HighlightingSpan> spans = definition.MainRuleSet.Spans.ToList();
@@ -66,7 +93,49 @@ namespace IDEThemes.Themes.CSharpThemes
                 }
             }
         }
+        #endregion
 
+        #region SetProperties
+
+        private void SetProperties()
+        {
+            DependencyProperty foreground = TextElement.ForegroundProperty;
+            DependencyProperty background = TextElement.BackgroundProperty;
+            for (int i = Colors.Count - 1; i > 0; i--)
+            {
+                switch (Colors[i].Name)
+                {
+                    case "Default":
+                        {
+                            Background = GetHCBrush(Colors[i], background);
+                            Foreground = GetHCBrush(Colors[i], foreground);
+                        }
+                        break;
+                    case "LineNumbersForeground":
+                        LineNumbersForeground = GetHCBrush(Colors[i], foreground);
+                        break;
+                    case "Selection":
+                        Selection = GetHCBrush(Colors[i], TextElement.BackgroundProperty);
+                        break;
+                    case "Hyperlink":
+                        Hyperlink = GetHCBrush(Colors[i], foreground);
+                        break;
+                    case "NonPrintableCharacter":
+                        NonPrintabelCharacters = GetHCBrush(Colors[i], foreground);
+                        break;
+                }
+            }
+        }
+
+        private Brush GetHCBrush(HighlightingColor color, DependencyProperty prop)
+        {
+            if (prop == TextElement.ForegroundProperty)
+                return (Brush)new BrushConverter().ConvertFromInvariantString(color.Foreground.ToString());
+            if(prop == TextElement.BackgroundProperty)
+                return (Brush)new BrushConverter().ConvertFromInvariantString(color.Background.ToString());
+            throw new Exception("Incorrect property");
+        }
+        #endregion
 
     }
 }
