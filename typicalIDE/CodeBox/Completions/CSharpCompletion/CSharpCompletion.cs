@@ -4,12 +4,14 @@ using ICSharpCode.AvalonEdit.Editing;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
 namespace typicalIDE.CodeBox.Completions.CSharpCompletion
 {
-    public class CSharpCompletion: ICompletionData
+    public class CSharpCompletion: INotifyPropertyChanged ,ICompletionData
     {
 
         public CSharpCompletion(string text)
@@ -43,6 +45,17 @@ namespace typicalIDE.CodeBox.Completions.CSharpCompletion
             get { return this.Text; }
         }
 
+        private Brush selectionColor = Brushes.Transparent;
+        public Brush SelectionColor
+        {
+            get => selectionColor;
+            set
+            {
+                selectionColor = value;
+                OnPropertyChanged("SelectionColor");
+            }
+        }
+
         public object Description
         {
             get { return "Keyword: " + this.Text; }
@@ -56,5 +69,11 @@ namespace typicalIDE.CodeBox.Completions.CSharpCompletion
         }
 
         public double Priority { get; }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
     }
 }

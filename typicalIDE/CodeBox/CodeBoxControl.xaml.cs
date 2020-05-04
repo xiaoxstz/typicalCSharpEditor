@@ -14,6 +14,8 @@ using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using System.Collections.Generic;
 using typicalIDE.CodeBox.Completions.CSharpCompletion;
+using System.Windows.Media;
+using HandyControl.Controls;
 
 namespace typicalIDE.CodeBox
 {
@@ -32,7 +34,7 @@ namespace typicalIDE.CodeBox
             Theme.SetTheme(textEditor);
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
-
+            
         }
         
         #region Methods
@@ -129,9 +131,15 @@ namespace typicalIDE.CodeBox
             if (completionWindow == null && char.IsLetterOrDigit(e.Text[0]))
             {
                 completionWindow = new CompletionWindow(textEditor.TextArea);
-                IList<ICompletionData> data = completionWindow.CompletionList.CompletionData;
+                completionWindow.Style = FindResource("CompletionWindowStyle") as Style;
+                completionWindow.CompletionList.Style = FindResource("CompletionListStyle") as Style;
+                completionWindow.CompletionList.ListBox.SelectionChanged += Changed;
+                IList <ICompletionData> data = completionWindow.CompletionList.CompletionData;
                 SetCompletionWindowOffset();
+                var of1 = completionWindow.StartOffset;
+                var pf2 = completionWindow.EndOffset;
                 data.Add(new CSharpCompletion("as", CompletionTypes.Keyword));
+                data.Add(new CSharpCompletion("is", CompletionTypes.Keyword));
                 completionWindow.Show();
                 completionWindow.Closed += delegate
                 {
@@ -172,18 +180,22 @@ namespace typicalIDE.CodeBox
 
         private int GetWordStartOffset(int startOffset, string text)
         {
+            int lineOffset = textEditor.Document.GetLineByOffset(startOffset).Offset;
+            startOffset -= lineOffset;
             int i = startOffset - 1;
             while (i > -1 && char.IsLetterOrDigit(text[i]))
                 i--;
-            return i + 1;
+            return i + 1 + lineOffset;
         }
 
         private int GetWordEndOffset(int endOffset, string text)
         {
+            int lineOffset = textEditor.Document.GetLineByOffset(endOffset).Offset;
+            endOffset -= lineOffset;
             int i = endOffset - 1;
             while (i < text.Length && char.IsLetterOrDigit(text[i]))
                 i++;
-            return i;
+            return i + lineOffset;
         }
         #endregion
 
@@ -240,6 +252,27 @@ namespace typicalIDE.CodeBox
 
         #endregion
 
+        private void Changed(object sender, SelectionChangedEventArgs e)
+        {
+            var a = sender as ListBox;
+            for(int i = 0; i < a.Items.Count; i++)
+            {
+                var temp = a.Items[i] as CSharpCompletion;
+                temp.SelectionColor = Brushes.Transparent;
+            }
+            var cur = a.SelectedValue;
+            if(cur != null)
+            {
+                var temp = cur as CSharpCompletion;
+                temp.SelectionColor = Brushes.Red;
+            }
+        }
+
+        private void TextEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key.ToString().Length > 1) //for special symbols
+                completionWindow?.Close();
+        }
     }
 
 }
