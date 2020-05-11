@@ -21,6 +21,7 @@ namespace typicalIDE.CodeBox
     public partial class CodeBoxControl : UserControl
     {
         private BraceFoldingStrategy braceFolding { get; set; } = new BraceFoldingStrategy();
+        private RegionFoldingStrategy regionFolding { get; set; } = new RegionFoldingStrategy();
         private FoldingManager foldingManager { get; set; }
 
         public CodeBoxControl()
@@ -40,7 +41,9 @@ namespace typicalIDE.CodeBox
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
             CheckAutoSymbols();
-            braceFolding.UpdateFoldings(foldingManager, textEditor.Document);
+            braceFolding.UpdateFoldings(foldingManager, textEditor.Document);           
+            regionFolding.UpdateFoldings(foldingManager, textEditor.Document);
+
         }
 
         #endregion
@@ -175,12 +178,6 @@ namespace typicalIDE.CodeBox
             }
         }
         #endregion
-
-        #endregion
-
-        #region FoldingManager
-
-
 
         #endregion
 

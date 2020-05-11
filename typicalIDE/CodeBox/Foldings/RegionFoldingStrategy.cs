@@ -1,10 +1,7 @@
 ﻿using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Folding;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Text.RegularExpressions;
 
 namespace typicalIDE.CodeBox.Foldings
 {
@@ -34,30 +31,23 @@ namespace typicalIDE.CodeBox.Foldings
         public IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
         {
             List<NewFolding> newFoldings = new List<NewFolding>();
-
-            Stack<int> startOffsets = new Stack<int>();
-            int lastNewLineOffset = 0;
-            var splited = document.Text.Split(' ', '\r', '\t', '\n');
-            splited = splited.Where(el => el.Length > 0).ToArray();
-            int chCounter = 0;
-            for(int i = 0; i < splited.Length; i++)
+            string t = document.Text;
+            int tLength = t.Length;
+            var regionMatches = Regex.Matches(t, $@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Singleline);
+            for(int i = 0; i < regionMatches.Count; i++)
             {
-                chCounter += splited[i].Length + 1;
-                var text = splited[i].Replace("\t", "");
-                text = text.Replace("\r", "").Replace("\n", "");
-                if (text == REGION)
+                int startIndex = regionMatches[i].Index;
+                int endIndex = startIndex + regionMatches[i].Length;
+                char symbolAfterRegion = t[startIndex + REGION.Length];
+                if (char.IsWhiteSpace(symbolAfterRegion))
                 {
-                    startOffsets.Push(chCounter);
-                }
-                else if(text == END_REGION && startOffsets.Count > 0)
-                {
-                    int startOffset = chCounter;
-                    
-                    newFoldings.Add(new NewFolding(startOffset, i + 1));
-                }
-                else if (splited[i] == "\n" || splited[i] == "\r")
-                {
-                    lastNewLineOffset = i + 1;
+                    if ((endIndex == tLength) ||
+                        (endIndex < tLength && char.IsWhiteSpace(t[endIndex])))// check last symbols of #endregion string
+                    {
+                        Match m = Regex.Match(regionMatches[i].Value, $@"{REGION}(.*?)\n");
+                        string displayName = m.Groups[1].Value.Remove(0, 1);
+                        newFoldings.Add(new NewFolding() { StartOffset = startIndex, EndOffset = endIndex, Name = displayName});
+                    }
                 }
             }
             newFoldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
