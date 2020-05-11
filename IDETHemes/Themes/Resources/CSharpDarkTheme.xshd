@@ -11,6 +11,7 @@
     <Color name="ValueTypeKeywords"     foreground="#399ac6"/>
     <Color name="ValueStructKeyword"     foreground="#86c691"/>
     <Color name="ValueInterfaceKeyword"   foreground="#b8d7a3"/>
+    <Color name="ValueClassKeyword" foreground="#45c981"/>
 
 
     <Color name="ReferenceTypeKeywords" foreground="#FF559CD6" exampleText="object o;"/>
@@ -309,7 +310,7 @@
         (?=\s*\() # followed by (
       </Rule>
 
-      <Rule color="ValueTypeKeywords" >
+      <Rule color="ValueClassKeyword">
         (?&lt;=\bclass\s+)\p{L}+
       </Rule>
 

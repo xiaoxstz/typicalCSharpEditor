@@ -36,15 +36,25 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="HandyControl, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\HandyControl.2.4.0\lib\net45\HandyControl.dll</HintPath>
+    </Reference>
     <Reference Include="HL">
       <HintPath>..\..\AvalonEditHighlightingThemes-master\source\HL\bin\Debug\HL.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.1\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.Expression.Interactions, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\Microsoft.Expression.Interactions.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.Windows.Design.Interaction, Version=4.3.1.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a, processorArchitecture=x86" />
     <Reference Include="System" />
     <Reference Include="System.Data" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
+      <HintPath>..\packages\System.Windows.Interactivity.WPF.2.0.20525\lib\net40\System.Windows.Interactivity.dll</HintPath>
+    </Reference>
     <Reference Include="System.Xml" />
     <Reference Include="Microsoft.CSharp" />
     <Reference Include="System.Core" />
@@ -67,6 +77,18 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionListStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -78,11 +100,15 @@
     <Compile Include="CodeBox\Completions\CSharpCompletion\CSharpCompletion.cs" />
     <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CompletionImage.cs" />
     <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CompletionTypes.cs" />
+    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CSharpStandardCompletoins.cs" />
+    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CustomCompletionWindow.cs" />
+    <Compile Include="CodeBox\Completions\CustomCompletionControl.cs" />
     <Compile Include="CodeBox\Enums\Languages.cs" />
     <Compile Include="CodeBox\Foldings\BraceFoldingStrategy.cs" />
     <Compile Include="CodeBox\CodeBoxControl.xaml.cs">
       <DependentUpon>CodeBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="CodeBox\Foldings\RegionFoldingStrategy.cs" />
     <Compile Include="CodeBox\Indents\CSharpIndent.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

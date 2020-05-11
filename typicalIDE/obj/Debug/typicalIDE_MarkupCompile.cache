@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 D:\typicalIDE\typicalIDE\App.xaml
-2781892417
+5-523557016
 
-12-1962127015
-17-1459844182
-CodeBox\CodeBoxControl.xaml;MainWindow.xaml;
+16-970741137
+211765619638
+CodeBox\CodeBoxControl.xaml;CodeBox\Completions\CSharpCompletion\Styles\CompletionListStyle.xaml;CodeBox\Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml;CodeBox\Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml;MainWindow.xaml;
 
 False
 

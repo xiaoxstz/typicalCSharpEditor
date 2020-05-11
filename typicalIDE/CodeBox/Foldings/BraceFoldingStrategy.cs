@@ -6,24 +6,9 @@ namespace typicalIDE.CodeBox.Foldings
 {
     public class BraceFoldingStrategy
     {
-        /// <summary>
-        /// Gets/Sets the opening brace. The default value is '{'.
-        /// </summary>
-        public char OpeningBrace { get; set; }
 
-        /// <summary>
-        /// Gets/Sets the closing brace. The default value is '}'.
-        /// </summary>
-        public char ClosingBrace { get; set; }
-
-        /// <summary>
-        /// Creates a new BraceFoldingStrategy.
-        /// </summary>
-        public BraceFoldingStrategy()
-        {
-            this.OpeningBrace = '{';
-            this.ClosingBrace = '}';
-        }
+        private const char OPEN_BRACE = '{';
+        private const char CLOSE_BRACE = '}';
 
         public void UpdateFoldings(FoldingManager manager, TextDocument document)
         {
@@ -50,8 +35,8 @@ namespace typicalIDE.CodeBox.Foldings
 
             Stack<int> startOffsets = new Stack<int>();
             int lastNewLineOffset = 0;
-            char openingBrace = this.OpeningBrace;
-            char closingBrace = this.ClosingBrace;
+            char openingBrace = OPEN_BRACE;
+            char closingBrace = CLOSE_BRACE;
             for (int i = 0; i < document.TextLength; i++)
             {
                 char c = document.GetCharAt(i);

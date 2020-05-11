@@ -11,11 +11,10 @@ using System.Windows.Input;
 using typicalIDE.CodeBox.Indents;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
-using ICSharpCode.AvalonEdit.CodeCompletion;
-using System.Collections.Generic;
+using typicalIDE.CodeBox.Completions;
 using typicalIDE.CodeBox.Completions.CSharpCompletion;
 using System.Windows.Media;
-using HandyControl.Controls;
+using System.Threading.Tasks;
 
 namespace typicalIDE.CodeBox
 {
@@ -29,16 +28,14 @@ namespace typicalIDE.CodeBox
             InitializeComponent();
             textEditor.TextArea.IndentationStrategy = new CSharpIndent(textEditor.TextArea.Caret);
             textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
-            foldingManager = FoldingManager.Install(textEditor.TextArea);
-            Theme = new LightTheme();
+            Theme = new DarkTheme();
             Theme.SetTheme(textEditor);
+            SetFolding();
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
-            
         }
-        
-        #region Methods
 
+        #region Events
         #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
@@ -79,6 +76,26 @@ namespace typicalIDE.CodeBox
         }
 
         #endregion
+        #endregion
+
+        #region Methods
+
+        #region SetFolding
+
+        private void SetFolding()
+        {
+            foldingManager = FoldingManager.Install(textEditor.TextArea);
+            FoldingMargin m = new FoldingMargin() { FoldingManager = foldingManager };
+            m.FoldingMarkerBackgroundBrush = Brushes.Transparent;
+            m.SelectedFoldingMarkerBackgroundBrush = Brushes.Transparent;
+            m.FoldingMarkerBrush = textEditor.Foreground;
+            m.SelectedFoldingMarkerBrush = textEditor.Foreground;
+            var lm = textEditor.TextArea.LeftMargins;
+            lm.Remove(lm.Last());
+            textEditor.TextArea.LeftMargins.Add(m);
+        }
+
+        #endregion
 
         #region AutoSymbols
 
@@ -116,36 +133,35 @@ namespace typicalIDE.CodeBox
             string noSpacesText = currentText.Replace(" ", "");
             if (noSpacesText.Length > 0 && noSpacesText.Last() == ch)
             {
-                textEditor.Document.Insert(currentLine.EndOffset, insertString);
+                for (int i = currentText.Length - 1; currentText[i] == ' '; i--)
+                    currentText = currentText.Remove(i, 1);
+                textEditor.Document.Replace(currentLine.Offset, currentLine.Length, currentText + insertString);
                 textEditor.TextArea.Caret.Column = textEditor.Document.GetLineByNumber(currentLine.LineNumber).Length;
             }
         }
         #endregion
 
         #region Completion
-        private CompletionWindow completionWindow { get; set; }
+        private CustomCompletionWindow completionWindow { get; set; }
 
         #region Events
         void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
             if (completionWindow == null && char.IsLetterOrDigit(e.Text[0]))
             {
-                completionWindow = new CompletionWindow(textEditor.TextArea);
-                completionWindow.Style = FindResource("CompletionWindowStyle") as Style;
-                completionWindow.CompletionList.Style = FindResource("CompletionListStyle") as Style;
-                completionWindow.CompletionList.ListBox.SelectionChanged += Changed;
-                IList <ICompletionData> data = completionWindow.CompletionList.CompletionData;
-                SetCompletionWindowOffset();
-                var of1 = completionWindow.StartOffset;
-                var pf2 = completionWindow.EndOffset;
-                data.Add(new CSharpCompletion("as", CompletionTypes.Keyword));
-                data.Add(new CSharpCompletion("is", CompletionTypes.Keyword));
-                completionWindow.Show();
+                completionWindow = new CustomCompletionControl(textEditor);
+                OpenTask();
                 completionWindow.Closed += delegate
                 {
                     completionWindow = null;
                 };
             }
+        }
+
+        private async Task OpenTask()
+        {
+            await Task.Delay(700);
+            completionWindow.Show();
         }
 
         void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
@@ -160,44 +176,11 @@ namespace typicalIDE.CodeBox
         }
         #endregion
 
-        #region WordOffset
-        private void SetCompletionWindowOffset()
-        {
-            string text = GetCurrentLineText();
-            completionWindow.StartOffset = GetWordStartOffset(completionWindow.StartOffset, text);
-            completionWindow.EndOffset = GetWordEndOffset(completionWindow.EndOffset, text);
-        }
-
-
-        private string GetCurrentLineText()
-        {
-            int line = textEditor.TextArea.Caret.Line;
-            int column = textEditor.TextArea.Caret.Column;
-            DocumentLine currentLine = textEditor.Document.GetLineByNumber(line);
-            string text = textEditor.Document.GetText(currentLine.Offset, currentLine.Length);
-            return text;
-        }
-
-        private int GetWordStartOffset(int startOffset, string text)
-        {
-            int lineOffset = textEditor.Document.GetLineByOffset(startOffset).Offset;
-            startOffset -= lineOffset;
-            int i = startOffset - 1;
-            while (i > -1 && char.IsLetterOrDigit(text[i]))
-                i--;
-            return i + 1 + lineOffset;
-        }
-
-        private int GetWordEndOffset(int endOffset, string text)
-        {
-            int lineOffset = textEditor.Document.GetLineByOffset(endOffset).Offset;
-            endOffset -= lineOffset;
-            int i = endOffset - 1;
-            while (i < text.Length && char.IsLetterOrDigit(text[i]))
-                i++;
-            return i + lineOffset;
-        }
         #endregion
+
+        #region FoldingManager
+
+
 
         #endregion
 
@@ -252,27 +235,6 @@ namespace typicalIDE.CodeBox
 
         #endregion
 
-        private void Changed(object sender, SelectionChangedEventArgs e)
-        {
-            var a = sender as ListBox;
-            for(int i = 0; i < a.Items.Count; i++)
-            {
-                var temp = a.Items[i] as CSharpCompletion;
-                temp.SelectionColor = Brushes.Transparent;
-            }
-            var cur = a.SelectedValue;
-            if(cur != null)
-            {
-                var temp = cur as CSharpCompletion;
-                temp.SelectionColor = Brushes.Red;
-            }
-        }
-
-        private void TextEditor_KeyDown(object sender, KeyEventArgs e)
-        {
-            if (e.Key.ToString().Length > 1) //for special symbols
-                completionWindow?.Close();
-        }
     }
 
 }

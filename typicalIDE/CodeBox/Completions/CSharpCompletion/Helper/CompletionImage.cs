@@ -6,7 +6,7 @@ namespace typicalIDE.CodeBox.Completions.CSharpCompletion
 {
     internal class CompletionImage
     {
-        private const string IMAGES_PATH = "/CodeBox/Completions/CSharpCompletion/Images/";
+        private const string IMAGES_PATH = @"\CodeBox\Completions\CSharpCompletion\Images\";
         private const string PNG_EXTENSION = ".png";
 
         internal static ImageSource GetImageSource(CompletionTypes type)

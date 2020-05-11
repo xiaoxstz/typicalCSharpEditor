@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("codebox/completions/csharpcompletion/images/keyword_16x.svg")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("codebox/completions/csharpcompletion/images/keyword.png")]
 
 
