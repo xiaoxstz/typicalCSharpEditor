@@ -87,6 +87,7 @@
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -114,32 +115,14 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Class.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Delegate.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Enum.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Field.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Interface.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Keyword.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Namespace.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Property.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Snippet.png" />
-  </ItemGroup>
-  <ItemGroup>
     <Resource Include="Completions\CSharpCompletion\Images\Struct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
