@@ -36,11 +36,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="CodeBox">
+      <HintPath>..\CodeBox\bin\Debug\CodeBox.dll</HintPath>
+    </Reference>
     <Reference Include="HandyControl, Version=2.4.0.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\HandyControl.2.4.0\lib\net45\HandyControl.dll</HintPath>
-    </Reference>
-    <Reference Include="HL">
-      <HintPath>..\..\AvalonEditHighlightingThemes-master\source\HL\bin\Debug\HL.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.AvalonEdit, Version=6.0.1.278, Culture=neutral, PublicKeyToken=9cc39be672370310, processorArchitecture=MSIL">
       <HintPath>..\packages\AvalonEdit.6.0.1\lib\net45\ICSharpCode.AvalonEdit.dll</HintPath>
@@ -64,6 +64,9 @@
     <Reference Include="System.Xaml">
       <RequiredTargetFramework>4.0</RequiredTargetFramework>
     </Reference>
+    <Reference Include="TestControl">
+      <HintPath>..\TestControl\bin\Debug\TestControl.dll</HintPath>
+    </Reference>
     <Reference Include="WindowsBase" />
     <Reference Include="PresentationCore" />
     <Reference Include="PresentationFramework" />
@@ -73,22 +76,6 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Page Include="CodeBox\CodeBoxControl.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionListStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="CodeBox\Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -97,19 +84,6 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CodeBox\Completions\CSharpCompletion\CSharpCompletion.cs" />
-    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CompletionImage.cs" />
-    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CompletionTypes.cs" />
-    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CSharpStandardCompletoins.cs" />
-    <Compile Include="CodeBox\Completions\CSharpCompletion\Helper\CustomCompletionWindow.cs" />
-    <Compile Include="CodeBox\Completions\CustomCompletionControl.cs" />
-    <Compile Include="CodeBox\Enums\Languages.cs" />
-    <Compile Include="CodeBox\Foldings\BraceFoldingStrategy.cs" />
-    <Compile Include="CodeBox\CodeBoxControl.xaml.cs">
-      <DependentUpon>CodeBoxControl.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="CodeBox\Foldings\RegionFoldingStrategy.cs" />
-    <Compile Include="CodeBox\Indents\CSharpIndent.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
@@ -147,18 +121,6 @@
       <Project>{F6956604-0D1F-4C2E-8591-5FFF806A3D84}</Project>
       <Name>IDEThemes</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Class.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Delegate.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Enum.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Field.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Interface.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Keyword.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Namespace.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Property.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Snippet.png" />
-    <Resource Include="CodeBox\Completions\CSharpCompletion\Images\Struct.png" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

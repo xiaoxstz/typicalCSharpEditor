@@ -6,12 +6,12 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="CodeBox/Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml" />
+                <!--<ResourceDictionary Source="CodeBox/Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml" />
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
                 <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Styles/Base/ListBoxBaseStyle.xaml"/>
                 <ResourceDictionary Source="CodeBox/Completions\CSharpCompletion\Styles\CompletionListStyle.xaml"/>
-                <ResourceDictionary Source="CodeBox/Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml"/>
+                <ResourceDictionary Source="CodeBox/Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml"/>-->
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>

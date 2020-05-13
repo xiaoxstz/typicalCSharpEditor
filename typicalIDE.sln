@@ -7,6 +7,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "typicalIDE", "typicalIDE\ty
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IDEThemes", "IDETHemes\IDEThemes.csproj", "{F6956604-0D1F-4C2E-8591-5FFF806A3D84}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeBox", "CodeBox\CodeBox.csproj", "{AE5DD141-679D-4A62-9074-429718D808BE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -21,6 +23,10 @@ Global
 		{F6956604-0D1F-4C2E-8591-5FFF806A3D84}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F6956604-0D1F-4C2E-8591-5FFF806A3D84}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F6956604-0D1F-4C2E-8591-5FFF806A3D84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE5DD141-679D-4A62-9074-429718D808BE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE5DD141-679D-4A62-9074-429718D808BE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE5DD141-679D-4A62-9074-429718D808BE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE5DD141-679D-4A62-9074-429718D808BE}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
