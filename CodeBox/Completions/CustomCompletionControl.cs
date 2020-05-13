@@ -140,7 +140,7 @@ namespace Completions
         {
             string text = GetCurrentLineText();
             StartOffset = GetWordStartOffset(StartOffset, text);
-            EndOffset = GetWordEndOffset(EndOffset, text);
+            EndOffset = GetWordEndOffset(StartOffset, text);
         }
 
 
@@ -165,11 +165,12 @@ namespace Completions
 
         private int GetWordEndOffset(int startOffset, string text)
         {
-            int endOffset = startOffset - 1;
+            int lineOffset = TextArea.Document.GetLineByOffset(startOffset).Offset;
+            int endOffset = startOffset - lineOffset;
             for (; endOffset < text.Length
                 && !char.IsWhiteSpace(text[endOffset]);
                 endOffset++) ;
-            return endOffset;
+            return endOffset + lineOffset;
         }
         #endregion
     }
