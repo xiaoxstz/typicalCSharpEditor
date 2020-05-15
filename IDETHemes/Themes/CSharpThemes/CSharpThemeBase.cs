@@ -6,10 +6,14 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Xml;
+using CodeBox;
+using Completions;
+using Completions.CSharpCompletion;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using IDEThemes.Themes.Interfaces;
+using CodeBox.Completions;
 
 namespace IDEThemes.Themes.CSharpThemes
 {
@@ -25,6 +29,10 @@ namespace IDEThemes.Themes.CSharpThemes
         public Brush Selection { get; protected set; }
         public Brush Hyperlink { get; protected set; }
         public Brush NonPrintabelCharacters { get; protected set; }
+        public Brush CompletionBorder { get; protected set; }
+        public Brush CompletionBackground { get; protected set; }
+        public Brush CompletionForeground { get; protected set; }
+        public Brush CompletionSelectionBrush { get; protected set; }
         #endregion
 
         #region Override Properties
@@ -66,6 +74,18 @@ namespace IDEThemes.Themes.CSharpThemes
             editor.TextArea.TextView.LinkTextBackgroundBrush = Hyperlink;
             editor.TextArea.TextView.LinkTextUnderline = true;
             editor.LineNumbersForeground = LineNumbersForeground;
+        }
+
+        public void SetTheme(TextEditor editor, CompletionTheme th)
+        {
+            SetTheme(editor);
+            if (th != null)
+            {
+                th.CompletionBackground = CompletionBackground;
+                th.CompletionForeground = CompletionForeground;
+                th.CompletionSelectionBrush = CompletionSelectionBrush;
+                th.CompletionBorder = CompletionBorder;
+            }
         }
         #endregion
 
@@ -122,6 +142,18 @@ namespace IDEThemes.Themes.CSharpThemes
                         break;
                     case "NonPrintableCharacter":
                         NonPrintabelCharacters = GetHCBrush(Colors[i], foreground);
+                        break;
+                    case"CompletionBorder":
+                        CompletionBorder = GetHCBrush(Colors[i], background);
+                        break;
+                    case "CompletionColors":
+                        {
+                            CompletionBackground = GetHCBrush(Colors[i], background);
+                            CompletionForeground = GetHCBrush(Colors[i], foreground);
+                            break;
+                        }
+                    case "CompletionSelectionBrush":
+                        CompletionSelectionBrush = GetHCBrush(Colors[i], background);
                         break;
                 }
             }

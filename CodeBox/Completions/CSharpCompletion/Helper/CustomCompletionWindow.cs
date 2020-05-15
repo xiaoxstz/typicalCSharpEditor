@@ -39,7 +39,6 @@ namespace Completions.CSharpCompletion
         #region CompletionWindow
         private CompletionList completionList = new CompletionList();
         public ToolTip toolTip { get; set; } = new ToolTip();
-        public bool IsClosed { get; private set; } = false;
 
         /// <summary>
         /// Gets the completion list used in this completion window.
@@ -62,8 +61,16 @@ namespace Completions.CSharpCompletion
             toolTip.PlacementTarget = this;
             toolTip.Placement = PlacementMode.Right;
             toolTip.Closed += toolTip_Closed;
-
+            InitializeStyles();
             AttachEvents();
+        }
+
+
+        private void InitializeStyles()
+        {
+            CompletionList.Style = FindResource("CompletionListStyle") as Style;
+            toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
+            Style = FindResource("CompletionWindowStyle") as Style;
         }
 
         #region ToolTip handling
@@ -78,31 +85,32 @@ namespace Completions.CSharpCompletion
 
         void completionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            var item = completionList.SelectedItem;
-            if (item == null)
-                return;
-            object description = item.Description;
-            if (description != null)
-            {
-                string descriptionText = description as string;
-                if (descriptionText != null)
-                {
-                    toolTip.Content = new TextBlock
-                    {
-                        Text = descriptionText,
-                        TextWrapping = TextWrapping.Wrap
-                    };
-                }
-                else
-                {
-                    toolTip.Content = description;
-                }
-                toolTip.IsOpen = true;
-            }
-            else
-            {
-                toolTip.IsOpen = false;
-            }
+            //var item = completionList.SelectedItem;
+            //if (item == null)
+            //    return;
+            //object description = item.Description;
+            //if (description != null)
+            //{
+            //    string descriptionText = description as string;
+            //    if (descriptionText != null)
+            //    {
+
+            //        toolTip.Content = new TextBlock
+            //        {
+            //            Text = descriptionText,
+            //            TextWrapping = TextWrapping.Wrap
+            //        };
+            //    }
+            //    else
+            //    {
+            //        toolTip.Content = description;
+            //    }
+            //    toolTip.IsOpen = true;
+            //}
+            //else
+            //{
+            //    toolTip.IsOpen = false;
+            //}
         }
         #endregion
 
@@ -113,8 +121,6 @@ namespace Completions.CSharpCompletion
             else
                 Dispatcher.Invoke(DispatcherPriority.Normal, new ThreadStart(base.Close));
         }
-
-
 
         void completionList_InsertionRequested(object sender, EventArgs e)
         {
@@ -149,7 +155,6 @@ namespace Completions.CSharpCompletion
         /// <inheritdoc/>
         protected override void OnClosed(EventArgs e)
         {
-            IsClosed = true;
             base.OnClosed(e);
             if (toolTip != null)
             {

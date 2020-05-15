@@ -59,7 +59,7 @@ namespace Completions.CSharpCompletion
         private Brush selectionColor;
         public Brush SelectionColor
         {
-            get => selectionColor;
+            get { return selectionColor; }
             set
             {
                 selectionColor = value;

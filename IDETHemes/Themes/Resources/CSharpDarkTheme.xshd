@@ -43,6 +43,11 @@
     <Color name="Selection" background="#264f98"/>
     <Color name="Hyperlink" foreground="#2f70d5"/>
     <Color name="NonPrintableCharacters" foreground="#FFFFFF00" />
+    
+    <!--Completion-->
+    <Color name="CompletionBorder" background="#999999"/>
+    <Color name="CompletionColors" background="#252526" foreground="White"/>
+    <Color name="CompletionSelectionBrush" background="#3399ff"/>
 
     <Property name="DocCommentMarker" value="///" />
 

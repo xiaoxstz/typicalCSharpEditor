@@ -61,6 +61,7 @@
     <Compile Include="CodeBoxControl.xaml.cs">
       <DependentUpon>CodeBoxControl.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Completions\CompletionTheme.cs" />
     <Compile Include="Completions\CSharpCompletion\CSharpCompletion.cs" />
     <Compile Include="Completions\CSharpCompletion\Helper\CompletionImage.cs" />
     <Compile Include="Completions\CSharpCompletion\Helper\CompletionTypes.cs" />

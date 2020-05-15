@@ -28,7 +28,6 @@ D:\typicalIDE\typicalIDE\bin\Debug\ICSharpCode.AvalonEdit.dll
 D:\typicalIDE\typicalIDE\bin\Debug\IDETHemes.dll
 D:\typicalIDE\typicalIDE\bin\Debug\IDETHemes.pdb
 D:\typicalIDE\typicalIDE\bin\Debug\ICSharpCode.AvalonEdit.xml
-D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csprojAssemblyReference.cache
 D:\typicalIDE\typicalIDE\obj\Debug\MainWindow.g.cs
 D:\typicalIDE\typicalIDE\obj\Debug\App.g.cs
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE_MarkupCompile.cache
@@ -37,8 +36,6 @@ D:\typicalIDE\typicalIDE\obj\Debug\MainWindow.baml
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.g.resources
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.Properties.Resources.resources
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csproj.GenerateResource.cache
-D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csproj.CoreCompileInputs.cache
-D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csproj.CopyComplete
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.exe
 D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.pdb
 D:\typicalIDE\typicalIDE\obj\Debug\App.baml
@@ -54,8 +51,6 @@ D:\typicalIDE\typicalIDE\bin\Debug\System.Windows.Interactivity.dll
 D:\typicalIDE\typicalIDE\bin\Debug\Microsoft.Windows.Design.Extensibility.dll
 D:\typicalIDE\typicalIDE\bin\Debug\Microsoft.Expression.Interactions.xml
 D:\typicalIDE\typicalIDE\bin\Debug\System.Windows.Interactivity.xml
-D:\typicalIDE\typicalIDE\bin\Debug\ru\Microsoft.Windows.Design.Interaction.resources.dll
-D:\typicalIDE\typicalIDE\bin\Debug\ru\Microsoft.Windows.Design.Extensibility.resources.dll
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\HandyControl.dll
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\Microsoft.Expression.Interactions.dll
 C:\Users\typical\Desktop\typicalIDE\typicalIDE\bin\Debug\Microsoft.Windows.Design.Interaction.dll
@@ -77,3 +72,6 @@ C:\Users\typical\Desktop\typicalIDE\typicalIDE\obj\Debug\CodeBox\Completions\CSh
 D:\typicalIDE\typicalIDE\bin\Debug\TestControl.pdb
 D:\typicalIDE\typicalIDE\bin\Debug\CodeBox.dll
 D:\typicalIDE\typicalIDE\bin\Debug\CodeBox.pdb
+D:\typicalIDE\typicalIDE\bin\Debug\en\Microsoft.Windows.Design.Interaction.resources.dll
+D:\typicalIDE\typicalIDE\bin\Debug\en\Microsoft.Windows.Design.Extensibility.resources.dll
+D:\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csprojResolveAssemblyReference.cache

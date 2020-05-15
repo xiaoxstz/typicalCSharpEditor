@@ -1,9 +1,11 @@
-﻿using Completions.CSharpCompletion;
+﻿using CodeBox.Completions;
+using Completions.CSharpCompletion;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
-using System.Threading.Tasks;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -11,23 +13,84 @@ using System.Windows.Media;
 
 namespace Completions
 {
-    class CustomCompletionControl: CustomCompletionWindow
+    public class CustomCompletionControl: CustomCompletionWindow, INotifyPropertyChanged
     {
+        /// <summary>
+        /// Global theme for completion windows.
+        /// </summary>
+        public static CompletionTheme Theme { get; set; } = new CompletionTheme();
         #region Brushes
 
         #region SelectionBrush
         private Brush selectionBrush;
         public Brush SelectionBrush
         {
-            get => selectionBrush ?? Brushes.Red;
+            get { return selectionBrush ?? Brushes.Red; }
             set
             {
                 if (value != null)
                     selectionBrush = value;
                 else
                     selectionBrush = Brushes.Red;
+                OnPropertyChanged("SelectionBrush");
             }
         }
+        #endregion
+
+        #region ForegroundBrush
+
+        private Brush foregroundBrush;
+        public Brush ForegroundBrush
+        {
+            get { return foregroundBrush ?? Brushes.White; }
+            set
+            {
+                if (value != null)
+                    foregroundBrush = value;
+                else
+                    foregroundBrush = Brushes.White;
+                OnPropertyChanged("ForegroundBrush");
+            }
+        }
+
+        #endregion
+
+        #region BackgroundBrush
+
+        private readonly Brush backgroundDef = (Brush)new BrushConverter().ConvertFrom("#1b1c1b");
+
+        private Brush backgroundBrush;
+        public Brush BackgroundBrush
+        {
+            get { return backgroundBrush ?? backgroundDef; }
+            set
+            {
+                if (value != null)
+                    backgroundBrush = value;
+                else
+                    backgroundBrush = backgroundDef;
+                OnPropertyChanged("BackgroundBrush");
+            }
+        }
+
+        #endregion
+
+        #region BorderBrush
+
+        private Brush borderBrush;
+        public new Brush BorderBrush
+        {
+            get { return borderBrush ?? Brushes.Gray; }
+            set
+            {
+                if (value != null)
+                    borderBrush = value;
+                else
+                    borderBrush = Brushes.Gray;
+                OnPropertyChanged("BorderBrush");
+            }
+        }
+
         #endregion
 
         #endregion
@@ -53,7 +116,7 @@ namespace Completions
         {
             Initialize();
             InitializeControl(CompletionList.ListBox, editor.Background, editor.Foreground);
-            InitializeControl(toolTip, editor.Background, editor.Foreground);
+            InitializeControl(toolTip, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
         }
 
 
@@ -75,6 +138,7 @@ namespace Completions
             InitializeStyles();
             InitializeWindow();
             InitializeStandardCompletions();
+            InitializeBrushes();
         }
 
         
@@ -106,6 +170,13 @@ namespace Completions
             toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
             Style = FindResource("CompletionWindowStyle") as Style;
         }
+        private void InitializeBrushes()
+        {
+            BackgroundBrush = Theme.CompletionBackground;
+            BorderBrush = Theme.CompletionBorder;
+            Foreground = Theme.CompletionForeground;
+            SelectionBrush = Theme.CompletionSelectionBrush;
+        }
 
         #endregion
         #region Events
@@ -124,6 +195,8 @@ namespace Completions
             {
                 var temp = cur as CSharpCompletion.CSharpCompletion;
                 temp.SelectionColor = SelectionBrush;
+                toolTip.Content = "AAAAAAAAAAAAA";
+                toolTip.IsOpen = true;
             }
         }
         protected override void OnKeyDown(KeyEventArgs e)
@@ -172,6 +245,17 @@ namespace Completions
                 endOffset++) ;
             return endOffset + lineOffset;
         }
+        #endregion
+
+        #region OnPropertyChanged
+
+
+        public event PropertyChangedEventHandler PropertyChanged;
+        public void OnPropertyChanged([CallerMemberName]string prop="")
+        {
+            PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
+        }
+
         #endregion
     }
 }

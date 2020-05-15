@@ -15,25 +15,19 @@ using Completions;
 using Completions.CSharpCompletion;
 using System.Windows.Media;
 using System.Threading.Tasks;
-using System.Threading;
-using System.Windows.Threading;
+using ICSharpCode.AvalonEdit;
 
 namespace CodeBox
 {
     public partial class CodeBoxControl : UserControl
     {
-        private BraceFoldingStrategy braceFolding { get; set; } = new BraceFoldingStrategy();
-        private RegionFoldingStrategy regionFolding { get; set; } = new RegionFoldingStrategy();
-        private FoldingManager foldingManager { get; set; }
-
         public CodeBoxControl()
         {
             InitializeComponent();
             InitializeResources();
             textEditor.TextArea.IndentationStrategy = new CSharpIndent(textEditor.TextArea.Caret);
             textEditor.TextArea.Caret.PositionChanged += Caret_PositionChanged;
-            Theme = new DarkTheme();
-            Theme.SetTheme(textEditor);
+            Theme.SetTheme(textEditor, CustomCompletionControl.Theme);
             SetFolding();
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
@@ -46,7 +40,6 @@ namespace CodeBox
             CheckAutoSymbols();
             braceFolding.UpdateFoldings(foldingManager, textEditor.Document);
             regionFolding.UpdateFoldings(foldingManager, textEditor.Document);
-
         }
 
         #endregion
@@ -87,6 +80,14 @@ namespace CodeBox
         #region Methods
 
         #region SetFolding
+
+        #region Properties
+
+        private BraceFoldingStrategy braceFolding { get; set; } = new BraceFoldingStrategy();
+        private RegionFoldingStrategy regionFolding { get; set; } = new RegionFoldingStrategy();
+        private FoldingManager foldingManager { get; set; }
+
+        #endregion
 
         private void SetFolding()
         {
@@ -168,10 +169,7 @@ namespace CodeBox
         {
             await Task.Delay(700);
             completionWindow?.Show();
-
         }
-
-
 
         void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
         {
@@ -221,12 +219,36 @@ namespace CodeBox
 
         public static readonly DependencyProperty DefaultThemeProperty =
     DependencyProperty.Register("DefaultTheme", typeof(DefaultThemesEnum), typeof(CodeBoxControl),
-        new PropertyMetadata(DefaultThemesEnum.DarkTheme));
+        new PropertyMetadata(DefaultThemesEnum.DarkTheme, new PropertyChangedCallback(DefaultThemePropertyChanged)));
 
         public DefaultThemesEnum DefaultTheme
         {
             get { return (DefaultThemesEnum)GetValue(DefaultThemeProperty); }
             set { SetValue(DefaultThemeProperty, value); }
+        }
+
+
+        private static void DefaultThemePropertyChanged(DependencyObject d,
+           DependencyPropertyChangedEventArgs e)
+        {
+            CodeBoxControl cb = d as CodeBoxControl;
+            cb.DefaultThemeChanged(e);
+        }
+
+        private void DefaultThemeChanged(DependencyPropertyChangedEventArgs e)
+        {
+            switch(DefaultTheme)
+            {
+                case DefaultThemesEnum.BlueTheme:
+                    new BlueTheme().SetTheme(textEditor);
+                    break;
+                case DefaultThemesEnum.LightTheme:
+                    new LightTheme().SetTheme(textEditor);
+                    break;
+                default:
+                    new DarkTheme().SetTheme(textEditor);
+                    break;
+            }
         }
 
         #endregion

@@ -16,8 +16,6 @@ D:\typicalIDE\CodeBox\bin\Debug\fr\HandyControl.resources.dll
 D:\typicalIDE\CodeBox\obj\Debug\CodeBox.g.resources
 D:\typicalIDE\CodeBox\obj\Debug\CodeBox.Properties.Resources.resources
 D:\typicalIDE\CodeBox\obj\Debug\CodeBox.csproj.GenerateResource.cache
-D:\typicalIDE\CodeBox\obj\Debug\CodeBox.csproj.CoreCompileInputs.cache
-D:\typicalIDE\CodeBox\obj\Debug\CodeBox.csproj.CopyComplete
 D:\typicalIDE\CodeBox\obj\Debug\CodeBox.dll
 D:\typicalIDE\CodeBox\obj\Debug\CodeBox.pdb
 D:\typicalIDE\CodeBox\obj\Debug\CodeBoxControl.g.cs
@@ -25,4 +23,4 @@ D:\typicalIDE\CodeBox\obj\Debug\CodeBoxControl.baml
 D:\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionListStyle.baml
 D:\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionToolTipStyle.baml
 D:\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionWindowStyle.baml
-D:\typicalIDE\CodeBox\obj\Debug\CodeBox.csprojAssemblyReference.cache
+D:\typicalIDE\CodeBox\obj\Debug\CodeBox.csprojResolveAssemblyReference.cache
