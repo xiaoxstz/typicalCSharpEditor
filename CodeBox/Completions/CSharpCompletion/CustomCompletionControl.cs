@@ -4,6 +4,7 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -19,6 +20,7 @@ namespace Completions
         /// Global theme for completion windows.
         /// </summary>
         public static CompletionTheme Theme { get; set; } = new CompletionTheme();
+
         #region Brushes
 
         #region SelectionBrush
@@ -116,7 +118,7 @@ namespace Completions
         {
             Initialize();
             InitializeControl(CompletionList.ListBox, editor.Background, editor.Foreground);
-            InitializeControl(toolTip, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
+            InitializeControl(t, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
         }
 
 
@@ -128,17 +130,17 @@ namespace Completions
         {
             Initialize();
             InitializeControl(CompletionList.ListBox, background, foreground, borderBrush, borderThickness);
-            InitializeControl(toolTip, background, foreground, borderBrush, borderThickness);
+            InitializeControl(t, background, foreground, borderBrush, borderThickness);
         }
         #endregion
 
 
         private void Initialize()
         {
+            InitializeBrushes();
             InitializeStyles();
             InitializeWindow();
             InitializeStandardCompletions();
-            InitializeBrushes();
         }
 
         
@@ -167,7 +169,7 @@ namespace Completions
         private void InitializeStyles()
         {
             CompletionList.Style = FindResource("CompletionListStyle") as Style;
-            toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
+            t.Style = FindResource("CompletionToolTipStyle") as Style;
             Style = FindResource("CompletionWindowStyle") as Style;
         }
         private void InitializeBrushes()
@@ -179,26 +181,52 @@ namespace Completions
         }
 
         #endregion
+
+
         #region Events
+        public new void Show()
+        {
+            var selected = CompletionList.SelectedItem;
+            CompletionList.ListBox.ClearSelection();
+            CompletionList.ListBox.SelectedItem = selected;
+
+            base.Show();
+        }
+
         private void Changed(object sender, SelectionChangedEventArgs e)
         {
-            ListBox list = sender as ListBox;
+            t.IsOpen = false;
+            ListBox list = CompletionList.ListBox;
             if (list.Items.Count == 0)
                 this.Close();
+            var selected = CompletionList.SelectedItem;
+            CompletionList.ListBox.ClearSelection();
+            CompletionList.ListBox.SelectedItem = selected;
             for (int i = 0; i < list.Items.Count; i++)
             {
                 var temp = list.Items[i] as CSharpCompletion.CSharpCompletion;
                 temp.SelectionColor = Brushes.Transparent;
             }
-            var cur = list.SelectedValue;
-            if (cur != null)
+            object currentItem = list.SelectedValue;
+            if (currentItem != null)
             {
-                var temp = cur as CSharpCompletion.CSharpCompletion;
-                temp.SelectionColor = SelectionBrush;
-                toolTip.Content = "AAAAAAAAAAAAA";
-                toolTip.IsOpen = true;
+                CSharpCompletion.CSharpCompletion data = currentItem as CSharpCompletion.CSharpCompletion;
+                data.SelectionColor = SelectionBrush;
+                CreateToolTip(data);
             }
         }
+
+        private void CreateToolTip(ICompletionData data)
+        {
+            t = new ToolTip();
+            t.Style = FindResource("CompletionToolTipStyle") as Style;
+            InitializeControl(t, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
+            t.PlacementTarget = this;
+            t.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
+            t.Content = data.Description.ToString();
+            t.IsOpen = true;
+        }
+
         protected override void OnKeyDown(KeyEventArgs e)
         {
             base.OnKeyDown(e);

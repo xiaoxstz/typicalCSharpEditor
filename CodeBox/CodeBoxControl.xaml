@@ -8,18 +8,6 @@
              xmlns:cnt="https://handyorg.github.io/handycontrol"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
-    <!--<UserControl.Resources>
-        <ResourceDictionary x:Key="RES">
-            <ResourceDictionary.MergedDictionaries>
-                <ResourceDictionary Source="pack://application:,,,/CodeBox;component/Completions/CSharpCompletion/Styles/CompletionWindowStyle.xaml" />
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/SkinDefault.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Theme.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/HandyControl;component/Themes/Styles/Base/ListBoxBaseStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/CodeBox;component\Completions\CSharpCompletion\Styles\CompletionListStyle.xaml"/>
-                <ResourceDictionary Source="pack://application:,,,/CodeBox;component/Completions/CSharpCompletion/Styles/CompletionToolTipStyle.xaml"/>
-            </ResourceDictionary.MergedDictionaries>
-        </ResourceDictionary>
-    </UserControl.Resources>-->
     <Grid>
         <avalonEdit:TextEditor Name="textEditor"
                                FontFamily="Consolas" 

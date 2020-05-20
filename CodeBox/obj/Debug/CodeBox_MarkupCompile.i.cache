@@ -4,7 +4,7 @@
 library
 C#
 .cs
-D:\typicalIDE\CodeBox\obj\Debug\
+E:\typicalIDE\CodeBox\obj\Debug\
 CodeBox
 none
 false
@@ -12,9 +12,9 @@ DEBUG;TRACE
 
 4-1723406773
 
-191613521870
-17789901408
+20-615360456
+171848697323
 CodeBoxControl.xaml;Completions\CSharpCompletion\Styles\CompletionListStyle.xaml;Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml;Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml;
 
-True
+False
 

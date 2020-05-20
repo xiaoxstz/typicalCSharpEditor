@@ -1,21 +1,4 @@
-﻿// Copyright (c) 2014 AlphaSierraPapa for the SharpDevelop Team
-// 
-// Permission is hereby granted, free of charge, to any person obtaining a copy of this
-// software and associated documentation files (the "Software"), to deal in the Software
-// without restriction, including without limitation the rights to use, copy, modify, merge,
-// publish, distribute, sublicense, and/or sell copies of the Software, and to permit persons
-// to whom the Software is furnished to do so, subject to the following conditions:
-// 
-// The above copyright notice and this permission notice shall be included in all copies or
-// substantial portions of the Software.
-// 
-// THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED,
-// INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR
-// PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE
-// FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
-// OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER
-// DEALINGS IN THE SOFTWARE.
-
+﻿
 using System;
 using System.ComponentModel;
 using System.Threading;
@@ -38,8 +21,7 @@ namespace Completions.CSharpCompletion
     {
         #region CompletionWindow
         private CompletionList completionList = new CompletionList();
-        public ToolTip toolTip { get; set; } = new ToolTip();
-
+        protected ToolTip t = new ToolTip();
         /// <summary>
         /// Gets the completion list used in this completion window.
         /// </summary>
@@ -53,64 +35,23 @@ namespace Completions.CSharpCompletion
         {
             this.CloseAutomatically = true;
             this.SizeToContent = SizeToContent.Height;
+            this.Content = completionList;
             this.MaxHeight = 300;
             this.Width = 175;
-            this.Content = completionList;
             this.MinHeight = 15;
             this.MinWidth = 30;
-            toolTip.PlacementTarget = this;
-            toolTip.Placement = PlacementMode.Right;
-            toolTip.Closed += toolTip_Closed;
-            InitializeStyles();
             AttachEvents();
         }
 
-
-        private void InitializeStyles()
-        {
-            CompletionList.Style = FindResource("CompletionListStyle") as Style;
-            toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
-            Style = FindResource("CompletionWindowStyle") as Style;
-        }
-
         #region ToolTip handling
-        void toolTip_Closed(object sender, RoutedEventArgs e)
-        {
-            // Clear content after tooltip is closed.
-            // We cannot clear is immediately when setting IsOpen=false
-            // because the tooltip uses an animation for closing.
-            if (toolTip != null)
-                toolTip.Content = null;
-        }
 
-        void completionList_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            //var item = completionList.SelectedItem;
-            //if (item == null)
-            //    return;
-            //object description = item.Description;
-            //if (description != null)
-            //{
-            //    string descriptionText = description as string;
-            //    if (descriptionText != null)
-            //    {
 
-            //        toolTip.Content = new TextBlock
-            //        {
-            //            Text = descriptionText,
-            //            TextWrapping = TextWrapping.Wrap
-            //        };
-            //    }
-            //    else
-            //    {
-            //        toolTip.Content = description;
-            //    }
-            //    toolTip.IsOpen = true;
-            //}
-            //else
-            //{
-            //    toolTip.IsOpen = false;
-            //}
+        protected override void OnClosed(EventArgs e)
+        {
+            if (t != null)
+                t.IsOpen = false;
+            t = null;
+            base.OnClosed(e);
         }
         #endregion
 
@@ -135,7 +76,6 @@ namespace Completions.CSharpCompletion
         void AttachEvents()
         {
             this.completionList.InsertionRequested += completionList_InsertionRequested;
-            this.completionList.SelectionChanged += completionList_SelectionChanged;
             this.TextArea.Caret.PositionChanged += CaretPositionChanged;
             this.TextArea.MouseWheel += textArea_MouseWheel;
             this.TextArea.PreviewTextInput += textArea_PreviewTextInput;
@@ -145,30 +85,23 @@ namespace Completions.CSharpCompletion
         protected override void DetachEvents()
         {
             this.completionList.InsertionRequested -= completionList_InsertionRequested;
-            this.completionList.SelectionChanged -= completionList_SelectionChanged;
             this.TextArea.Caret.PositionChanged -= CaretPositionChanged;
             this.TextArea.MouseWheel -= textArea_MouseWheel;
             this.TextArea.PreviewTextInput -= textArea_PreviewTextInput;
             base.DetachEvents();
         }
 
+
         /// <inheritdoc/>
-        protected override void OnClosed(EventArgs e)
-        {
-            base.OnClosed(e);
-            if (toolTip != null)
-            {
-                toolTip.IsOpen = false;
-                toolTip = null;
-            }
-        }
         protected override void OnKeyDown(KeyEventArgs e)
         {
-   
-            base.OnKeyDown(e);
-            if ((CompletionList.ListBox.SelectedIndex > -1 || e.Key != Key.Enter)  && !e.Handled)
+            if (IsLoaded)
             {
-                completionList.HandleKey(e);
+                base.OnKeyDown(e);
+                if ((CompletionList.ListBox.SelectedIndex > -1 || e.Key != Key.Enter) && !e.Handled)
+                {
+                    completionList.HandleKey(e);
+                }
             }
         }
         void textArea_PreviewTextInput(object sender, TextCompositionEventArgs e)
@@ -239,6 +172,7 @@ namespace Completions.CSharpCompletion
                 if (document != null)
                 {
                     completionList.SelectItem(document.GetText(this.StartOffset, offset - this.StartOffset));
+                    completionList.ListBox.SelectedItem = completionList.ListBox.SelectedItem;
                 }
             }
         }

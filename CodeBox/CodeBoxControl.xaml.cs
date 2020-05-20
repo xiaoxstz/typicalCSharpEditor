@@ -16,6 +16,9 @@ using Completions.CSharpCompletion;
 using System.Windows.Media;
 using System.Threading.Tasks;
 using ICSharpCode.AvalonEdit;
+using ICSharpCode.AvalonEdit.CodeCompletion;
+using System.Windows.Threading;
+using System.Collections.Generic;
 
 namespace CodeBox
 {
@@ -38,8 +41,9 @@ namespace CodeBox
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
             CheckAutoSymbols();
-            braceFolding.UpdateFoldings(foldingManager, textEditor.Document);
-            regionFolding.UpdateFoldings(foldingManager, textEditor.Document);
+            List<NewFolding> foldings = new List<NewFolding>();
+            braceFolding.UpdateFoldings(foldings, textEditor.Document);
+            foldingManager.UpdateFoldings(foldings, -1);
         }
 
         #endregion
@@ -47,7 +51,8 @@ namespace CodeBox
         #region Caret_PositionChanged
         private int lastXPosition = 1;
         private int lastYPosition = 1;
-        private void Caret_PositionChanged(object sender, EventArgs e)
+
+    private void Caret_PositionChanged(object sender, EventArgs e)
         {
             Caret caret = sender as Caret;
             if (lastYPosition != caret.Line)
@@ -62,6 +67,7 @@ namespace CodeBox
             }
             lastYPosition = caret.Line;
             lastXPosition = caret.Column;
+
         }
         #endregion
 
@@ -149,26 +155,24 @@ namespace CodeBox
         #endregion
 
         #region Completion
-        private CustomCompletionWindow completionWindow { get; set; }
+        private CustomCompletionControl completionWindow { get; set; }
 
         #region Events
-        void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
+
+        async void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
-            if (completionWindow == null  && char.IsLetterOrDigit(e.Text[0]))
+            if (completionWindow == null && !char.IsWhiteSpace(e.Text[0]))
             {
+
                 completionWindow = new CustomCompletionControl(textEditor);
                 completionWindow.Closed += delegate
                 {
                     completionWindow = null;
                 };
-                OpenAsync();
-            }
-        }
+                await Task.Delay(2000);
+                completionWindow?.Show();
 
-        private async void OpenAsync()
-        {
-            await Task.Delay(700);
-            completionWindow?.Show();
+            }
         }
 
         void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
@@ -285,6 +289,7 @@ namespace CodeBox
         #endregion
 
         #endregion
+
 
     }
 }

@@ -4,32 +4,17 @@ using System.Collections.Generic;
 
 namespace Foldings
 {
-    public class BraceFoldingStrategy
+    internal class BraceFoldingStrategy: AbstractFolding
     {
 
         private const char OPEN_BRACE = '{';
         private const char CLOSE_BRACE = '}';
 
-        public void UpdateFoldings(FoldingManager manager, TextDocument document)
-        {
-            int firstErrorOffset;
-            IEnumerable<NewFolding> newFoldings = CreateNewFoldings(document, out firstErrorOffset);
-            manager.UpdateFoldings(newFoldings, firstErrorOffset);
-        }
 
         /// <summary>
         /// Create <see cref="NewFolding"/>s for the specified document.
         /// </summary>
-        public IEnumerable<NewFolding> CreateNewFoldings(TextDocument document, out int firstErrorOffset)
-        {
-            firstErrorOffset = -1;
-            return CreateNewFoldings(document);
-        }
-
-        /// <summary>
-        /// Create <see cref="NewFolding"/>s for the specified document.
-        /// </summary>
-        public IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
+        public override IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
         {
             List<NewFolding> newFoldings = new List<NewFolding>();
 

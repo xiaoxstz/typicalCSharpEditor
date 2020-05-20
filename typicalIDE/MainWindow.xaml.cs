@@ -1,4 +1,5 @@
 ﻿using System.Windows;
+using System.Windows.Controls;
 
 namespace typicalIDE
 {
@@ -11,5 +12,6 @@ namespace typicalIDE
         {
             InitializeComponent();
         }
+
     }
 }                

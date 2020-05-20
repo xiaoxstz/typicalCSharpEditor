@@ -14,7 +14,7 @@
         <Style.Triggers>
             <Trigger Property="IsSelected" Value="true">
                 <Setter Property="Background" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Background}"/>
-                <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Foreground}"/>
+                <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Foreground, UpdateSourceTrigger=PropertyChanged}"/>
             </Trigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>
@@ -22,11 +22,10 @@
                     <Condition Property="Selector.IsSelectionActive" Value="false"/>
                 </MultiTrigger.Conditions>
                 <Setter Property="Background" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Background}"/>
-                <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Foreground}"/>
+
             </MultiTrigger>
             <Trigger Property="IsMouseOver" Value="true">
                 <Setter Property="Background" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Background}"/>
-                <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource Mode=Self}, Path=Foreground}"/>
             </Trigger>
         </Style.Triggers>
     </Style>
@@ -55,7 +54,7 @@
                             <cc:CompletionListBox.ItemContainerStyle>
                                 <Style TargetType="ListBoxItem" BasedOn="{StaticResource containerStyle}">
                                     <Setter Property="Background" Value="{Binding  RelativeSource={RelativeSource AncestorType=ListBox}, Path=Background}"/>
-                                    <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource AncestorType=ListBox}, Path=Foreground}"/>
+                                    <Setter Property="Foreground" Value="{Binding  RelativeSource={RelativeSource AncestorType=ListBox}, Path=Foreground, UpdateSourceTrigger=PropertyChanged}"/>
                                 </Style>
                             </cc:CompletionListBox.ItemContainerStyle>
                         </cc:CompletionListBox>

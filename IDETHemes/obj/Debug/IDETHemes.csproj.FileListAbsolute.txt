@@ -16,3 +16,14 @@ D:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
 D:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csprojResolveAssemblyReference.cache
 D:\typicalIDE\IDETHemes\bin\Debug\CodeBox.dll
 D:\typicalIDE\IDETHemes\bin\Debug\CodeBox.pdb
+E:\typicalIDE\IDETHemes\bin\Debug\IDETHemes.dll
+E:\typicalIDE\IDETHemes\bin\Debug\IDETHemes.pdb
+E:\typicalIDE\IDETHemes\bin\Debug\CodeBox.dll
+E:\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+E:\typicalIDE\IDETHemes\bin\Debug\CodeBox.pdb
+E:\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+E:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csprojAssemblyReference.cache
+E:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
+E:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
+E:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
+E:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
