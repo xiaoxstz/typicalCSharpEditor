@@ -4,9 +4,9 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
-using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -96,6 +96,7 @@ namespace Completions
         #endregion
 
         #endregion
+
         #region Initializing
 
         #region Constructors
@@ -118,7 +119,7 @@ namespace Completions
         {
             Initialize();
             InitializeControl(CompletionList.ListBox, editor.Background, editor.Foreground);
-            InitializeControl(t, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
+            InitializeControl(toolTip, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
         }
 
 
@@ -130,7 +131,7 @@ namespace Completions
         {
             Initialize();
             InitializeControl(CompletionList.ListBox, background, foreground, borderBrush, borderThickness);
-            InitializeControl(t, background, foreground, borderBrush, borderThickness);
+            InitializeControl(toolTip, background, foreground, borderBrush, borderThickness);
         }
         #endregion
 
@@ -155,10 +156,10 @@ namespace Completions
         }
         private void InitializeWindow()
         {
-            CompletionList.ListBox.SelectionChanged += Changed;
+            CompletionList.ListBox.SelectionChanged += SelectionChanged;
             SetCompletionWindowOffset();
-
         }
+
         private void InitializeStandardCompletions()
         {
                 var data = CompletionList.CompletionData;
@@ -168,8 +169,8 @@ namespace Completions
         }
         private void InitializeStyles()
         {
-            CompletionList.Style = FindResource("CompletionListStyle") as Style;
-            t.Style = FindResource("CompletionToolTipStyle") as Style;
+            //CompletionList.Style = FindResource("CompletionListStyle") as Style;
+            toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
             Style = FindResource("CompletionWindowStyle") as Style;
         }
         private void InitializeBrushes()
@@ -182,35 +183,35 @@ namespace Completions
 
         #endregion
 
-
-        #region Events
-        public new void Show()
+        /// <summary>
+        /// Showing with duration
+        /// </summary>
+        public new async void Show()
         {
-            var selected = CompletionList.SelectedItem;
+            ICompletionData selected = CompletionList.SelectedItem;
             CompletionList.ListBox.ClearSelection();
             CompletionList.ListBox.SelectedItem = selected;
-
             base.Show();
         }
 
-        private void Changed(object sender, SelectionChangedEventArgs e)
+
+        #region Events
+
+        private void SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            t.IsOpen = false;
+            toolTip.IsOpen = false;
             ListBox list = CompletionList.ListBox;
             if (list.Items.Count == 0)
                 this.Close();
-            var selected = CompletionList.SelectedItem;
-            CompletionList.ListBox.ClearSelection();
-            CompletionList.ListBox.SelectedItem = selected;
             for (int i = 0; i < list.Items.Count; i++)
             {
-                var temp = list.Items[i] as CSharpCompletion.CSharpCompletion;
-                temp.SelectionColor = Brushes.Transparent;
+                CSharpCompletion.CSharpCompletion item = list.Items[i] as CSharpCompletion.CSharpCompletion;
+                item.SelectionColor = Brushes.Transparent;
             }
-            object currentItem = list.SelectedValue;
+            CSharpCompletion.CSharpCompletion currentItem = list.SelectedValue as CSharpCompletion.CSharpCompletion;
             if (currentItem != null)
             {
-                CSharpCompletion.CSharpCompletion data = currentItem as CSharpCompletion.CSharpCompletion;
+                CSharpCompletion.CSharpCompletion data = currentItem;
                 data.SelectionColor = SelectionBrush;
                 CreateToolTip(data);
             }
@@ -218,13 +219,13 @@ namespace Completions
 
         private void CreateToolTip(ICompletionData data)
         {
-            t = new ToolTip();
-            t.Style = FindResource("CompletionToolTipStyle") as Style;
-            InitializeControl(t, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
-            t.PlacementTarget = this;
-            t.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
-            t.Content = data.Description.ToString();
-            t.IsOpen = true;
+            toolTip = new ToolTip();
+            toolTip.Style = FindResource("CompletionToolTipStyle") as Style;
+            InitializeControl(toolTip, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
+            toolTip.PlacementTarget = this;
+            toolTip.Placement = System.Windows.Controls.Primitives.PlacementMode.Right;
+            toolTip.Content = data.Description.ToString();
+            toolTip.IsOpen = true;
         }
 
         protected override void OnKeyDown(KeyEventArgs e)
@@ -232,10 +233,11 @@ namespace Completions
             base.OnKeyDown(e);
             if (e.Key == Key.Space)
                 CompletionList.RequestInsertion(e);
-            if (e.Key.ToString().Length > 1 && e.Key != Key.Up && e.Key != Key.Down)
+            if (e.Key.ToString().Length > 1 && e.Key != Key.Up && e.Key != Key.Down)//for changing items and autocomplete keys
                 Close();
         }    
         #endregion
+
         #region WordOffset
         private void SetCompletionWindowOffset()
         {
