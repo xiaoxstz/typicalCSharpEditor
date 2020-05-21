@@ -6,7 +6,6 @@ using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
@@ -108,17 +107,7 @@ namespace Completions
         public CustomCompletionControl(TextArea area) : base(area)
         {
             Initialize();
-        }
-
-        /// <summary>
-        /// Initializing colors from editor style
-        /// </summary>
-        /// <param name="editor"></param>
-
-        public CustomCompletionControl(TextEditor editor) : base(editor.TextArea)
-        {
-            Initialize();
-            InitializeControl(CompletionList.ListBox, editor.Background, editor.Foreground);
+            InitializeControl(CompletionList.ListBox, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
             InitializeControl(toolTip, Theme.CompletionBackground, Theme.CompletionForeground, Theme.CompletionBorder);
         }
 
@@ -206,7 +195,7 @@ namespace Completions
             for (int i = 0; i < list.Items.Count; i++)
             {
                 CSharpCompletion.CSharpCompletion item = list.Items[i] as CSharpCompletion.CSharpCompletion;
-                item.SelectionColor = Brushes.Transparent;
+                item.SelectionColor = Theme.CompletionBackground;
             }
             CSharpCompletion.CSharpCompletion currentItem = list.SelectedValue as CSharpCompletion.CSharpCompletion;
             if (currentItem != null)

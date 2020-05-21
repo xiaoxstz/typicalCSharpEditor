@@ -12,13 +12,9 @@ using Indents;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 using Completions;
-using Completions.CSharpCompletion;
 using System.Windows.Media;
-using System.Threading.Tasks;
-using ICSharpCode.AvalonEdit;
-using ICSharpCode.AvalonEdit.CodeCompletion;
-using System.Windows.Threading;
 using System.Collections.Generic;
+using System.Threading.Tasks;
 
 namespace CodeBox
 {
@@ -163,15 +159,13 @@ namespace CodeBox
         {
             if (completionWindow == null && !char.IsWhiteSpace(e.Text[0]))
             {
-
-                completionWindow = new CustomCompletionControl(textEditor);
+                completionWindow = new CustomCompletionControl(textEditor.TextArea);
                 completionWindow.Closed += delegate
                 {
                     completionWindow = null;
                 };
-                await Task.Delay(2000);
+                await Task.Delay(700);
                 completionWindow?.Show();
-
             }
         }
 
@@ -244,15 +238,17 @@ namespace CodeBox
             switch(DefaultTheme)
             {
                 case DefaultThemesEnum.BlueTheme:
-                    new BlueTheme().SetTheme(textEditor);
+
+                    Theme = new BlueTheme();
                     break;
                 case DefaultThemesEnum.LightTheme:
-                    new LightTheme().SetTheme(textEditor);
+                    Theme = new LightTheme();
                     break;
                 default:
-                    new DarkTheme().SetTheme(textEditor);
+                    Theme = new DarkTheme();
                     break;
             }
+            Theme.SetTheme(textEditor, CustomCompletionControl.Theme);
         }
 
         #endregion

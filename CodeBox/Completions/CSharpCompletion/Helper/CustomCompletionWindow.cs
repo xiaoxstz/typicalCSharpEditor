@@ -21,7 +21,7 @@ namespace Completions.CSharpCompletion
     {
         #region CompletionWindow
         private CompletionList completionList = new CompletionList();
-        protected ToolTip t = new ToolTip();
+        protected ToolTip toolTip { get; set; } = new ToolTip();
         /// <summary>
         /// Gets the completion list used in this completion window.
         /// </summary>
@@ -48,9 +48,9 @@ namespace Completions.CSharpCompletion
 
         protected override void OnClosed(EventArgs e)
         {
-            if (t != null)
-                t.IsOpen = false;
-            t = null;
+            if (toolTip != null)
+                toolTip.IsOpen = false;
+            toolTip = null;
             base.OnClosed(e);
         }
         #endregion
@@ -172,7 +172,6 @@ namespace Completions.CSharpCompletion
                 if (document != null)
                 {
                     completionList.SelectItem(document.GetText(this.StartOffset, offset - this.StartOffset));
-                    completionList.ListBox.SelectedItem = completionList.ListBox.SelectedItem;
                 }
             }
         }
