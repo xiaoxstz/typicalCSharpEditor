@@ -41,7 +41,15 @@
   <Color name="NonPrintableCharacters" foreground="#5FFF8080"/>
 
 
-    <Property name="DocCommentMarker" value="///" />
+
+
+
+  <!--Completion-->
+  <Color name="CompletionBorder" background="Red"/>
+  <Color name="CompletionColors" background="#013afe" foreground="#FFFFFFFF"/>
+  <Color name="CompletionSelectionBrush" background="#ff2f18"/>
+
+  <Property name="DocCommentMarker" value="///" />
 
     <RuleSet name="CommentMarkerSet">
       <Keywords color="CommentMarkerSetTodo">
