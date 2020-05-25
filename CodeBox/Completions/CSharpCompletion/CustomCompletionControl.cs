@@ -4,6 +4,7 @@ using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
+using System;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows;
@@ -175,7 +176,7 @@ namespace Completions
         /// <summary>
         /// Showing with duration
         /// </summary>
-        public new async void Show()
+        public new void Show()
         {
             ICompletionData selected = CompletionList.SelectedItem;
             CompletionList.ListBox.ClearSelection();
@@ -224,7 +225,8 @@ namespace Completions
                 CompletionList.RequestInsertion(e);
             if (e.Key.ToString().Length > 1 && e.Key != Key.Up && e.Key != Key.Down)//for changing items and autocomplete keys
                 Close();
-        }    
+        }
+
         #endregion
 
         #region WordOffset

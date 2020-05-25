@@ -1,12 +1,16 @@
-﻿using ICSharpCode.AvalonEdit.CodeCompletion;
+﻿
+using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
+using ICSharpCode.AvalonEdit.Rendering;
+using ICSharpCode.AvalonEdit.Snippets;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
 using System.Windows.Controls;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
@@ -23,14 +27,18 @@ namespace Completions.CSharpCompletion
         public CSharpCompletion(string text, CompletionTypes type)
         {
             Image = CompletionImage.GetImageSource(type);
+            CompletionType = type;
             this.Text = text;
         }
         #endregion
 
         #region Completion properties
+        public CompletionTypes CompletionType { get; }
+
         public ImageSource Image { get; }
 
         public string Text { get; private set; }
+
 
         public object Content => this.Text;
 
@@ -75,9 +83,11 @@ namespace Completions.CSharpCompletion
         public void Complete(TextArea textArea, ISegment completionSegment,
     EventArgs insertionRequestEventArgs)
         {
+
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
-                Text, OffsetChangeMappingType.CharacterReplace);
+                                      Text, OffsetChangeMappingType.CharacterReplace);
         }
+
         #endregion
 
         #region OnPropertyChanged

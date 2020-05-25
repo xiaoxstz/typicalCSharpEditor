@@ -70,12 +70,12 @@ namespace Completions.CSharpCompletion
             // If the Complete callback pushes stacked input handlers, we don't want to pop those when the CC window closes.
             var item = completionList.SelectedItem;
             if (item != null)
-                item.Complete(this.TextArea, new AnchorSegment(this.TextArea.Document, this.StartOffset, this.EndOffset - this.StartOffset), e);
-        }
+                item.Complete(TextArea, new AnchorSegment(this.TextArea.Document, this.StartOffset, this.EndOffset - this.StartOffset), e);
 
+        }
         void AttachEvents()
         {
-            this.completionList.InsertionRequested += completionList_InsertionRequested;
+            this.CompletionList.InsertionRequested += completionList_InsertionRequested;
             this.TextArea.Caret.PositionChanged += CaretPositionChanged;
             this.TextArea.MouseWheel += textArea_MouseWheel;
             this.TextArea.PreviewTextInput += textArea_PreviewTextInput;
@@ -84,15 +84,12 @@ namespace Completions.CSharpCompletion
         /// <inheritdoc/>
         protected override void DetachEvents()
         {
-            this.completionList.InsertionRequested -= completionList_InsertionRequested;
+            this.CompletionList.InsertionRequested -= completionList_InsertionRequested;
             this.TextArea.Caret.PositionChanged -= CaretPositionChanged;
             this.TextArea.MouseWheel -= textArea_MouseWheel;
             this.TextArea.PreviewTextInput -= textArea_PreviewTextInput;
             base.DetachEvents();
         }
-
-
-        /// <inheritdoc/>
         protected override void OnKeyDown(KeyEventArgs e)
         {
             if (IsLoaded)
@@ -102,6 +99,7 @@ namespace Completions.CSharpCompletion
                 {
                     completionList.HandleKey(e);
                 }
+
             }
         }
         void textArea_PreviewTextInput(object sender, TextCompositionEventArgs e)

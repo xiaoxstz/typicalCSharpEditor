@@ -27,3 +27,14 @@ E:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
 E:\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
 E:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
 E:\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\IDETHemes.dll
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\IDETHemes.pdb
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\CodeBox.dll
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\CodeBox.pdb
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csprojAssemblyReference.cache
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
+C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb

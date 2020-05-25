@@ -15,7 +15,7 @@
 
   <Color name="ReferenceTypeKeywords" foreground="#101cff" exampleText="object o;"/>
   <Color name="MethodCall"            foreground="Red" exampleText="o.ToString();"/>
-  <Color name="NumberLiteral"         foreground="#FFb5cea8" exampleText="3.1415f"/>
+  <Color name="NumberLiteral"         foreground="Black" exampleText="3.1415f"/>
   <Color name="ThisOrBaseReference"   foreground="#FF3a6a9b" exampleText="this.Do(); base.Do();"/>
   <Color name="NullOrValueKeywords"   foreground="#101cff" exampleText="if (value == null)"/>
   <Color name="Keywords"              foreground="#FFd8a0df" exampleText="if (a) {} else {}"/>
@@ -42,6 +42,12 @@
   <Color name="Selection" background="#9da7c3"/>
   <Color name="Hyperlink" foreground="#0000ff"/>
   <Color name="NonPrintableCharacters" foreground="Orange" />
+
+  <!--Completion-->
+  <Color name="CompletionBorder" background="Gray"/>
+  <Color name="CompletionColors" background="#f5f5f5" foreground="Black"/>
+  <Color name="CompletionSelectionBrush" background="#3399ff"/>
+
 
   <Property name="DocCommentMarker" value="///" />
 

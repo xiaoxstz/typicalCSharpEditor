@@ -15,6 +15,7 @@ using Completions;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using ICSharpCode.AvalonEdit.Snippets;
 
 namespace CodeBox
 {
@@ -30,6 +31,7 @@ namespace CodeBox
             SetFolding();
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
+
         }
 
         #region Events
