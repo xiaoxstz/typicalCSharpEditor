@@ -14,7 +14,7 @@
                                FontSize="12pt"
                                ShowLineNumbers="True"
                                TextChanged="TextEditor_TextChanged"
-                               PreviewTextInput="TextEditor_PreviewTextInput" >
+                               PreviewTextInput="TextEditor_PreviewTextInput" PreviewKeyDown="textEditor_KeyDown">
         </avalonEdit:TextEditor>
         
     </Grid> 

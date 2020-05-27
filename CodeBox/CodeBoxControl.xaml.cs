@@ -16,6 +16,7 @@ using System.Windows.Media;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using ICSharpCode.AvalonEdit.Snippets;
+using CodeBox.Completions.CSharpCompletion.Snippets;
 
 namespace CodeBox
 {
@@ -32,6 +33,12 @@ namespace CodeBox
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
 
+            CodeSnippet cs = new CodeSnippet(textEditor.TextArea)
+            {
+                InsertString = "Console.WriteLine();",
+                SelectionStrings = new List<string>() { "Console" }
+            };
+            cs.Insert();
         }
 
         #region Events
@@ -68,7 +75,7 @@ namespace CodeBox
 
         }
         #endregion
-
+                
         #region TextEditor_PreviewTextInput
 
 
@@ -284,10 +291,14 @@ namespace CodeBox
         }
 
 
-        #endregion
 
         #endregion
 
+        #endregion
 
+        private void textEditor_KeyDown(object sender, KeyEventArgs e)
+        {
+                e.Handled = e.Key == Key.Tab ;
+        }
     }
 }

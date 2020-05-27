@@ -220,11 +220,13 @@ namespace Completions
 
         protected override void OnKeyDown(KeyEventArgs e)
         {
+
             base.OnKeyDown(e);
             if (e.Key == Key.Space)
                 CompletionList.RequestInsertion(e);
             if (e.Key.ToString().Length > 1 && e.Key != Key.Up && e.Key != Key.Down)//for changing items and autocomplete keys
                 Close();
+
         }
 
         #endregion

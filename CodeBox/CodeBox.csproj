@@ -68,6 +68,7 @@
     <Compile Include="Completions\CSharpCompletion\Helper\CSharpStandardCompletoins.cs" />
     <Compile Include="Completions\CSharpCompletion\Helper\CustomCompletionWindow.cs" />
     <Compile Include="Completions\CSharpCompletion\CustomCompletionControl.cs" />
+    <Compile Include="Completions\CSharpCompletion\Snippets\CodeSnippet.cs" />
     <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />
     <Compile Include="Foldings\Interfaces\AbstractFolding.cs" />
