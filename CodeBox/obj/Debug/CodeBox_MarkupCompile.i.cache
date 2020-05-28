@@ -10,11 +10,11 @@ none
 false
 DEBUG;TRACE
 
-4-1723406773
+41437407948
 
-18-357820968
+20-285936511
 17-1087341632
-CodeBoxControl.xaml;Completions\CSharpCompletion\Styles\CompletionListStyle.xaml;Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml;Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml;
+CodeBoxControl.xaml;Completions\CSCompletion\Styles\CompletionListStyle.xaml;Completions\CSCompletion\Styles\CompletionToolTipStyle.xaml;Completions\CSCompletion\Styles\CompletionWindowStyle.xaml;
 
 True
 

@@ -1,4 +1,6 @@
 ﻿
+using CodeBox;
+using CodeBox.Completions.CSCompletion.Snippets;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
@@ -14,7 +16,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 
-namespace Completions.CSharpCompletion
+namespace Completions.CSCompletion
 {
     public class CSharpCompletion: INotifyPropertyChanged, ICompletionData
     {
@@ -37,7 +39,7 @@ namespace Completions.CSharpCompletion
 
         public ImageSource Image { get; }
 
-        public string Text { get; private set; }
+        public string Text { get; protected set; }
 
 
         public object Content => this.Text;
@@ -60,7 +62,7 @@ namespace Completions.CSharpCompletion
         }
         #endregion
 
-        public double Priority { get; }
+        public double Priority { get; protected set; }
 
         #region SelectionColor
 
@@ -83,7 +85,10 @@ namespace Completions.CSharpCompletion
         public void Complete(TextArea textArea, ISegment completionSegment,
     EventArgs insertionRequestEventArgs)
         {
-
+            if (CompletionType == CompletionTypes.Snippet)
+                CodeBoxControl.IsSnippetCompletion = true;
+            else
+                CodeBoxControl.IsSnippetCompletion = false;
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
                                       Text, OffsetChangeMappingType.CharacterReplace);
         }

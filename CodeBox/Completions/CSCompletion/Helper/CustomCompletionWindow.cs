@@ -12,7 +12,7 @@ using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 
-namespace Completions.CSharpCompletion
+namespace Completions.CSCompletion
 {
     /// <summary>
     /// The code completion window.

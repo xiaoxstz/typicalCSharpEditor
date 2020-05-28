@@ -65,14 +65,11 @@ C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\bin\Debug\en\HandyC
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\bin\Debug\fa\HandyControl.resources.dll
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\bin\Debug\fr\HandyControl.resources.dll
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.csprojAssemblyReference.cache
-C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionListStyle.baml
-C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionToolTipStyle.baml
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBoxControl.g.cs
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox_MarkupCompile.cache
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox_MarkupCompile.lref
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBoxControl.baml
-C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSharpCompletion\Styles\CompletionWindowStyle.baml
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.g.resources
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.Properties.Resources.resources
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.csproj.GenerateResource.cache
@@ -80,3 +77,6 @@ C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.c
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.csproj.CopyComplete
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.dll
 C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\CodeBox.pdb
+C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionListStyle.baml
+C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionToolTipStyle.baml
+C:\Users\Пользователь\Desktop\typicalIDE\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionWindowStyle.baml

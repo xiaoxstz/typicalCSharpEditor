@@ -1,5 +1,5 @@
 ﻿using CodeBox.Completions;
-using Completions.CSharpCompletion;
+using Completions.CSCompletion;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
 using ICSharpCode.AvalonEdit.Document;
@@ -153,7 +153,7 @@ namespace Completions
         private void InitializeStandardCompletions()
         {
                 var data = CompletionList.CompletionData;
-                var standard = CSharpStandardCompletoins.GetKeyWords();
+                var standard = CSharpStandardCompletions.GetKeyWords();
                 for (int i = 0; i < standard.Count; i++)
                     data.Add(standard[i]);
         }
@@ -195,13 +195,13 @@ namespace Completions
                 this.Close();
             for (int i = 0; i < list.Items.Count; i++)
             {
-                CSharpCompletion.CSharpCompletion item = list.Items[i] as CSharpCompletion.CSharpCompletion;
+                CSharpCompletion item = list.Items[i] as CSharpCompletion;
                 item.SelectionColor = Theme.CompletionBackground;
             }
-            CSharpCompletion.CSharpCompletion currentItem = list.SelectedValue as CSharpCompletion.CSharpCompletion;
+            CSharpCompletion currentItem = list.SelectedValue as CSharpCompletion;
             if (currentItem != null)
             {
-                CSharpCompletion.CSharpCompletion data = currentItem;
+                CSharpCompletion data = currentItem;
                 data.SelectionColor = SelectionBrush;
                 CreateToolTip(data);
             }

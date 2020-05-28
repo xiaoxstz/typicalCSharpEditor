@@ -15,8 +15,8 @@ using Completions;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using ICSharpCode.AvalonEdit.Snippets;
-using CodeBox.Completions.CSharpCompletion.Snippets;
+using CodeBox.Completions.CSCompletion;
+using CodeBox.Completions.CSCompletion.Snippets;
 
 namespace CodeBox
 {
@@ -33,11 +33,7 @@ namespace CodeBox
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
 
-            CodeSnippet cs = new CodeSnippet(textEditor.TextArea)
-            {
-                InsertString = "Console.WriteLine();",
-                SelectionStrings = new List<string>() { "Console" }
-            };
+            RegionSnippet cs = new RegionSnippet(textEditor.TextArea);
             cs.Insert();
         }
 
@@ -200,7 +196,7 @@ namespace CodeBox
             new Uri("HandyControl;component/Themes/Styles/Base/ListBoxBaseStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-           new Uri("CodeBox;component/Completions/CSharpCompletion/Styles/CompletionWindowStyle.xaml", UriKind.Relative)) as ResourceDictionary);
+           new Uri("CodeBox;component/Completions/CSCompletion/Styles/CompletionWindowStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
           new Uri("HandyControl;component/Themes/SkinDefault.xaml", UriKind.Relative)) as ResourceDictionary);
@@ -209,10 +205,10 @@ namespace CodeBox
           new Uri("HandyControl;component/Themes/Theme.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-          new Uri("CodeBox;component/Completions/CSharpCompletion/Styles/CompletionListStyle.xaml", UriKind.Relative)) as ResourceDictionary);
+          new Uri("CodeBox;component/Completions/CSCompletion/Styles/CompletionListStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-        new Uri("CodeBox;component/Completions/CSharpCompletion/Styles/CompletionToolTipStyle.xaml", UriKind.Relative)) as ResourceDictionary);
+        new Uri("CodeBox;component/Completions/CSCompletion/Styles/CompletionToolTipStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
         }
 
@@ -296,9 +292,15 @@ namespace CodeBox
 
         #endregion
 
+        public static Action TabAction { get; set; }
+        public static bool IsSnippetCompletion { get; set; }
         private void textEditor_KeyDown(object sender, KeyEventArgs e)
         {
-                e.Handled = e.Key == Key.Tab ;
+            if(e.Key == Key.Tab && IsSnippetCompletion)
+            {
+                e.Handled = true;
+                TabAction();
+            }
         }
     }
 }

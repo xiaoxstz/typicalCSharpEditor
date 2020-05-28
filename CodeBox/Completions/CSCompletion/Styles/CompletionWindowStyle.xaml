@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-                    xmlns:local="clr-namespace:Completions.CSharpCompletion"
+                    xmlns:local="clr-namespace:Completions.CSCompletion"
                     xmlns:avalonEdit="clr-namespace:ICSharpCode.AvalonEdit.CodeCompletion;assembly=ICSharpCode.AvalonEdit">
     <Style TargetType="{x:Type local:CustomCompletionWindow}" x:Key="CompletionWindowStyle">
         <Setter Property="WindowStyle" Value="None"></Setter>

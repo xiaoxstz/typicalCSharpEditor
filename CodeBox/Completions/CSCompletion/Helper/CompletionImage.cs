@@ -7,7 +7,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using CodeBox.Properties;
 
-namespace Completions.CSharpCompletion
+namespace Completions.CSCompletion
 {
     internal class CompletionImage
     {

@@ -62,13 +62,15 @@
       <DependentUpon>CodeBoxControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="Completions\CompletionTheme.cs" />
-    <Compile Include="Completions\CSharpCompletion\CSharpCompletion.cs" />
-    <Compile Include="Completions\CSharpCompletion\Helper\CompletionImage.cs" />
-    <Compile Include="Completions\CSharpCompletion\Helper\CompletionTypes.cs" />
-    <Compile Include="Completions\CSharpCompletion\Helper\CSharpStandardCompletoins.cs" />
-    <Compile Include="Completions\CSharpCompletion\Helper\CustomCompletionWindow.cs" />
-    <Compile Include="Completions\CSharpCompletion\CustomCompletionControl.cs" />
-    <Compile Include="Completions\CSharpCompletion\Snippets\CodeSnippet.cs" />
+    <Compile Include="Completions\CSCompletion\CSharpCompletion.cs" />
+    <Compile Include="Completions\CSCompletion\Helper\CompletionImage.cs" />
+    <Compile Include="Completions\CSCompletion\Helper\CompletionTypes.cs" />
+    <Compile Include="Completions\CSCompletion\Helper\CSharpStandardCompletions.cs" />
+    <Compile Include="Completions\CSCompletion\Helper\CustomCompletionWindow.cs" />
+    <Compile Include="Completions\CSCompletion\CustomCompletionControl.cs" />
+    <Compile Include="Completions\CSCompletion\Snippets\CodeSnippet.cs" />
+    <Compile Include="Completions\CSCompletion\Snippets\ColorizeSnippet.cs" />
+    <Compile Include="Completions\CSCompletion\Snippets\RegionSnippet.cs" />
     <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />
     <Compile Include="Foldings\Interfaces\AbstractFolding.cs" />
@@ -103,30 +105,30 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Completions\CSharpCompletion\Styles\CompletionListStyle.xaml">
+    <Page Include="Completions\CSCompletion\Styles\CompletionListStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Completions\CSharpCompletion\Styles\CompletionToolTipStyle.xaml">
+    <Page Include="Completions\CSCompletion\Styles\CompletionToolTipStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
-    <Page Include="Completions\CSharpCompletion\Styles\CompletionWindowStyle.xaml">
+    <Page Include="Completions\CSCompletion\Styles\CompletionWindowStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="Completions\CSharpCompletion\Images\Class.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Delegate.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Enum.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Field.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Interface.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Keyword.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Namespace.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Property.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Snippet.png" />
-    <Resource Include="Completions\CSharpCompletion\Images\Struct.png" />
+    <Resource Include="Completions\CSCompletion\Images\Class.png" />
+    <Resource Include="Completions\CSCompletion\Images\Delegate.png" />
+    <Resource Include="Completions\CSCompletion\Images\Enum.png" />
+    <Resource Include="Completions\CSCompletion\Images\Field.png" />
+    <Resource Include="Completions\CSCompletion\Images\Interface.png" />
+    <Resource Include="Completions\CSCompletion\Images\Keyword.png" />
+    <Resource Include="Completions\CSCompletion\Images\Namespace.png" />
+    <Resource Include="Completions\CSCompletion\Images\Property.png" />
+    <Resource Include="Completions\CSCompletion\Images\Snippet.png" />
+    <Resource Include="Completions\CSCompletion\Images\Struct.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -8,7 +8,6 @@ using System.Windows.Media;
 using System.Xml;
 using CodeBox;
 using Completions;
-using Completions.CSharpCompletion;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;

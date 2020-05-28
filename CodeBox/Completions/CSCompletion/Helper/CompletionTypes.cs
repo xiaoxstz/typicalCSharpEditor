@@ -1,4 +1,4 @@
-﻿namespace Completions.CSharpCompletion
+﻿namespace Completions.CSCompletion
 {
     public enum CompletionTypes
     {
