@@ -18,11 +18,25 @@ namespace CodeBox.Completions.CSCompletion.Snippets
         delegate bool IsCorrectChar(char c);
         private IsCorrectChar CheckChar { get; set; }
 
+        private Brush backgroundBrush;
+        private Brush BackgroundBrush {
+            get => backgroundBrush;
+            set {
+                if (value != null)
+                    backgroundBrush = value;
+                else
+                    backgroundBrush = StandardBGBrush;
+            }
+        }
+
+        private Brush StandardBGBrush { get; set; } = (Brush)new BrushConverter().ConvertFromInvariantString("#3a506a");
+
         private TextArea textArea { get; set; }
-        public ColorizeSnippet(int startOffset, TextArea textArea, bool isAllLine = true)
+        public ColorizeSnippet(int startOffset, TextArea textArea, Brush backgroundBrush = null, bool isAllLine = true)
         {
             StartOffset = startOffset;
             this.textArea = textArea;
+            BackgroundBrush = backgroundBrush;
             if (isAllLine)
                 CheckChar = (c) => c != '\n';
             else
@@ -45,7 +59,7 @@ namespace CodeBox.Completions.CSCompletion.Snippets
                     EndOffset,
                     (VisualLineElement element) =>
                     {
-                        element.TextRunProperties.SetBackgroundBrush(Brushes.Green);
+                        element.TextRunProperties.SetBackgroundBrush(BackgroundBrush);
                     });
                 k--;
             }

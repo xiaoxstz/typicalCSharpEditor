@@ -73,6 +73,7 @@ namespace Completions.CSCompletion
                 item.Complete(TextArea, new AnchorSegment(this.TextArea.Document, this.StartOffset, this.EndOffset - this.StartOffset), e);
 
         }
+
         void AttachEvents()
         {
             this.CompletionList.InsertionRequested += completionList_InsertionRequested;

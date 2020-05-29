@@ -1,4 +1,5 @@
 ﻿using CodeBox.Completions;
+using CodeBox.Completions.CSCompletion.Snippets;
 using Completions.CSCompletion;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.CodeCompletion;
@@ -156,6 +157,7 @@ namespace Completions
                 var standard = CSharpStandardCompletions.GetKeyWords();
                 for (int i = 0; i < standard.Count; i++)
                     data.Add(standard[i]);
+            data.Add(new RegionSnippet(TextArea));
         }
         private void InitializeStyles()
         {
@@ -222,8 +224,6 @@ namespace Completions
         {
 
             base.OnKeyDown(e);
-            if (e.Key == Key.Space)
-                CompletionList.RequestInsertion(e);
             if (e.Key.ToString().Length > 1 && e.Key != Key.Up && e.Key != Key.Down)//for changing items and autocomplete keys
                 Close();
 

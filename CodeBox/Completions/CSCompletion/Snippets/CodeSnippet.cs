@@ -54,6 +54,9 @@ namespace CodeBox.Completions.CSCompletion
             if (nextIndex == SelectionStrings.Count)
                 nextIndex = 0;
             CurrentString = Keys[nextIndex];
+            Select();
+            SetSelections();
+
         }
 
         private void SetSelections()
@@ -67,8 +70,18 @@ namespace CodeBox.Completions.CSCompletion
 
         private void Select()
         {
-
+            int endOffset = SelectionStrings[CurrentString] + CurrentString.Length;
+            textArea.Selection = Selection.Create(textArea, SelectionStrings[CurrentString], endOffset);
+            textArea.Caret.Offset = endOffset;
         }
 
+        public override void Complete(TextArea textArea, ISegment completionSegment,
+    EventArgs insertionRequestEventArgs)
+        {
+            CodeBoxControl.IsSnippetCompletion = true;
+            textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
+                                      InsertString, OffsetChangeMappingType.CharacterReplace);
+            ChangeSelection();
+        }
     }
 }

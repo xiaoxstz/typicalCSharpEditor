@@ -15,8 +15,6 @@ using Completions;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using CodeBox.Completions.CSCompletion;
-using CodeBox.Completions.CSCompletion.Snippets;
 
 namespace CodeBox
 {
@@ -32,9 +30,6 @@ namespace CodeBox
             SetFolding();
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
-
-            RegionSnippet cs = new RegionSnippet(textEditor.TextArea);
-            cs.Insert();
         }
 
         #region Events
@@ -44,6 +39,7 @@ namespace CodeBox
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
             braceFolding.UpdateFoldings(foldings, textEditor.Document);
+            regionFolding.UpdateFoldings(foldings, textEditor.Document);
             foldingManager.UpdateFoldings(foldings, -1);
         }
 
@@ -178,7 +174,8 @@ namespace CodeBox
         {
             if (e.Text.Length > 0 && completionWindow != null)
             {
-                if (!char.IsLetterOrDigit(e.Text[0]))
+                if (
+                    !char.IsLetterOrDigit(e.Text[0]))
                 {
                     completionWindow.CompletionList.RequestInsertion(e);
                 }
@@ -300,6 +297,11 @@ namespace CodeBox
             {
                 e.Handled = true;
                 TabAction();
+            }
+            else if((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return) && IsSnippetCompletion)
+            {
+                IsSnippetCompletion = false;
+                TabAction = null;
             }
         }
     }

@@ -5,36 +5,18 @@ using System.Text.RegularExpressions;
 
 namespace Foldings
 {
-    class RegionFoldingStrategy
+    class RegionFoldingStrategy: AbstractFolding
     {
         private const string REGION = "#region";
         private const string END_REGION = "#endregion";
-        public void UpdateFoldings(FoldingManager manager, TextDocument document)
-        {
-            int firstErrorOffset;
-            IEnumerable<NewFolding> newFoldings = CreateNewFoldings(document, out firstErrorOffset);
-            manager.UpdateFoldings(newFoldings, firstErrorOffset);
-        }
 
-        /// <summary>
-        /// Create <see cref="NewFolding"/>s for the specified document.
-        /// </summary>
-        public IEnumerable<NewFolding> CreateNewFoldings(TextDocument document, out int firstErrorOffset)
-        {
-            firstErrorOffset = -1;
-            return CreateNewFoldings(document);
-        }
-
-        /// <summary>
-        /// Create <see cref="NewFolding"/>s for the specified document.
-        /// </summary>
-        public IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
+        public override IEnumerable<NewFolding> CreateNewFoldings(ITextSource document)
         {
             List<NewFolding> newFoldings = new List<NewFolding>();
             string t = document.Text;
             int tLength = t.Length;
             var regionMatches = Regex.Matches(t, $@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Singleline);
-            for(int i = 0; i < regionMatches.Count; i++)
+            for (int i = 0; i < regionMatches.Count; i++)
             {
                 int startIndex = regionMatches[i].Index;
                 int endIndex = startIndex + regionMatches[i].Length;

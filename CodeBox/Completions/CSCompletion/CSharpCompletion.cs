@@ -52,7 +52,7 @@ namespace Completions.CSCompletion
             {
                 if (description == null)
                     return $"Keyword: {Text}";
-                return $"{description}{Text}";
+                return $"{description}";
             }
             set
             {
@@ -82,13 +82,10 @@ namespace Completions.CSCompletion
         #endregion
 
         #region Completion methods
-        public void Complete(TextArea textArea, ISegment completionSegment,
+        public virtual void Complete(TextArea textArea, ISegment completionSegment,
     EventArgs insertionRequestEventArgs)
         {
-            if (CompletionType == CompletionTypes.Snippet)
-                CodeBoxControl.IsSnippetCompletion = true;
-            else
-                CodeBoxControl.IsSnippetCompletion = false;
+            CodeBoxControl.IsSnippetCompletion = false;
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
                                       Text, OffsetChangeMappingType.CharacterReplace);
         }
