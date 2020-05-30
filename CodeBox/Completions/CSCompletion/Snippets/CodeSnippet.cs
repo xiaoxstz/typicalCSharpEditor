@@ -30,14 +30,6 @@ namespace CodeBox.Completions.CSCompletion
         private int StartOffset { get; set; }
         private int EndOffset { get; set; }
 
-        public void Insert()
-        {
-            StartOffset = textArea.Caret.Offset;
-            textArea.Document.Insert(textArea.Caret.Offset, InsertString);
-            EndOffset = StartOffset + InsertString.Length;
-            SetStringsOffset();
-            SetSelections();
-        }
         private void SetStringsOffset()
         {
             foreach (KeyValuePair<string, int> s in SelectionStrings.ToArray())
@@ -79,8 +71,11 @@ namespace CodeBox.Completions.CSCompletion
     EventArgs insertionRequestEventArgs)
         {
             CodeBoxControl.IsSnippetCompletion = true;
+            StartOffset = textArea.Caret.Offset - completionSegment.Length;
+            EndOffset = StartOffset + InsertString.Length;
+            SetStringsOffset();
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
-                                      InsertString, OffsetChangeMappingType.CharacterReplace);
+              InsertString, OffsetChangeMappingType.CharacterReplace);
             ChangeSelection();
         }
     }
