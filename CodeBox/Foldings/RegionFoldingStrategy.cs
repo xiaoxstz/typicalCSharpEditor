@@ -2,6 +2,7 @@
 using ICSharpCode.AvalonEdit.Folding;
 using System.Collections.Generic;
 using System.Text.RegularExpressions;
+using System.Linq;
 
 namespace Foldings
 {
@@ -15,9 +16,19 @@ namespace Foldings
             List<NewFolding> newFoldings = new List<NewFolding>();
             string t = document.Text;
             int tLength = t.Length;
-            var regionMatches = Regex.Matches(t, $@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Singleline);
+            var pattern = new Regex($@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Multiline);
+            List<Match> regionMatches = new List<Match>();
+            MatchCollection temp = pattern.Matches(t);
+            while(temp.Count > 0)
+            {
+                regionMatches.Add(temp[0]);
+                temp = pattern.Matches(t, temp[0].Groups[1].Index);
+            }
+
+
             for (int i = 0; i < regionMatches.Count; i++)
             {
+
                 int startIndex = regionMatches[i].Index;
                 int endIndex = startIndex + regionMatches[i].Length;
                 char symbolAfterRegion = t[startIndex + REGION.Length];
