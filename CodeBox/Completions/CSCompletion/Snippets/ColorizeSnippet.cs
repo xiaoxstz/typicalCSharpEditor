@@ -76,7 +76,7 @@ namespace CodeBox.Completions.CSCompletion.Snippets
 
         private void DeactivateSnippet()
         {
-            textArea.TextView.LineTransformers.Clear();
+            textArea.TextView.LineTransformers.Remove(textArea.TextView.LineTransformers.Last());
         }
     }
 
