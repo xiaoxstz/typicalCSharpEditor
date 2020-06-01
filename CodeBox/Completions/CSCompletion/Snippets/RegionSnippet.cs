@@ -1,4 +1,5 @@
 ﻿using ICSharpCode.AvalonEdit.Editing;
+using Indents;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace CodeBox.Completions.CSCompletion.Snippets
         {
             Text = "#region";
             Description = "Code snippet for #region";
-            InsertString = "#region MyRegion\n\n#endregion";
+            InsertString = $"#region MyRegion\n\n#endregion";
             SelectionStrings.Add("MyRegion", 8);
         }
     }

@@ -243,7 +243,6 @@ namespace Completions
         private string GetCurrentLineText()
         {
             int line = TextArea.Caret.Line;
-            int column = TextArea.Caret.Column;
             DocumentLine currentLine = TextArea.Document.GetLineByNumber(line);
             string text = TextArea.Document.GetText(currentLine.Offset, currentLine.Length);
             return text;
@@ -254,7 +253,7 @@ namespace Completions
             int lineOffset = TextArea.Document.GetLineByOffset(startOffset).Offset;
             startOffset -= lineOffset;
             int i = startOffset - 1;
-            while (i > -1 && char.IsLetterOrDigit(text[i]))
+            while (i > -1 && !char.IsWhiteSpace(text[i]))
                 i--;
             return i + 1 + lineOffset;
         }

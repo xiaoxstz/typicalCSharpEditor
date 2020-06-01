@@ -170,6 +170,7 @@ namespace Completions.CSCompletion
                 TextDocument document = this.TextArea.Document;
                 if (document != null)
                 {
+                    var text = document.GetText(this.StartOffset, offset - this.StartOffset);
                     completionList.SelectItem(document.GetText(this.StartOffset, offset - this.StartOffset));
                 }
             }

@@ -15,27 +15,26 @@ namespace Foldings
         {
             List<NewFolding> newFoldings = new List<NewFolding>();
             string t = document.Text;
-            int tLength = t.Length;
-            var pattern = new Regex($@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Multiline);
+            var pattern = new Regex($@"{REGION}((.|\n|\r)*){END_REGION}", RegexOptions.Singleline);
             List<Match> regionMatches = new List<Match>();
             MatchCollection temp = pattern.Matches(t);
             while(temp.Count > 0)
             {
                 regionMatches.Add(temp[0]);
+                t = t.Remove(t.Length - END_REGION.Length);
                 temp = pattern.Matches(t, temp[0].Groups[1].Index);
             }
-
-
+            int textLength = document.Text.Length;
             for (int i = 0; i < regionMatches.Count; i++)
             {
 
                 int startIndex = regionMatches[i].Index;
                 int endIndex = startIndex + regionMatches[i].Length;
-                char symbolAfterRegion = t[startIndex + REGION.Length];
+                char symbolAfterRegion = document.Text[startIndex + REGION.Length];
                 if (char.IsWhiteSpace(symbolAfterRegion))
                 {
-                    if ((endIndex == tLength) ||
-                        (endIndex < tLength && char.IsWhiteSpace(t[endIndex])))// check last symbols of #endregion string
+                    if ((endIndex == textLength) ||
+                        (endIndex < textLength && char.IsWhiteSpace(document.Text[endIndex])))// check last symbols of #endregion string
                     {
                         Match m = Regex.Match(regionMatches[i].Value, $@"{REGION}(.*?)\n");
                         if (m.Groups[1].Value.Length > 0)

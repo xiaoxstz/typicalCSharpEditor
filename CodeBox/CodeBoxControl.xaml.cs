@@ -40,6 +40,7 @@ namespace CodeBox
             List<NewFolding> foldings = new List<NewFolding>();
             braceFolding.UpdateFoldings(foldings, textEditor.Document);
             regionFolding.UpdateFoldings(foldings, textEditor.Document);
+            foldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             foldingManager.UpdateFoldings(foldings, -1);
         }
 

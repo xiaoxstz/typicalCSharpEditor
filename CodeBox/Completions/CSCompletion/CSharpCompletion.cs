@@ -87,7 +87,7 @@ namespace Completions.CSCompletion
         {
             CodeBoxControl.IsSnippetCompletion = false;
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
-                                      Text, OffsetChangeMappingType.CharacterReplace);
+                                      Text, OffsetChangeMappingType.RemoveAndInsert);
         }
 
         #endregion

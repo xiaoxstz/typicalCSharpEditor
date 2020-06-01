@@ -19,6 +19,7 @@ namespace Indents
         public const string INDENT_STRING = "   ";
         private const char OPEN_BRACE = '{';
         private const char CLOSE_BRACE = '}';
+        internal static string indentation { get; set; }
        
         public override void IndentLine(TextDocument document, DocumentLine line)
         {
@@ -30,7 +31,7 @@ namespace Indents
             if (previousLine != null)
             {
                 ISegment indentationSegment = TextUtilities.GetWhitespaceAfter(document, previousLine.Offset);
-                string indentation = document.GetText(indentationSegment);
+                indentation = document.GetText(indentationSegment);
                 indentation = GetSharpIndentation(indentation, previousLine, document);
                 indentationSegment = TextUtilities.GetWhitespaceAfter(document, line.Offset);
                 document.Replace(indentationSegment.Offset, indentationSegment.Length, indentation,

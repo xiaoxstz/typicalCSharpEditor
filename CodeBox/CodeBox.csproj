@@ -73,7 +73,7 @@
     <Compile Include="Completions\CSCompletion\Snippets\RegionSnippet.cs" />
     <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />
-    <Compile Include="Foldings\Interfaces\AbstractFolding.cs" />
+    <Compile Include="Foldings\Abstract\AbstractFolding.cs" />
     <Compile Include="Foldings\RegionFoldingStrategy.cs" />
     <Compile Include="Indents\CSharpIndent.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
