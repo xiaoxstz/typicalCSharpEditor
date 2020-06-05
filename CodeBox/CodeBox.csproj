@@ -68,8 +68,10 @@
     <Compile Include="Completions\CSCompletion\Helper\CSharpStandardCompletions.cs" />
     <Compile Include="Completions\CSCompletion\Helper\CustomCompletionWindow.cs" />
     <Compile Include="Completions\CSCompletion\CustomCompletionControl.cs" />
+    <Compile Include="Completions\CSCompletion\Snippets\ClassSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\CodeSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\ColorizeSnippet.cs" />
+    <Compile Include="Completions\CSCompletion\Snippets\CWSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\RegionSnippet.cs" />
     <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />

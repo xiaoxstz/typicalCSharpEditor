@@ -15,6 +15,7 @@ using Completions;
 using System.Windows.Media;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using CodeBox.Completions.CSCompletion;
 
 namespace CodeBox
 {
@@ -290,19 +291,26 @@ namespace CodeBox
 
         #endregion
 
-        public static Action TabAction { get; set; }
+        public static Action TabAction { get; set; }//for changing words in snippet
+        public static Action EnterAction { get; set; }//for code after filling snippet
         public static bool IsSnippetCompletion { get; set; }
         private void textEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            if(e.Key == Key.Tab && IsSnippetCompletion)
+            if (e.Key == Key.Enter && IsSnippetCompletion && EnterAction != null)
+            {
+                e.Handled = true;
+                EnterAction();
+                EnterAction = null;
+            }
+            if (e.Key == Key.Tab && IsSnippetCompletion)
             {
                 e.Handled = true;
                 TabAction();
             }
-            else if((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return) && IsSnippetCompletion)
+            else if((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return || e.Key == Key.Back
+                || e.Key == Key.LeftCtrl || e.Key == Key.LeftAlt) && IsSnippetCompletion)
             {
-                IsSnippetCompletion = false;
-                TabAction = null;
+                CodeSnippet.Clear(textEditor.TextArea);
             }
         }
     }

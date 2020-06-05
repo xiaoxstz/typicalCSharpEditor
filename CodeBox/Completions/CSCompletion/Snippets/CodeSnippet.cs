@@ -1,17 +1,12 @@
 ﻿using CodeBox.Completions.CSCompletion.Snippets;
 using Completions.CSCompletion;
-using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Document;
 using ICSharpCode.AvalonEdit.Editing;
 using ICSharpCode.AvalonEdit.Rendering;
-using Indents;
 using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows;
-using System.Windows.Media;
 
 namespace CodeBox.Completions.CSCompletion
 {
@@ -19,17 +14,17 @@ namespace CodeBox.Completions.CSCompletion
     {
         public string InsertString { get; protected set; }
         public Dictionary<string, int> SelectionStrings { get; protected set; } = new Dictionary<string, int>();
+
+        protected int CaretPosition { get; set; } = -1;
         
-        private string CurrentString { get; set; }
+        private int CurrentIndex { get; set; }
         private TextArea textArea { get; set; }
         public CodeSnippet(TextArea textArea):base(textArea.Document.Text, CompletionTypes.Snippet)
         {
             this.textArea = textArea;
-            CodeBoxControl.TabAction = ChangeSelection;
         }
 
         private int StartOffset { get; set; }
-        private int EndOffset { get; set; }
 
         private void SetStringsOffset()
         {
@@ -42,14 +37,14 @@ namespace CodeBox.Completions.CSCompletion
         private void ChangeSelection()
         {
             List<string> Keys = SelectionStrings.Keys.ToList();
-            int currentIndex = Keys.IndexOf(CurrentString);
-            int nextIndex = currentIndex + 1;
-            if (nextIndex == SelectionStrings.Count)
-                nextIndex = 0;
-            CurrentString = Keys[nextIndex];
-            Select();
-            SetSelections();
-
+            if (Keys.Count > 0)
+            {
+                int nextIndex = CurrentIndex + 1;
+                if (nextIndex == SelectionStrings.Count)
+                    nextIndex = 0;
+                CurrentIndex = nextIndex;
+                SetSelections();
+            }
         }
 
         private void SetSelections()
@@ -60,24 +55,40 @@ namespace CodeBox.Completions.CSCompletion
                 textArea.TextView.LineTransformers.Add(snip);
             }
         }
-
-        private void Select()
-        {
-            int endOffset = SelectionStrings[CurrentString] + CurrentString.Length;
-            textArea.Selection = Selection.Create(textArea, SelectionStrings[CurrentString], endOffset);
-            textArea.Caret.Offset = endOffset;
-        }
+        
 
         public override void Complete(TextArea textArea, ISegment completionSegment,
     EventArgs insertionRequestEventArgs)
         {
             CodeBoxControl.IsSnippetCompletion = true;
             StartOffset = textArea.Caret.Offset - completionSegment.Length;
-            EndOffset = StartOffset + InsertString.Length;
             SetStringsOffset();
             textArea.Document.Replace(completionSegment.Offset, completionSegment.Length,
               InsertString, OffsetChangeMappingType.CharacterReplace);
+            if (CaretPosition != -1)
+                textArea.Caret.Offset = CaretPosition + StartOffset;
+            Indent(textArea);
             ChangeSelection();
+            CodeBoxControl.EnterAction = EnterAction;
+            CodeBoxControl.TabAction = ChangeSelection;
         }
+
+        protected virtual void Indent(TextArea area)
+        {
+            area.IndentationStrategy.IndentLine(area.Document, area.Document.GetLineByNumber(area.Caret.Line));
+        }
+
+        public static void Clear(TextArea area)
+        {
+            CodeBoxControl.IsSnippetCompletion = false;
+            CodeBoxControl.TabAction = null;
+            IList<IVisualLineTransformer> trans = area.TextView.LineTransformers;
+            for (int i = 0; i < trans.Count; i++)
+                if (trans[i].GetType() == typeof(ColorizeSnippet))
+                    trans.Remove(trans[i]);
+        }
+
+        protected virtual void EnterAction() { }
+
     }
 }

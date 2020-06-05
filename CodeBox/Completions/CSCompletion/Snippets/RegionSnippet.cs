@@ -1,10 +1,6 @@
-﻿using ICSharpCode.AvalonEdit.Editing;
-using Indents;
+﻿using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Editing;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace CodeBox.Completions.CSCompletion.Snippets
 {
@@ -14,8 +10,13 @@ namespace CodeBox.Completions.CSCompletion.Snippets
         {
             Text = "#region";
             Description = "Code snippet for #region";
-            InsertString = $"#region MyRegion\n\n#endregion";
+            InsertString = $"#region MyRegion\n#endregion";
             SelectionStrings.Add("MyRegion", 8);
+        }
+        public override void Complete(TextArea textArea, ISegment completionSegment, EventArgs insertionRequestEventArgs)
+        {
+            base.Complete(textArea, completionSegment, insertionRequestEventArgs);
+            CodeBoxControl.EnterAction = null;
         }
     }
 }

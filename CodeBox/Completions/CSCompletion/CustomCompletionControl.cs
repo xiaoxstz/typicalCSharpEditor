@@ -154,10 +154,9 @@ namespace Completions
         private void InitializeStandardCompletions()
         {
                 var data = CompletionList.CompletionData;
-                var standard = CSharpStandardCompletions.GetKeyWords();
+                var standard = CSharpStandardCompletions.GetStandard(TextArea);
                 for (int i = 0; i < standard.Count; i++)
                     data.Add(standard[i]);
-            data.Add(new RegionSnippet(TextArea));
         }
         private void InitializeStyles()
         {

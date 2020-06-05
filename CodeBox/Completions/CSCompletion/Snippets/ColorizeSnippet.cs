@@ -12,8 +12,8 @@ namespace CodeBox.Completions.CSCompletion.Snippets
 {
     class ColorizeSnippet : DocumentColorizingTransformer
     {
-        private int StartOffset { get; set; }
-        private int EndOffset { get; set; }
+        public int StartOffset { get; set; }
+        public int EndOffset { get; set; }
 
         delegate bool IsCorrectChar(char c);
         private IsCorrectChar CheckChar { get; set; }
@@ -45,36 +45,30 @@ namespace CodeBox.Completions.CSCompletion.Snippets
 
         protected override void ColorizeLine(DocumentLine line)
         {
-            SetEndOffset(line);
-            if (EndOffset <= StartOffset || StartOffset < line.Offset)
+            if (textArea.Document.TextLength == 0 || StartOffset > line.EndOffset || StartOffset < line.Offset)
             {
-                DeactivateSnippet();
+                Deactivate();
                 return;
             }
-            int k = EndOffset;
-            while (k > StartOffset)
+            SetEndOffset(line);
+            ChangeVisualElements(StartOffset - line.Offset, EndOffset, (VisualLineElement element) =>
             {
-                base.ChangeLinePart(
-                    StartOffset,
-                    EndOffset,
-                    (VisualLineElement element) =>
-                    {
-                        element.TextRunProperties.SetBackgroundBrush(BackgroundBrush);
-                    });
-                k--;
-            }
+                element.TextRunProperties.SetBackgroundBrush(BackgroundBrush);
+            });
+            textArea.Selection = Selection.Create(textArea, StartOffset, EndOffset);
         }
+
 
         private void SetEndOffset(DocumentLine line)
         {
-            int i = StartOffset;
+            int i = StartOffset - line.Offset;
             string text = CurrentContext.Document.GetText(line);
             while (i < text.Length && CheckChar(text[i]))
                 i++;
-            EndOffset = i;
+            EndOffset = i + line.Offset;
         }
 
-        private void DeactivateSnippet()
+        private void Deactivate()
         {
             textArea.TextView.LineTransformers.Remove(this);
         }
