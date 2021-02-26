@@ -38,3 +38,14 @@ C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDEThem
 C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
 C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
 C:\Users\Пользователь\Desktop\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\IDETHemes.dll
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\IDETHemes.pdb
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\CodeBox.dll
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\CodeBox.pdb
+C:\files\Programming\Projects\typicalIDE\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csprojAssemblyReference.cache
+C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
+C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
+C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
+C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
