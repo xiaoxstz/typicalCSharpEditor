@@ -49,3 +49,14 @@ C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.Co
 C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
 C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDETHemes.dll
 C:\files\Programming\Projects\typicalIDE\IDETHemes\obj\Debug\IDETHemes.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\IDETHemes.dll
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\IDETHemes.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\CodeBox.dll
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.dll
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\CodeBox.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\obj\Debug\IDEThemes.csprojAssemblyReference.cache
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\obj\Debug\IDEThemes.csproj.CoreCompileInputs.cache
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\obj\Debug\IDEThemes.csproj.CopyComplete
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\obj\Debug\IDETHemes.dll
+C:\Users\HP\Desktop\typicalCSharpEditor\IDETHemes\obj\Debug\IDETHemes.pdb

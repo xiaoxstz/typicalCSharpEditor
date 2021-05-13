@@ -7,7 +7,6 @@
         <Setter Property="Foreground" Value="Black"/>
         <Setter Property="FontSize" Value="12"/>
         <Setter Property="FontFamily" Value="Consolas"/>
-        <Setter Property="controls:BorderElement.CornerRadius" Value="1"/>
         <Setter Property="BorderThickness" Value="1.5"/>
         <Setter Property="BorderBrush" Value="Red"/>
         <Setter Property="Template">
@@ -16,7 +15,6 @@
                     <Border Background="{TemplateBinding Background}" 
                             Padding="{TemplateBinding Padding}" 
                             BorderThickness="{TemplateBinding BorderThickness}" 
-                            CornerRadius="{Binding Path=(controls:BorderElement.CornerRadius),RelativeSource={RelativeSource TemplatedParent}}"
                             BorderBrush="{TemplateBinding BorderBrush}">
                         <ContentPresenter Margin="10,0"/>
                     </Border>

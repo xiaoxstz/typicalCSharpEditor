@@ -31,18 +31,29 @@ namespace CodeBox
             SetFolding();
             textEditor.TextArea.TextEntered += textEditor_TextArea_TextEntered;
             textEditor.TextArea.TextEntering += textEditor_TextArea_TextEntering;
+            textEditor.TextArea.SelectionChanged += SelectionChanged;
         }
 
         #region Events
         #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
+            Text = textEditor.Text;
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
             braceFolding.UpdateFoldings(foldings, textEditor.Document);
             regionFolding.UpdateFoldings(foldings, textEditor.Document);
             foldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             foldingManager.UpdateFoldings(foldings, -1);
+        }
+
+        #endregion
+
+        #region SelectionChanged
+        private void SelectionChanged(object sender, EventArgs e)
+        {
+            SelectedTextLength = textEditor.SelectionLength;
+            SelectionOffset = textEditor.SelectionStart;
         }
 
         #endregion
@@ -191,17 +202,17 @@ namespace CodeBox
 
         private void InitializeResources()
         {
-            Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-            new Uri("HandyControl;component/Themes/Styles/Base/ListBoxBaseStyle.xaml", UriKind.Relative)) as ResourceDictionary);
+            //Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
+            //new Uri("HandyControl;component/Themes/Styles/Base/ListBoxBaseStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
            new Uri("CodeBox;component/Completions/CSCompletion/Styles/CompletionWindowStyle.xaml", UriKind.Relative)) as ResourceDictionary);
 
-            Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-          new Uri("HandyControl;component/Themes/SkinDefault.xaml", UriKind.Relative)) as ResourceDictionary);
+          //  Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
+          //new Uri("HandyControl;component/Themes/SkinDefault.xaml", UriKind.Relative)) as ResourceDictionary);
 
-            Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
-          new Uri("HandyControl;component/Themes/Theme.xaml", UriKind.Relative)) as ResourceDictionary);
+          //  Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
+          //new Uri("HandyControl;component/Themes/Theme.xaml", UriKind.Relative)) as ResourceDictionary);
 
             Application.Current.Resources.MergedDictionaries.Add(Application.LoadComponent(
           new Uri("CodeBox;component/Completions/CSCompletion/Styles/CompletionListStyle.xaml", UriKind.Relative)) as ResourceDictionary);
@@ -286,6 +297,50 @@ namespace CodeBox
         }
 
 
+
+        #endregion
+
+        #region Text
+        public static readonly DependencyProperty TextProperty =
+                DependencyProperty.Register("Text", typeof(string), typeof(CodeBoxControl), new
+                   PropertyMetadata(""));
+
+        public string Text
+        {
+            get { return (string)GetValue(TextProperty); }
+            set { SetValue(TextProperty, value); }
+        }
+
+        #endregion
+
+        #region SelectedTextLength
+        public static readonly DependencyProperty SelectedTextLengthProperty =
+                DependencyProperty.Register("SelectedTextLength", typeof(int), typeof(CodeBoxControl), new
+                   PropertyMetadata(0));
+
+        public int SelectedTextLength
+        {
+            get { return (int)GetValue(SelectedTextLengthProperty); }
+            set {
+                SetValue(SelectedTextLengthProperty, value);
+                textEditor.SelectionLength = value;
+            }
+        }
+
+        #endregion
+
+        #region SelectionOffset
+        public static readonly DependencyProperty SelectionOffsetProperty =
+                DependencyProperty.Register("SelectionOffset", typeof(int), typeof(CodeBoxControl), new
+                   PropertyMetadata(0));
+
+        public int SelectionOffset
+        {
+            get { return textEditor.SelectionStart; }
+            set { SetValue(SelectionOffsetProperty, value);
+                textEditor.SelectionStart = value;
+            }
+        }
 
         #endregion
 

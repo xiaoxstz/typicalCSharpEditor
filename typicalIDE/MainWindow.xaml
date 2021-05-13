@@ -8,6 +8,13 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <cb:CodeBoxControl DefaultTheme="DarkTheme"/>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="50"/>
+        </Grid.RowDefinitions>
+        <cb:CodeBoxControl DefaultTheme="DarkTheme"
+                           Text="fdsf" Name="cntrl" />
+        <Button Click="Button_Click" Grid.Row="1"/>
+
     </Grid>
 </Window>

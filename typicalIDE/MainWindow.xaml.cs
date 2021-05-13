@@ -13,5 +13,10 @@ namespace typicalIDE
             InitializeComponent();
         }
 
+        private void Button_Click(object sender, RoutedEventArgs e)
+        {
+            cntrl.SelectionOffset = 0;
+            cntrl.SelectedTextLength = cntrl.Text.Length;
+        }
     }
 }                
