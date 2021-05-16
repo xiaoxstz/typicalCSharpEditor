@@ -171,7 +171,7 @@ namespace CodeBox
 
         async void textEditor_TextArea_TextEntered(object sender, TextCompositionEventArgs e)
         {
-            if (completionWindow == null && !char.IsWhiteSpace(e.Text[0]))
+            if (completionWindow == null && !char.IsWhiteSpace(e.Text[0]) && IsCompletionEnable)
             {
                 completionWindow = new CustomCompletionControl(textEditor.TextArea);
                 completionWindow.Closed += delegate
@@ -185,7 +185,7 @@ namespace CodeBox
 
         void textEditor_TextArea_TextEntering(object sender, TextCompositionEventArgs e)
         {
-            if (e.Text.Length > 0 && completionWindow != null)
+            if (e.Text.Length > 0 && completionWindow != null && IsCompletionEnable)
             {
                 if (
                     !char.IsLetterOrDigit(e.Text[0]))
@@ -275,8 +275,8 @@ namespace CodeBox
 
         public Languages Language
         {
-            get { return (Languages)GetValue(DefaultThemeProperty); }
-            set { SetValue(DefaultThemeProperty, value); }
+            get { return (Languages)GetValue(LanguageProperty); }
+            set { SetValue(LanguageProperty, value); }
         }
         #endregion
 
@@ -342,6 +342,18 @@ namespace CodeBox
             }
         }
 
+        #endregion
+
+        #region IsCompletionEnable
+        public static readonly DependencyProperty IsCompletionEnableProperty =
+   DependencyProperty.Register("IsCompletionEnable", typeof(bool), typeof(CodeBoxControl),
+       new PropertyMetadata(false));
+
+        public bool IsCompletionEnable
+        {
+            get { return (bool)GetValue(IsCompletionEnableProperty); }
+            set { SetValue(IsCompletionEnableProperty, value); }
+        }
         #endregion
 
         #endregion

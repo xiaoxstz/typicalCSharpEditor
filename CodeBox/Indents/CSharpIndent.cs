@@ -16,7 +16,7 @@ namespace Indents
             this.caret = caret;
         }
 
-        public const string INDENT_STRING = "   ";
+        public const string INDENT_STRING = "    ";
         private const char OPEN_BRACE = '{';
         private const char CLOSE_BRACE = '}';
         internal static string indentation { get; set; }

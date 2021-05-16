@@ -6,7 +6,7 @@
     <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
     <Color name="Char"                foreground="#FFD69D85" exampleText="char linefeed = '\n';"/>
     <Color name="Preprocessor"        foreground="#FF9B9B9B" exampleText="#region Title"/>
-    <Color name="Punctuation"         foreground="White" exampleText="a(b.c);"/>
+    <Color name="Punctuation"         foreground="#dcdcdc" exampleText="a(b.c);"/>
 
     <Color name="ValueTypeKeywords"     foreground="#399ac6"/>
     <Color name="ValueStructKeyword"     foreground="#86c691"/>
@@ -38,7 +38,7 @@
     <Color name="CommentMarkerSetTodo"       foreground="#FFFF0000" fontWeight="bold" />
     <Color name="CommentMarkerSetHackUndone" foreground="#FF8B008B" fontWeight="bold" />
 
-    <Color name="Default" background="#1b1c1b" foreground="White"/>
+    <Color name="Default" background="#1b1c1b" foreground="#dcdcdc"/>
     <Color name="LineNumbersForeground" foreground="#2b91af"/>
     <Color name="Selection" background="#264f98"/>
     <Color name="Hyperlink" foreground="#2f70d5"/>
