@@ -1,4 +1,6 @@
-﻿using System.Windows;
+﻿using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using System.Windows;
 using System.Windows.Controls;
 
 namespace typicalIDE
@@ -11,12 +13,11 @@ namespace typicalIDE
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MVM();
         }
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-            cntrl.SelectionOffset = 0;
-            cntrl.SelectedTextLength = cntrl.Text.Length;
-        }
+     
+
+       
     }
 }                

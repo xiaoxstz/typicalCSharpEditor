@@ -55,9 +55,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CodeBoxControl.xaml.cs">
-      <DependentUpon>CodeBoxControl.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Completions\CompletionTheme.cs" />
     <Compile Include="Completions\CSCompletion\CSharpCompletion.cs" />
     <Compile Include="Completions\CSCompletion\Helper\CompletionImage.cs" />
@@ -70,6 +67,7 @@
     <Compile Include="Completions\CSCompletion\Snippets\ColorizeSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\CWSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\RegionSnippet.cs" />
+    <Compile Include="CodeBoxControl.cs" />
     <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />
     <Compile Include="Foldings\Abstract\AbstractFolding.cs" />
@@ -99,10 +97,6 @@
     </None>
   </ItemGroup>
   <ItemGroup>
-    <Page Include="CodeBoxControl.xaml">
-      <Generator>MSBuild:Compile</Generator>
-      <SubType>Designer</SubType>
-    </Page>
     <Page Include="Completions\CSCompletion\Styles\CompletionListStyle.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

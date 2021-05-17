@@ -117,11 +117,9 @@ C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\IDETHemes.pdb
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.csprojAssemblyReference.cache
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionListStyle.baml
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionToolTipStyle.baml
-C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBoxControl.g.cs
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\GeneratedInternalTypeHelper.g.cs
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox_MarkupCompile.cache
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox_MarkupCompile.lref
-C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBoxControl.baml
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionWindowStyle.baml
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.g.resources
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.Properties.Resources.resources
