@@ -57,6 +57,7 @@
     <Compile Include="Themes\CSharpThemes\LightTheme.cs" />
     <Compile Include="Themes\Interfaces\ITheme.cs" />
     <Compile Include="Themes\Enums\DefaultThemesEnum.cs" />
+    <Compile Include="Themes\RuleSetGenerator.cs" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Themes\Resources\CSharpDarkTheme.xshd">

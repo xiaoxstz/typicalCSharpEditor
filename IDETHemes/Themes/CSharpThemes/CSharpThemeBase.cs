@@ -13,6 +13,8 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using IDEThemes.Themes.Interfaces;
 using CodeBox.Completions;
+using CodeBox.Enums;
+using IDETHemes.Themes;
 
 namespace IDEThemes.Themes.CSharpThemes
 {
@@ -73,6 +75,29 @@ namespace IDEThemes.Themes.CSharpThemes
             editor.TextArea.TextView.LinkTextBackgroundBrush = Hyperlink;
             editor.TextArea.TextView.LinkTextUnderline = true;
             editor.LineNumbersForeground = LineNumbersForeground;
+        }
+
+        public void SetTheme(TextEditor editor, Languages lang)
+        {
+            SetTheme(editor, lang, null);
+        }
+
+        public void SetTheme(TextEditor editor, Languages lang, CompletionTheme th)
+        {
+            if (lang == Languages.CSharp)
+                SetTheme(editor, th);
+            else if (lang == Languages.C)
+            {
+                SetTheme(editor, th);
+                HighlightingRule kwRule = RuleSet.Rules[1];
+                while (RuleSet.Rules.Count > 2)
+                    RuleSet.Rules.RemoveAt(0);
+                RuleSet.Rules.Insert(0, kwRule);
+                var a = kwRule.Regex;
+RuleSet.Rules[0].Regex = new System.Text.RegularExpressions.Regex(RuleSetGenerator.GetRuleSetRegex("auto sizeof volatile"),
+    System.Text.RegularExpressions.RegexOptions.ExplicitCapture |System.Text.RegularExpressions.RegexOptions.CultureInvariant);
+                SetTheme(editor, th);
+            }
         }
 
         public void SetTheme(TextEditor editor, CompletionTheme th)

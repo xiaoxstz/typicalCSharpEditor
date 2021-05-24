@@ -38,7 +38,7 @@ namespace CodeBox
             InitializeResources();
             TextArea.IndentationStrategy = new CSharpIndent(TextArea.Caret);
             TextArea.Caret.PositionChanged += Caret_PositionChanged;
-            Theme.SetTheme(this, CustomCompletionControl.Theme);
+            Theme.SetTheme(this, ProgrammingLanguage, CustomCompletionControl.Theme);
             SetFolding();
             TextArea.TextEntered += textEditor_TextArea_TextEntered;
             TextArea.TextEntering += textEditor_TextArea_TextEntering;
@@ -281,21 +281,25 @@ namespace CodeBox
                     Theme = new DarkTheme();
                     break;
             }
-            Theme.SetTheme(this, CustomCompletionControl.Theme);
+            Theme.SetTheme(this, ProgrammingLanguage, CustomCompletionControl.Theme);
         }
 
         #endregion
 
         #region Language
-        public static readonly DependencyProperty LanguageProperty =
-   DependencyProperty.Register("Language", typeof(Languages), typeof(CodeBoxControl),
-       new PropertyMetadata(Languages.CSharp));
+        public static readonly DependencyProperty ProgrammingLanguageProperty =
+DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(CodeBoxControl),
+   new PropertyMetadata(Languages.CSharp, new PropertyChangedCallback(DefaultThemePropertyChanged)));
 
-        public Languages Language
+        public Languages ProgrammingLanguage
         {
-            get { return (Languages)GetValue(LanguageProperty); }
-            set { SetValue(LanguageProperty, value); }
+            get { return (Languages)GetValue(ProgrammingLanguageProperty); }
+            set { SetValue(ProgrammingLanguageProperty, value); }
         }
+
+
+
+
         #endregion
 
         #region Theme
@@ -309,7 +313,7 @@ namespace CodeBox
             get { return (ITheme)GetValue(ThemeProperty); }
             set
             {
-                value.SetTheme(this);
+                value.SetTheme(this, ProgrammingLanguage);
                 SetValue(ThemeProperty, value);
             }
         }
@@ -317,14 +321,16 @@ namespace CodeBox
 
 
         #endregion
+
+        #region Text
         public static readonly DependencyProperty TextProperty =
-           DependencyProperty.Register("Text", typeof(string), typeof(CodeBoxControl), 
-               new FrameworkPropertyMetadata
-               {
-                   DefaultValue = default(string),
-                   BindsTwoWayByDefault = true,
-                   PropertyChangedCallback = OnTextChanged
-               });
+      DependencyProperty.Register("Text", typeof(string), typeof(CodeBoxControl),
+          new FrameworkPropertyMetadata
+          {
+              DefaultValue = default(string),
+              BindsTwoWayByDefault = true,
+              PropertyChangedCallback = OnTextChanged
+          });
 
         public new string Text
         {
@@ -352,6 +358,9 @@ namespace CodeBox
                 TextArea.Caret.Offset = caretOffset;
             }
         }
+
+        #endregion
+
         #endregion
 
 

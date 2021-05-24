@@ -16,5 +16,5 @@ DEBUG;TRACE
 16390260882
 Completions\CSCompletion\Styles\CompletionListStyle.xaml;Completions\CSCompletion\Styles\CompletionToolTipStyle.xaml;Completions\CSCompletion\Styles\CompletionWindowStyle.xaml;
 
-True
+False
 

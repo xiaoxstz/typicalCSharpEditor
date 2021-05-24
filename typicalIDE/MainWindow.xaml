@@ -13,7 +13,7 @@
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <cb:CodeBoxControl Name="cbc"
+        <cb:CodeBoxControl Name="cbc" ProgrammingLanguage="C"
             Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Grid.Row="1">
             <TextBlock Text="{Binding ElementName=cbc, Path=SelectedTextLength, UpdateSourceTrigger=PropertyChanged}"/>
