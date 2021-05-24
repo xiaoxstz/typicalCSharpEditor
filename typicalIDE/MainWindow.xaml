@@ -9,11 +9,16 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition/>
+            <RowDefinition Height="5*"/>
             <RowDefinition />
         </Grid.RowDefinitions>
 
-        <cb:CodeBoxControl Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
+        <cb:CodeBoxControl Name="cbc"
+            Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged}"/>
+        <StackPanel Grid.Row="1">
+            <TextBlock Text="{Binding ElementName=cbc, Path=SelectedTextLength, UpdateSourceTrigger=PropertyChanged}"/>
+            <TextBlock Text="{Binding ElementName=cbc, Path=SelectionOffset, UpdateSourceTrigger=PropertyChanged}"/>
+            <Button Click="Button_Click" Height="30"/>
+        </StackPanel>
     </Grid>
 </Window>

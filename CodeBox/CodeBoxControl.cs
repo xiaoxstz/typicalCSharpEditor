@@ -61,6 +61,7 @@ namespace CodeBox
             regionFolding.UpdateFoldings(foldings, Document);
             foldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             foldingManager.UpdateFoldings(foldings, -1);
+            var cf = TextArea.Caret.Offset;
         }
 
         #endregion
@@ -102,6 +103,7 @@ namespace CodeBox
 
         private void TextEditor_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
+
             IsBrace = e.Text == "{";
             IsBracket = e.Text == "(";
         }
@@ -175,7 +177,7 @@ namespace CodeBox
                 for (int i = currentText.Length - 1; currentText[i] == ' '; i--)
                     currentText = currentText.Remove(i, 1);
                 Document.Replace(currentLine.Offset, currentLine.Length, currentText + insertString);
-                TextArea.Caret.Column = Document.GetLineByNumber(currentLine.LineNumber).Length;
+                TextArea.Caret.Offset--;
             }
         }
         #endregion
@@ -321,7 +323,7 @@ namespace CodeBox
                {
                    DefaultValue = default(string),
                    BindsTwoWayByDefault = true,
-                   PropertyChangedCallback = OnSetTextChanged
+                   PropertyChangedCallback = OnTextChanged
                });
 
         public new string Text
@@ -334,31 +336,33 @@ namespace CodeBox
             }
         }
 
-        private static void OnSetTextChanged(DependencyObject d,
+        private static void OnTextChanged(DependencyObject d,
            DependencyPropertyChangedEventArgs e)
         {
             CodeBoxControl UserControl1Control = d as CodeBoxControl;
-            UserControl1Control.OnSetTextChanged(e);
+            UserControl1Control.OnTextChanged(e);
         }
 
-        private void OnSetTextChanged(DependencyPropertyChangedEventArgs e)
+        private void OnTextChanged(DependencyPropertyChangedEventArgs e)
         {
-            if(e.NewValue != null)
-            Document.Text = e.NewValue.ToString();
+            if (e.NewValue != null)
+            {
+                int caretOffset = TextArea.Caret.Offset;
+                Document.Text = e.NewValue.ToString();
+                TextArea.Caret.Offset = caretOffset;
+            }
         }
         #endregion
 
 
-        protected static void OnTextPropertyChanged(DependencyObject obj, DependencyPropertyChangedEventArgs args)
-        {
-            CodeBoxControl target = (CodeBoxControl)obj;
-            target.Document.Text = (string)args.NewValue;
-        }
-
         #region SelectedTextLength
         public static readonly DependencyProperty SelectedTextLengthProperty =
-                DependencyProperty.Register("SelectedTextLength", typeof(int), typeof(CodeBoxControl), new
-                   PropertyMetadata(0));
+                DependencyProperty.Register("SelectedTextLength", typeof(int), typeof(CodeBoxControl),
+                   new FrameworkPropertyMetadata
+                   {
+                       DefaultValue = default(int),
+                       BindsTwoWayByDefault = true
+                   });
 
         public int SelectedTextLength
         {
@@ -366,24 +370,30 @@ namespace CodeBox
             set
             {
                 SetValue(SelectedTextLengthProperty, value);
-                SelectionLength = value;
+                OnPropertyChanged("SelectedTextLength");
             }
         }
+
+   
 
         #endregion
 
         #region SelectionOffset
         public static readonly DependencyProperty SelectionOffsetProperty =
-                DependencyProperty.Register("SelectionOffset", typeof(int), typeof(CodeBoxControl), new
-                   PropertyMetadata(0));
+                DependencyProperty.Register("SelectionOffset", typeof(int), typeof(CodeBoxControl),
+                  new FrameworkPropertyMetadata
+                  {
+                      DefaultValue = default(int),
+                      BindsTwoWayByDefault = true
+                  });
 
         public int SelectionOffset
         {
-            get { return SelectionStart; }
+            get { return (int)GetValue(SelectionOffsetProperty); }
             set
             {
                 SetValue(SelectionOffsetProperty, value);
-                SelectionStart = value;
+                OnPropertyChanged("SelectionOffset");
             }
         }
 

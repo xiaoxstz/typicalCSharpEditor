@@ -17,7 +17,7 @@ namespace typicalIDE
         }
         #region Txt
 
-        private string txt;
+        private string txt = "before start";
         public string Txt
         {
             get => txt;
