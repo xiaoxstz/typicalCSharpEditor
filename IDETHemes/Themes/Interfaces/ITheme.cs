@@ -12,8 +12,6 @@ namespace IDEThemes.Themes.Interfaces
         IList<HighlightingColor> Colors { get; }
         HighlightingRuleSet RuleSet { get; }
         void SetTheme(TextEditor editor);
-        void SetTheme(TextEditor editor, Languages lang);
-        void SetTheme(TextEditor editor, Languages lang, CompletionTheme theme);
         void SetTheme(TextEditor editor, CompletionTheme theme);
         Brush Background { get;}
         Brush Foreground { get; }

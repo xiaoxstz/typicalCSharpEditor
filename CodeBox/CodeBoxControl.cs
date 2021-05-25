@@ -38,7 +38,7 @@ namespace CodeBox
             InitializeResources();
             TextArea.IndentationStrategy = new CSharpIndent(TextArea.Caret);
             TextArea.Caret.PositionChanged += Caret_PositionChanged;
-            Theme.SetTheme(this, ProgrammingLanguage, CustomCompletionControl.Theme);
+            Theme.SetTheme(this, CustomCompletionControl.Theme);
             SetFolding();
             TextArea.TextEntered += textEditor_TextArea_TextEntered;
             TextArea.TextEntering += textEditor_TextArea_TextEntering;
@@ -281,7 +281,7 @@ namespace CodeBox
                     Theme = new DarkTheme();
                     break;
             }
-            Theme.SetTheme(this, ProgrammingLanguage, CustomCompletionControl.Theme);
+            Theme.SetTheme(this, CustomCompletionControl.Theme);
         }
 
         #endregion
@@ -313,7 +313,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
             get { return (ITheme)GetValue(ThemeProperty); }
             set
             {
-                value.SetTheme(this, ProgrammingLanguage);
+                value.SetTheme(this);
                 SetValue(ThemeProperty, value);
             }
         }
