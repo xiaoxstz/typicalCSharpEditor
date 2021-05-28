@@ -1,52 +1,53 @@
 <?xml version="1.0"?>
 
   <SyntaxDefinition name="C" extensions=".c" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
-    <Color name="Comment"             foreground="#FF57A64A" exampleText="// comment" />
-    <Color name="String"              foreground="#FFD69D85" exampleText="string text = &quot;Hello, World!&quot;"/>
+    <Color name="Comment"             foreground="#008000" exampleText="// comment" />
+    <Color name="String"              foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;"/>
     <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
-    <Color name="Char"                foreground="#FFD69D85" exampleText="char linefeed = '\n';"/>
+    <Color name="Char"                foreground="#b11414" exampleText="char linefeed = '\n';"/>
     <Color name="Preprocessor"        foreground="#FF9B9B9B" exampleText="#region Title"/>
-    <Color name="Punctuation"         foreground="#dcdcdc" exampleText="a(b.c);"/>
+    <Color name="Punctuation"         foreground="Black" exampleText="a(b.c);"/>
 
-    <Color name="ValueTypeKeywords"     foreground="#399ac6"/>
-    <Color name="ValueStructKeyword"     foreground="#86c691"/>
-    <Color name="ValueInterfaceKeyword"   foreground="#b8d7a3"/>
+    <Color name="ValueTypeKeywords"     foreground="#299ac6"/>
+    <Color name="ValueStructKeyword"     foreground="#319ac6"/>
+    <Color name="ValueInterfaceKeyword"   foreground="#319ac6"/>
     <Color name="ValueClassKeyword" foreground="#45c981"/>
 
 
-    <Color name="ReferenceTypeKeywords" foreground="#FF559CD6" exampleText="object o;"/>
-    <Color name="MethodCall"            foreground="#FFdcdcaa" exampleText="o.ToString();"/>
-    <Color name="NumberLiteral"         foreground="#FFb5cea8" exampleText="3.1415f"/>
+
+    <Color name="ReferenceTypeKeywords" foreground="#101cff" exampleText="object o;"/>
+    <Color name="MethodCall"            foreground="Red" exampleText="o.ToString();"/>
+    <Color name="NumberLiteral"         foreground="Black" exampleText="3.1415f"/>
     <Color name="ThisOrBaseReference"   foreground="#FF3a6a9b" exampleText="this.Do(); base.Do();"/>
-    <Color name="NullOrValueKeywords"   foreground="#FF559CD6" exampleText="if (value == null)"/>
+    <Color name="NullOrValueKeywords"   foreground="#101cff" exampleText="if (value == null)"/>
     <Color name="Keywords"              foreground="#FFd8a0df" exampleText="if (a) {} else {}"/>
     <Color name="GotoKeywords"          foreground="#FFd8a0df" exampleText="continue; return null;"/>
     <Color name="ContextKeywords"       foreground="#FFd8a0df" exampleText="var a = from x in y select z;"/>
     <Color name="ExceptionKeywords"     foreground="#FFd8a0df" exampleText="try {} catch {} finally {}"/>
-    <Color name="CheckedKeyword"        foreground="#FF559CD6" exampleText="checked {}"/>
-    <Color name="UnsafeKeywords"        foreground="#FF559CD6" exampleText="unsafe { fixed (..) {} }"/>
+    <Color name="CheckedKeyword"        foreground="#101cff" exampleText="checked {}"/>
+    <Color name="UnsafeKeywords"        foreground="#101cff" exampleText="unsafe { fixed (..) {} }"/>
     <Color name="OperatorKeywords"      foreground="#FFD69D85" exampleText="public static implicit operator..."/>
-    <Color name="ParameterModifiers"    foreground="#FF559CD6" exampleText="(ref int a, params int[] b)"/>
-    <Color name="Modifiers"             foreground="#FF559CD6" exampleText="static readonly int a;"/>
-    <Color name="Visibility"            foreground="#FF559CD6" exampleText="public override void ToString();"/>
-    <Color name="NamespaceKeywords"     foreground="#FF559CD6" exampleText="namespace A.B { using System; }"/>
-    <Color name="GetSetAddRemove"       foreground="#FF559CD6" exampleText="int Prop { get; set; }"/>
+    <Color name="ParameterModifiers"    foreground="#101cff" exampleText="(ref int a, params int[] b)"/>
+    <Color name="Modifiers"             foreground="#101cff" exampleText="static readonly int a;"/>
+    <Color name="Visibility"            foreground="#101cff" exampleText="public override void ToString();"/>
+    <Color name="NamespaceKeywords"     foreground="#101cff" exampleText="namespace A.B { using System; }"/>
+    <Color name="GetSetAddRemove"       foreground="#101cff" exampleText="int Prop { get; set; }"/>
     <Color name="TrueFalse"             foreground="#FF00A0FF" exampleText="b = false; a = true;"/>
-    <Color name="TypeKeywords"          foreground="#FF559CD6" exampleText="if (x is int) { a = x as int; type = typeof(int); size = sizeof(int); c = new object(); }"/>
-    <Color name="SemanticKeywords"      foreground="#FF559CD6" fontWeight="bold" exampleText="if (args == null) throw new ArgumentNullException(nameof(args));" />
+    <Color name="TypeKeywords"          foreground="#101cff" exampleText="if (x is int) { a = x as int; type = typeof(int); size = sizeof(int); c = new object(); }"/>
+    <Color name="SemanticKeywords"      foreground="#101cff" fontWeight="bold" exampleText="if (args == null) throw new ArgumentNullException(nameof(args));" />
 
     <Color name="CommentMarkerSetTodo"       foreground="#FFFF0000" fontWeight="bold" />
     <Color name="CommentMarkerSetHackUndone" foreground="#FF8B008B" fontWeight="bold" />
 
-    <Color name="Default" background="#1b1c1b" foreground="#dcdcdc"/>
-    <Color name="LineNumbersForeground" foreground="#2b91af"/>
-    <Color name="Selection" background="#264f98"/>
-    <Color name="Hyperlink" foreground="#2f70d5"/>
-    <Color name="NonPrintableCharacters" foreground="#FFFFFF00" />
-    
+    <Color name="Default" background="White" foreground="Black"/>
+    <Color name="LineNumbersForeground" foreground="#399ac6"/>
+    <Color name="Selection" background="#9da7c3"/>
+    <Color name="Hyperlink" foreground="#0000ff"/>
+    <Color name="NonPrintableCharacters" foreground="Orange" />
+
     <!--Completion-->
-    <Color name="CompletionBorder" background="#999999"/>
-    <Color name="CompletionColors" background="#252526" foreground="White"/>
+    <Color name="CompletionBorder" background="Gray"/>
+    <Color name="CompletionColors" background="#f5f5f5" foreground="Black"/>
     <Color name="CompletionSelectionBrush" background="#3399ff"/>
 
     <Property name="DocCommentMarker" value="///" />

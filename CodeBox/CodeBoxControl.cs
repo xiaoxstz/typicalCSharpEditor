@@ -270,15 +270,14 @@ namespace CodeBox
         {
             switch (DefaultTheme)
             {
-                case DefaultThemesEnum.BlueTheme:
-
-                    Theme = new BlueTheme();
+                case DefaultThemesEnum.DarkTheme:
+                    Theme = new DarkTheme(ProgrammingLanguage);
                     break;
                 case DefaultThemesEnum.LightTheme:
-                    Theme = new LightTheme();
+                    Theme = new LightTheme(ProgrammingLanguage);
                     break;
                 default:
-                    Theme = new DarkTheme();
+                    Theme = new BlueTheme(ProgrammingLanguage);
                     break;
             }
             Theme.SetTheme(this, CustomCompletionControl.Theme);
@@ -306,7 +305,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
 
         public static readonly DependencyProperty ThemeProperty =
     DependencyProperty.Register("Theme", typeof(ITheme), typeof(CodeBoxControl),
-        new PropertyMetadata(new DarkTheme()));
+        new PropertyMetadata(new DarkTheme(Languages.CSharp)));
 
         public ITheme Theme
         {

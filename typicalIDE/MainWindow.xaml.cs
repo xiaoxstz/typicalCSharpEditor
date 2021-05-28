@@ -19,8 +19,6 @@ namespace typicalIDE
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            cbc.SelectionOffset = 2;
-            cbc.SelectedTextLength = 3;
         }
     }
 }                

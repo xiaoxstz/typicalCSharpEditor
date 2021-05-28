@@ -2,6 +2,6 @@
 {
     public enum DefaultThemesEnum
     {
-        LightTheme, DarkTheme, BlueTheme
+        LightTheme, DarkTheme
     }
 }

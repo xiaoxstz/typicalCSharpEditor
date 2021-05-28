@@ -1,0 +1,157 @@
+<?xml version="1.0"?>
+
+  <SyntaxDefinition name="Assembly" extensions=".asm" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+    <Color name="Comment"             foreground="#008000" exampleText="// comment" />
+    <Color name="String"              foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;"/>
+    <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
+    <Color name="Char"                foreground="#b11414" exampleText="char linefeed = '\n';"/>
+    <Color name="Preprocessor"        foreground="#FF9B9B9B" exampleText="#region Title"/>
+    <Color name="Punctuation"         foreground="Black" exampleText="a(b.c);"/>
+
+    <Color name="ValueTypeKeywords"     foreground="#299ac6"/>
+    <Color name="ValueStructKeyword"     foreground="#319ac6"/>
+    <Color name="ValueInterfaceKeyword"   foreground="#319ac6"/>
+    <Color name="ValueClassKeyword" foreground="#45c981"/>
+
+
+
+    <Color name="ReferenceTypeKeywords" foreground="#101cff" exampleText="object o;"/>
+    <Color name="MethodCall"            foreground="Red" exampleText="o.ToString();"/>
+    <Color name="NumberLiteral"         foreground="Black" exampleText="3.1415f"/>
+    <Color name="ThisOrBaseReference"   foreground="#FF3a6a9b" exampleText="this.Do(); base.Do();"/>
+    <Color name="NullOrValueKeywords"   foreground="#101cff" exampleText="if (value == null)"/>
+    <Color name="Keywords"              foreground="#FFd8a0df" exampleText="if (a) {} else {}"/>
+    <Color name="GotoKeywords"          foreground="#FFd8a0df" exampleText="continue; return null;"/>
+    <Color name="ContextKeywords"       foreground="#FFd8a0df" exampleText="var a = from x in y select z;"/>
+    <Color name="ExceptionKeywords"     foreground="#FFd8a0df" exampleText="try {} catch {} finally {}"/>
+    <Color name="CheckedKeyword"        foreground="#101cff" exampleText="checked {}"/>
+    <Color name="UnsafeKeywords"        foreground="#101cff" exampleText="unsafe { fixed (..) {} }"/>
+    <Color name="OperatorKeywords"      foreground="#FFD69D85" exampleText="public static implicit operator..."/>
+    <Color name="ParameterModifiers"    foreground="#101cff" exampleText="(ref int a, params int[] b)"/>
+    <Color name="Modifiers"             foreground="#101cff" exampleText="static readonly int a;"/>
+    <Color name="Visibility"            foreground="#101cff" exampleText="public override void ToString();"/>
+    <Color name="NamespaceKeywords"     foreground="#101cff" exampleText="namespace A.B { using System; }"/>
+    <Color name="GetSetAddRemove"       foreground="#101cff" exampleText="int Prop { get; set; }"/>
+    <Color name="TrueFalse"             foreground="#FF00A0FF" exampleText="b = false; a = true;"/>
+    <Color name="TypeKeywords"          foreground="#101cff" exampleText="if (x is int) { a = x as int; type = typeof(int); size = sizeof(int); c = new object(); }"/>
+    <Color name="SemanticKeywords"      foreground="#101cff" fontWeight="bold" exampleText="if (args == null) throw new ArgumentNullException(nameof(args));" />
+
+    <Color name="CommentMarkerSetTodo"       foreground="#FFFF0000" fontWeight="bold" />
+    <Color name="CommentMarkerSetHackUndone" foreground="#FF8B008B" fontWeight="bold" />
+
+    <Color name="Default" background="White" foreground="Black"/>
+    <Color name="LineNumbersForeground" foreground="#399ac6"/>
+    <Color name="Selection" background="#9da7c3"/>
+    <Color name="Hyperlink" foreground="#0000ff"/>
+    <Color name="NonPrintableCharacters" foreground="Orange" />
+
+    <!--Completion-->
+    <Color name="CompletionBorder" background="Gray"/>
+    <Color name="CompletionColors" background="#f5f5f5" foreground="Black"/>
+    <Color name="CompletionSelectionBrush" background="#3399ff"/>
+
+    <Property name="DocCommentMarker" value="///" />
+
+    <RuleSet name="CommentMarkerSet">
+      <Keywords color="CommentMarkerSetTodo">
+        <Word>TODO</Word>
+        <Word>FIXME</Word>
+      </Keywords>
+      <Keywords color="CommentMarkerSetHackUndone">
+        <Word>HACK</Word>
+        <Word>UNDONE</Word>
+      </Keywords>
+    </RuleSet>
+
+    <!-- This is the main ruleset. -->
+    <RuleSet>
+      <Span >
+        <Begin color="ValueClassKeyword">\#(undef|region|include|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line|define|endregion)</Begin>
+          <End color="Keywords">(\s+[^\s]+)*</End>
+      </Span>
+      
+      
+        
+      <Span color="Comment">
+        <Begin color="XmlDoc/DocComment">///(?!/)</Begin>
+        <RuleSet>
+          <Import ruleSet="XmlDoc/DocCommentSet"/>
+          <Import  ruleSet="CommentMarkerSet" />
+        </RuleSet>
+      </Span>
+
+      <Span color="Comment" ruleSet="CommentMarkerSet">
+        <Begin>;</Begin>
+      </Span>
+      
+      <Span color="String">
+        <Begin>"</Begin>
+        <End>"</End>
+        <RuleSet>
+          <!-- span for escape sequences -->
+          <Span begin="\\" end="."/>
+        </RuleSet>
+      </Span>
+
+      <Span color="Char">
+        <Begin>'</Begin>
+        <End>'</End>
+        <RuleSet>
+          <!-- span for escape sequences -->
+          <Span begin="\\" end="."/>
+        </RuleSet>
+      </Span>
+
+      <Span color="String" multiline="true">
+        <Begin>@"</Begin>
+        <End>"</End>
+        <RuleSet>
+          <!-- span for escape sequences -->
+          <Span begin='""' end=""/>
+        </RuleSet>
+      </Span>
+
+      <Span color="String">
+        <Begin>\$"</Begin>
+        <End>"</End>
+        <RuleSet>
+          <!-- span for escape sequences -->
+          <Span begin="\\" end="."/>
+          <Span begin="\{\{" end=""/>
+          <!-- string interpolation -->
+          <Span begin="{" end="}" color="StringInterpolation" ruleSet=""/>
+        </RuleSet>
+      </Span>
+
+
+      <Span color="Keywords">
+        <Begin>\b(dword|qword|tword|db|dw|dd|dq|dt|do|dy|resb|resw|resd|resq|rest|reso|resy|incbin|equ|times)\b</Begin>
+        <End> </End>
+      </Span>
+
+      <Span color="ValueTypeKeywords">
+        <Begin>\b(aaa|global|aad|aam|aas|adc|add|and|arpl|bound|bsf|bsr|bswap|bt|btc|btr|bts|call|cbw|cdq|clc|cld|cli|clts|cmc|cmp|cmps|cmpxchg|cwd|cwde|daa|das|dec|div|enter|esc|hlt|idiv|imul|in|inc|ins|int|into|invd|invlpg|iret|iretd|ja|jae|jb|jbe|jc|jcxz|je|jecxz|jg|jge|jl|jle|jmp|jna|jnae|jnb|jnbe|jnc|jne|jng|jnge|jnl|jnle|jno|jnp|jns|jnz|jo|jp|jpe|jpo|js|jz|lahf|lar|lds|lea|leave|les|lfs|lgdt|lidt|lgs|lldt|lmsw|lock|lods|loop|loope|loopz|loopnz|loopne|lsl|lss|ltr|mov|movs|movsx|movzx|mul|near|neg|nop|not|or|out|outs|pop|popa|popad|popf|popfd|push|pusha|pushad|pushf|pushfd|rcl|rcr|rep|repe|repz|repne|repnz|ret|retf|rol|ror|sahf|sal|sar|sbb|scas|section|setae|setnb|setb|setnae|setbe|setna|sete|setz|setne|setnz|setl|setnge|setge|setng|setle|setng|setg|setnle|sets|setns|setc|setnc|seto|setno|setp|setpe|setnp|setpo|sgdt|sidt|shl|shld|shr|shrd|sldt|smsw|stc|std|sti|stos|str|sub|test|verr|verw|wait|fwait|wait|fwait|wbinvd|xchg|xlat|xlatb|xor)\b</Begin>
+        <End> </End>
+      </Span>
+      <Span color="Preprocessor">
+        <Begin>\b%?(ip|eip|eax|ebx|ecx|edx|edi|esi|ebp|esp|ax|bx|cx|dx|di|si|bp|sp|ah|al|bh|bl|ch|cl|dh|dl|ax|bx|cx|dx|cs|ds|ss|es|fs|gs|cr0|cr2|cr3|db0|db1|db2|db3|db6|db7|tr6|tr7|st)+\b</Begin>
+        <End> </End>
+      </Span>
+   
+
+
+      <!-- Digits -->
+      <Rule color="NumberLiteral">
+        \b0[xX][0-9a-fA-F]+  # hex number
+        |
+        (	\b\d+(\.[0-9]+)?   #number with optional floating point
+        |	\.[0-9]+           #or just starting with floating point
+        )
+        ([eE][+-]?[0-9]+)? # optional exponent
+      </Rule>
+
+      <Rule color="Punctuation">
+        [?,.;()\[\]{}+\-/%*&lt;&gt;^+~!|&amp;]+
+      </Rule>
+    </RuleSet>
+  </SyntaxDefinition>

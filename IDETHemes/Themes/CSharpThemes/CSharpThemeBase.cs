@@ -15,6 +15,7 @@ using IDEThemes.Themes.Interfaces;
 using CodeBox.Completions;
 using CodeBox.Enums;
 using IDETHemes.Themes;
+using IDETHemes.Themes.Enums;
 
 namespace IDEThemes.Themes.CSharpThemes
 {
@@ -44,11 +45,10 @@ namespace IDEThemes.Themes.CSharpThemes
         #endregion
 
         #region Ctor
-        private const string DEFAULT_RESOURCE = "CDarkTheme.xshd";
-        public CSharpThemeBase()
+        private const string DEFAULT_RESOURCE = "CSharpDarkTheme.xshd";
+        public CSharpThemeBase(Languages lang, DefaultThemesEnum dte)
         {
-            if (string.IsNullOrEmpty(FilePath))
-                FilePath = DEFAULT_RESOURCE;
+            FilePath = $"{lang}{dte}.xshd";
             Assembly assembly = Assembly.GetExecutingAssembly();
             string xmlCSharpFile = assembly.GetManifestResourceNames()
                 .First(fp => fp.Contains(FilePath));
@@ -57,6 +57,7 @@ namespace IDEThemes.Themes.CSharpThemes
             Colors = definition.NamedHighlightingColors.ToList();
             SetProperties();
         }
+
 
 
         #endregion

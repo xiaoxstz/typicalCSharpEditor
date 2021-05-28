@@ -1,5 +1,7 @@
-﻿using IDEThemes.Themes.CSharpThemes;
+﻿using CodeBox.Enums;
+using IDEThemes.Themes.CSharpThemes;
 using System;
+using IDETHemes.Themes.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -9,6 +11,9 @@ namespace IDEThemes.Themes.CSharpThemes
 {
     public class LightTheme: CSharpThemeBase
     {
-        public override string FilePath { get; set; } = "CSharpLightTheme.xshd";
+        public override string FilePath { get; set; }
+        public LightTheme(Languages lang) : base(lang, DefaultThemesEnum.LightTheme)
+        {
+        }
     }
 }

@@ -5,7 +5,7 @@
     /// </summary>
     public enum Languages
     {
-        CSharp, C, Cpp, JavaScript, Java, PHP, Assembly
+        CSharp, C, JavaScript, Java, PHP, Assembly
     }
 }
 
