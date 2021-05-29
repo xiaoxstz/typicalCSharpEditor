@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <cb:CodeBoxControl Name="cbc" DefaultTheme="LightTheme"
-                           ProgrammingLanguage="Assembly"/>
+                           ProgrammingLanguage="PHP"/>
         <StackPanel Grid.Row="1">
             <Button Click="Button_Click" Height="30"/>
         </StackPanel>

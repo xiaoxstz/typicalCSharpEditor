@@ -73,7 +73,7 @@ namespace IDEThemes.Themes.CSharpThemes
             editor.Foreground = Foreground;
             editor.TextArea.SelectionBrush = Selection;
             editor.TextArea.TextView.NonPrintableCharacterBrush = NonPrintabelCharacters;
-            editor.TextArea.TextView.LinkTextBackgroundBrush = Hyperlink;
+            editor.TextArea.TextView.LinkTextForegroundBrush = Hyperlink;
             editor.TextArea.TextView.LinkTextUnderline = true;
             editor.LineNumbersForeground = LineNumbersForeground;
         }

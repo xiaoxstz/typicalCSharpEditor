@@ -1,0 +1,202 @@
+<?xml version="1.0"?>
+
+<SyntaxDefinition name="PHP" extensions = ".php" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <Color name="Comment"             foreground="#008000" exampleText="// comment" />
+  <Color name="String"              foreground="#a31515" exampleText="string text = &quot;Hello, World!&quot;"/>
+  <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
+  <Color name="Char"                foreground="#b11414" exampleText="char linefeed = '\n';"/>
+  <Color name="Preprocessor"        foreground="#FF9B9B9B" exampleText="#region Title"/>
+  <Color name="Punctuation"         foreground="Black" exampleText="a(b.c);"/>
+
+  <Color name="ValueTypeKeywords"     foreground="#299ac6"/>
+  <Color name="ValueStructKeyword"     foreground="#319ac6"/>
+  <Color name="ValueInterfaceKeyword"   foreground="#319ac6"/>
+  <Color name="ValueClassKeyword" foreground="#45c981"/>
+
+
+  <Color name="ReferenceTypeKeywords" foreground="#101cff" exampleText="object o;"/>
+  <Color name="FunctionCall"            foreground="Red" exampleText="o.ToString();"/>
+  <Color name="NumberLiteral"         foreground="Black" exampleText="3.1415f"/>
+  <Color name="ThisOrBaseReference"   foreground="#FF3a6a9b" exampleText="this.Do(); base.Do();"/>
+  <Color name="NullOrValueKeywords"   foreground="#101cff" exampleText="if (value == null)"/>
+  <Color name="Keywords"              foreground="#FFd8a0df" exampleText="if (a) {} else {}"/>
+  <Color name="GotoKeywords"          foreground="#FFd8a0df" exampleText="continue; return null;"/>
+  <Color name="ContextKeywords"       foreground="#FFd8a0df" exampleText="var a = from x in y select z;"/>
+  <Color name="ExceptionKeywords"     foreground="#FFd8a0df" exampleText="try {} catch {} finally {}"/>
+  <Color name="CheckedKeyword"        foreground="#101cff" exampleText="checked {}"/>
+  <Color name="UnsafeKeywords"        foreground="#101cff" exampleText="unsafe { fixed (..) {} }"/>
+  <Color name="OperatorKeywords"      foreground="#FFD69D85" exampleText="public static implicit operator..."/>
+  <Color name="ParameterModifiers"    foreground="#101cff" exampleText="(ref int a, params int[] b)"/>
+  <Color name="Modifiers"             foreground="#101cff" exampleText="static readonly int a;"/>
+  <Color name="Visibility"            foreground="#101cff" exampleText="public override void ToString();"/>
+  <Color name="NamespaceKeywords"     foreground="#101cff" exampleText="namespace A.B { using System; }"/>
+  <Color name="GetSetAddRemove"       foreground="#101cff" exampleText="int Prop { get; set; }"/>
+  <Color name="TrueFalse"             foreground="#FF00A0FF" exampleText="b = false; a = true;"/>
+  <Color name="TypeKeywords"          foreground="#101cff" exampleText="if (x is int) { a = x as int; type = typeof(int); size = sizeof(int); c = new object(); }"/>
+  <Color name="SemanticKeywords"      foreground="#101cff" fontWeight="bold" exampleText="if (args == null) throw new ArgumentNullException(nameof(args));" />
+  <Color name="Dollar"       foreground="#54b6de"/>
+  <Color name="CommentMarkerSetTodo"       foreground="#FFFF0000" fontWeight="bold" />
+  <Color name="CommentMarkerSetHackUndone" foreground="#FF8B008B" fontWeight="bold" />
+
+  <Color name="Default" background="White" foreground="Black"/>
+  <Color name="LineNumbersForeground" foreground="#399ac6"/>
+  <Color name="Selection" background="#9da7c3"/>
+  <Color name="Hyperlink" foreground="#0000ff"/>
+  <Color name="NonPrintableCharacters" foreground="Orange" />
+
+  <!--Completion-->
+  <Color name="CompletionBorder" background="Gray"/>
+  <Color name="CompletionColors" background="#f5f5f5" foreground="Black"/>
+  <Color name="CompletionSelectionBrush" background="#3399ff"/>
+  <RuleSet>
+    <Span color="Comment">
+      <Begin>\#</Begin>
+    </Span>
+
+    <Span color="Comment">
+      <Begin>//</Begin>
+    </Span>
+
+    <Span color="Comment" multiline="true">
+      <Begin>/\*</Begin>
+      <End>\*/</End>
+    </Span>
+    
+    <Span >
+      <Begin color="Dollar">->\w+</Begin>
+      <End>[=+\-\/\*\s]</End>
+    </Span>
+
+
+    <!-- Digits -->
+    <Rule color="NumberLiteral">
+      \b0[xX][0-9a-fA-F]+  # hex number
+      |
+      \b0[0-9]+ # octal number
+      |
+      (	\b\d+(\.[0-9]+)?   #number with optional floating point
+      |	\.[0-9]+           #or just starting with floating point
+      )
+      ([eE][+-]?[0-9]+)? # optional exponent
+    </Rule>
+
+    <Rule color="Punctuation">
+      [?,.:;()\[\]{}+\-/%*&lt;&gt;&amp;^!|~@]+
+    </Rule>
+
+    <!-- Mark previous rule-->
+    <Rule color="FunctionCall">
+      [\d\w_]+  # an identifier
+      (?=\s*\() # followed by (
+    </Rule>
+
+    <Span color="String" multiline="true">
+      <Begin>'</Begin>
+      <End>'</End>
+      <RuleSet>
+        <!-- span for escape sequences -->
+        <Span begin="\\" end="."/>
+      </RuleSet>
+    </Span>
+
+    <Span color="String" multiline="true">
+      <Begin>"</Begin>
+      <End>"</End>
+      <RuleSet>
+        <!-- span for escape sequences -->
+        <Span begin="\\" end="."/>
+      </RuleSet>
+    </Span>
+
+    <!-- heredoc syntax -->
+    <Span color="String" multiline="true">
+      <Begin>&lt;&lt;&lt;\"?[\d\w_]+\"?$</Begin>
+      <End>^[\d\w_]+;</End>
+    </Span>
+
+    <!-- nowdoc syntax -->
+    <Span color="String" multiline="true">
+      <Begin>&lt;&lt;&lt;\'[\d\w_]+\'$</Begin>
+      <End>^[\d\w_]+;</End>
+    </Span>
+
+    <Keywords color="Visibility">
+      <Word>global</Word>
+      <Word>my</Word>
+      <Word>var</Word>
+    </Keywords>
+
+    <Keywords color="OperatorKeywords">
+      <Word>and</Word>
+      <Word>or</Word>
+      <Word>new</Word>
+      <Word>clone</Word>
+      <Word>instanceof</Word>
+      <Word>xor</Word>
+      <Word>true</Word>
+      <Word>false</Word>
+    </Keywords>
+
+    <Keywords color="Keywords">
+      <Word>else</Word>
+      <Word>else</Word>
+      <Word>switch</Word>
+      <Word>case</Word>
+      <Word>endif</Word>
+      <Word>elseif</Word>
+      <Word>use</Word>
+      <Word>namespace</Word>
+    </Keywords>
+
+    <Keywords color="Keywords">
+      <Word>do</Word>
+      <Word>for</Word>
+      <Word>foreach</Word>
+      <Word>while</Word>
+      <Word>endwhile</Word>
+      <Word>exit</Word>
+    </Keywords>
+
+    <Keywords color="Keywords">
+      <Word>break</Word>
+      <Word>continue</Word>
+      <Word>default</Word>
+      <Word>goto</Word>
+      <Word>return</Word>
+    </Keywords>
+
+    <Keywords color="ValueStructKeyword">
+      <Word>require</Word>
+      <Word>include</Word>
+      <Word>require</Word>
+      <Word>include</Word>
+      <Word>function</Word>
+    </Keywords>
+
+    <Keywords color="ValueTypeKeywords">
+      <Word>int</Word>
+      <Word>integer</Word>
+      <Word>real</Word>
+      <Word>double</Word>
+      <Word>float</Word>
+      <Word>string</Word>
+      <Word>array</Word>
+      <Word>object</Word>
+    </Keywords>
+
+    <Keywords color="ValueClassKeyword">
+      <Word>class</Word>
+      <Word>void</Word>
+    </Keywords>
+
+    <Keywords color="Visibility">
+      <Word>public</Word>
+      <Word>private</Word>
+      <Word>protected</Word>
+    </Keywords>
+
+    <Keywords color="ValueInterfaceKeyword">
+      <Word>php</Word>
+    </Keywords>
+  </RuleSet>
+</SyntaxDefinition>
