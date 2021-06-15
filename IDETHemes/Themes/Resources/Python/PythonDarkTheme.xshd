@@ -62,8 +62,8 @@
       </Keywords>
     </RuleSet>
  <RuleSet>
-      
-      <Span color="Comment" ruleSet="CommentMarkerSet">
+
+   <Span color="Comment" ruleSet="CommentMarkerSet">
         <Begin>\#</Begin>
       </Span>     
 

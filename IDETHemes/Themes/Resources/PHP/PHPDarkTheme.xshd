@@ -50,6 +50,7 @@
   <Color name="CompletionColors" background="#252526" foreground="White"/>
   <Color name="CompletionSelectionBrush" background="#3399ff"/>
   <RuleSet>
+
     <Span color="Comment">
       <Begin>\#</Begin>
     </Span>

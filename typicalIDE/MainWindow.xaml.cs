@@ -19,7 +19,7 @@ namespace typicalIDE
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            cbc.DefaultTheme = IDETHemes.Themes.Enums.DefaultThemesEnum.LightTheme;
+            cbc.ProgrammingLanguage = CodeBox.Enums.Languages.Assembly;
         }
     }
 }                

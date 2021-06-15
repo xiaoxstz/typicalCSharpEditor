@@ -64,33 +64,14 @@
     </RuleSet>
 
     <!-- This is the main ruleset. -->
-    <RuleSet>
+    <RuleSet  ignoreCase="true">
       <Span >
-        <Begin color="ValueClassKeyword">\#(undef|region|include|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line|define|endregion)</Begin>
-          <End color="Keywords">(\s+[^\s]+)*</End>
-      </Span>
-      
-      
-        
-      <Span color="Comment">
-        <Begin color="XmlDoc/DocComment">///(?!/)</Begin>
-        <RuleSet>
-          <Import ruleSet="XmlDoc/DocCommentSet"/>
-          <Import  ruleSet="CommentMarkerSet" />
-        </RuleSet>
+        <Begin color="ValueClassKeyword">\#(region|endregion)</Begin>
+        <End color="Keywords">(\s+[^\s]+)*</End>
       </Span>
 
       <Span color="Comment" ruleSet="CommentMarkerSet">
         <Begin>;</Begin>
-      </Span>
-      
-      <Span color="String">
-        <Begin>"</Begin>
-        <End>"</End>
-        <RuleSet>
-          <!-- span for escape sequences -->
-          <Span begin="\\" end="."/>
-        </RuleSet>
       </Span>
 
       <Span color="Char">
@@ -99,27 +80,6 @@
         <RuleSet>
           <!-- span for escape sequences -->
           <Span begin="\\" end="."/>
-        </RuleSet>
-      </Span>
-
-      <Span color="String" multiline="true">
-        <Begin>@"</Begin>
-        <End>"</End>
-        <RuleSet>
-          <!-- span for escape sequences -->
-          <Span begin='""' end=""/>
-        </RuleSet>
-      </Span>
-
-      <Span color="String">
-        <Begin>\$"</Begin>
-        <End>"</End>
-        <RuleSet>
-          <!-- span for escape sequences -->
-          <Span begin="\\" end="."/>
-          <Span begin="\{\{" end=""/>
-          <!-- string interpolation -->
-          <Span begin="{" end="}" color="StringInterpolation" ruleSet=""/>
         </RuleSet>
       </Span>
 
