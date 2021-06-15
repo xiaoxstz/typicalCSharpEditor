@@ -13,8 +13,8 @@
             <RowDefinition Height="Auto"/>
         </Grid.RowDefinitions>
 
-        <cb:CodeBoxControl Name="cbc" DefaultTheme="LightTheme"
-                           ProgrammingLanguage="PHP"/>
+        <cb:CodeBoxControl Name="cbc" DefaultTheme="DarkTheme"
+                           ProgrammingLanguage="JS"/>
         <StackPanel Grid.Row="1">
             <Button Click="Button_Click" Height="30"/>
         </StackPanel>

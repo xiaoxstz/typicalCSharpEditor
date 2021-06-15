@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-  <SyntaxDefinition name="C" extensions=".c" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <SyntaxDefinition name="C" extensions=".cpp" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
     <Color name="Comment"             foreground="#FF57A64A" exampleText="// comment" />
     <Color name="String"              foreground="#FFD69D85" exampleText="string text = &quot;Hello, World!&quot;"/>
     <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
@@ -68,16 +68,7 @@
         <Begin color="ValueClassKeyword">\#(undef|region|include|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line|define|endregion)</Begin>
           <End color="Keywords">(\s+[^\s]+)*</End>
       </Span>
-      
-      
-        <!--<Span color="ValueClassKeyword">
-        <Begin color="XmlDoc/DocComment">\#</Begin>
-        <End>(undef|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line)(?!/)</End>
-        <RuleSet>
-          <Import ruleSet="XmlDoc/DocCommentSet"/>
-          <Import  ruleSet="CommentMarkerSet" />
-        </RuleSet>
-      </Span>-->
+     
         
       <Span color="Comment">
         <Begin color="XmlDoc/DocComment">///(?!/)</Begin>
@@ -114,62 +105,152 @@
           <Span begin="\\" end="."/>
         </RuleSet>
       </Span>
-
-   
-      <Keywords color="TrueFalse">
-        <Word>true</Word>
-        <Word>false</Word>
+      <Keywords color="ValueClassKeyword">
+        <Word>__abstract</Word>
+        <Word>__box</Word>
+        <Word>__delegate</Word>
+        <Word>__gc</Word>
+        <Word>__identifier</Word>
+        <Word>__nogc</Word>
+        <Word>__pin</Word>
+        <Word>__property</Word>
+        <Word>__sealed</Word>
+        <Word>__try_cast</Word>
+        <Word>__typeof</Word>
+        <Word>__value</Word>
+        <Word>__event</Word>
+        <Word>__hook</Word>
+        <Word>__raise</Word>
+        <Word>__unhook</Word>
+        <Word>__interface</Word>
+        <Word>ref class</Word>
+        <Word>ref struct</Word>
+        <Word>value class</Word>
+        <Word>value struct</Word>
+        <Word>interface class</Word>
+        <Word>interface struct</Word>
+        <Word>enum class</Word>
+        <Word>enum struct</Word>
+        <Word>delegate</Word>
+        <Word>event</Word>
+        <Word>property</Word>
+        <Word>abstract</Word>
+        <Word>override</Word>
+        <Word>sealed</Word>
+        <Word>generic</Word>
+        <Word>where</Word>
+        <Word>finally</Word>
+        <Word>for each</Word>
+        <Word>gcnew</Word>
+        <Word>in</Word>
+        <Word>initonly</Word>
+        <Word>literal</Word>
+        <Word>nullptr</Word>
       </Keywords>
-
-      <Keywords color="Keywords">
-        <Word>auto</Word>
-        <Word>break</Word>
-        <Word>case</Word>
-        <Word>typeof</Word>
-        <Word>continue</Word>
-        <Word>while</Word>
-        <Word>default</Word>
-        <Word>do</Word>
-        <Word>else</Word>
-        <Word>for</Word>
-        <Word>goto</Word>
-        <Word>if</Word>
-        <Word>inline</Word>
-        <Word>register</Word>
-        <Word>return</Word>
-        <Word>switch</Word>
-        <Word>asm</Word>
-        <Word>fortran</Word>
+      <Keywords color="ValueTypeKeywords">
+        <Word>this</Word>
       </Keywords>
-
-
+      <Keywords color="ValueStructKeyword">
+        <Word>and</Word>
+        <Word>and_eq</Word>
+        <Word>bitand</Word>
+        <Word>bitor</Word>
+        <Word>new</Word>
+        <Word>not</Word>
+        <Word>not_eq</Word>
+        <Word>or</Word>
+        <Word>or_eq</Word>
+        <Word>xor</Word>
+        <Word>xor_eq</Word>
+      </Keywords>
+      
+      <Keywords color="ValueTypeKeywords">
+        <Word>using</Word>
+        <Word>namespace</Word>
+      </Keywords>
+      <Keywords color="ValueTypeKeywords">
+        <Word>friend</Word>
+      </Keywords>
+      <Keywords color="ValueTypeKeywords">
+        <Word>private</Word>
+        <Word>protected</Word>
+        <Word>public</Word>
+        <Word>const</Word>
+        <Word>volatile</Word>
+        <Word>static</Word>
+      </Keywords>
+      
       <Keywords color="ValueTypeKeywords">
         <Word>bool</Word>
         <Word>char</Word>
-        <Word>_Decimal128</Word>
-        <Word>_Decimal64</Word>
-        <Word>_Decimal32</Word>
-        <Word>float</Word>
-        <Word>int</Word>
-        <Word>short</Word>
-        <Word>double</Word>
-        <Word>long</Word>
-        <Word>extern</Word>
-        <Word>enum</Word>
-        <Word>signed</Word>
-        <Word>static</Word>
-        <Word>struct</Word>
-        <Word>static</Word>
-        <Word>typedef</Word>
-        <Word>union</Word>
         <Word>unsigned</Word>
+        <Word>union</Word>
+        <Word>virtual</Word>
+        <Word>double</Word>
+        <Word>float</Word>
+        <Word>short</Word>
+        <Word>signed</Word>
         <Word>void</Word>
-        <Word>volatile</Word>
+        <Word>class</Word>
+        <Word>enum</Word>
+        <Word>struct</Word>
       </Keywords>
-
-   
-      <Keywords color="NullOrValueKeywords">
-        <Word>NULL</Word>
+      
+      <Keywords color="Keywords">
+        <Word>false</Word>
+        <Word>true</Word>
+      </Keywords>
+      
+      <Keywords color="Keywords">
+        <Word>do</Word>
+        <Word>for</Word>
+        <Word>while</Word>
+      </Keywords>
+      
+      <Keywords color="Keywords">
+        <Word>break</Word>
+        <Word>continue</Word>
+        <Word>goto</Word>
+        <Word>return</Word>
+      </Keywords>
+      
+      <Keywords color="Keywords">
+        <Word>catch</Word>
+        <Word>throw</Word>
+        <Word>try</Word>
+      </Keywords>
+      
+      <Keywords color="Keywords">
+        <Word>case</Word>
+        <Word>else</Word>
+        <Word>if</Word>
+        <Word>switch</Word>
+        <Word>default</Word>
+      </Keywords>
+      
+      <Keywords color="Keywords">
+        <Word>asm</Word>
+        <Word>auto</Word>
+        <Word>compl</Word>
+        <Word>mutable</Word>
+        <Word>const_cast</Word>
+        <Word>delete</Word>
+        <Word>dynamic_cast</Word>
+        <Word>explicit</Word>
+        <Word>export</Word>
+        <Word>extern</Word>
+        <Word>inline</Word>
+        <Word>int</Word>
+        <Word>long</Word>
+        <Word>operator</Word>
+        <Word>register</Word>
+        <Word>reinterpret_cast</Word>
+        <Word>sizeof</Word>
+        <Word>static_cast</Word>
+        <Word>template</Word>
+        <Word>typedef</Word>
+        <Word>typeid</Word>
+        <Word>typename</Word>
       </Keywords>
 
 

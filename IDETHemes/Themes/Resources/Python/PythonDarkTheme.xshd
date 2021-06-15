@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
 
-  <SyntaxDefinition name="C" extensions=".c" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
+  <SyntaxDefinition name="Python" extensions="py" xmlns="http://icsharpcode.net/sharpdevelop/syntaxdefinition/2008">
     <Color name="Comment"             foreground="#FF57A64A" exampleText="// comment" />
     <Color name="String"              foreground="#FFD69D85" exampleText="string text = &quot;Hello, World!&quot;"/>
     <Color name="StringInterpolation" foreground="#FFffd68f" exampleText="string text = $&quot;Hello, {name}!&quot;"/>
@@ -61,41 +61,11 @@
         <Word>UNDONE</Word>
       </Keywords>
     </RuleSet>
-
-    <!-- This is the main ruleset. -->
-    <RuleSet>
-      <Span >
-        <Begin color="ValueClassKeyword">\#(undef|region|include|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line|define|endregion)</Begin>
-          <End color="Keywords">(\s+[^\s]+)*</End>
-      </Span>
+ <RuleSet>
       
-      
-        <!--<Span color="ValueClassKeyword">
-        <Begin color="XmlDoc/DocComment">\#</Begin>
-        <End>(undef|if|ifdef|ifndef|undef|error|pragma|defined|elif|else|endif|line)(?!/)</End>
-        <RuleSet>
-          <Import ruleSet="XmlDoc/DocCommentSet"/>
-          <Import  ruleSet="CommentMarkerSet" />
-        </RuleSet>
-      </Span>-->
-        
-      <Span color="Comment">
-        <Begin color="XmlDoc/DocComment">///(?!/)</Begin>
-        <RuleSet>
-          <Import ruleSet="XmlDoc/DocCommentSet"/>
-          <Import  ruleSet="CommentMarkerSet" />
-        </RuleSet>
-      </Span>
-
       <Span color="Comment" ruleSet="CommentMarkerSet">
-        <Begin>//</Begin>
-      </Span>
-      
-
-      <Span color="Comment" ruleSet="CommentMarkerSet" multiline="true">
-        <Begin>/\*</Begin>
-        <End>\*/</End>
-      </Span>
+        <Begin>\#</Begin>
+      </Span>     
 
       <Span color="String">
         <Begin>"</Begin>
@@ -105,7 +75,7 @@
           <Span begin="\\" end="."/>
         </RuleSet>
       </Span>
-
+      
       <Span color="Char">
         <Begin>'</Begin>
         <End>'</End>
@@ -114,63 +84,54 @@
           <Span begin="\\" end="."/>
         </RuleSet>
       </Span>
-
-   
+      
       <Keywords color="TrueFalse">
         <Word>true</Word>
         <Word>false</Word>
+        <Word>False</Word>
+        <Word>True</Word>
       </Keywords>
 
       <Keywords color="Keywords">
-        <Word>auto</Word>
-        <Word>break</Word>
-        <Word>case</Word>
-        <Word>typeof</Word>
-        <Word>continue</Word>
-        <Word>while</Word>
-        <Word>default</Word>
-        <Word>do</Word>
         <Word>else</Word>
-        <Word>for</Word>
-        <Word>goto</Word>
-        <Word>if</Word>
-        <Word>inline</Word>
-        <Word>register</Word>
+        <Word>import</Word>
+        <Word>pass</Word>
+        <Word>break</Word>
+        <Word>except</Word>
+        <Word>in</Word>
+        <Word>raise</Word>
+        <Word>finally</Word>
+        <Word>is</Word>
         <Word>return</Word>
-        <Word>switch</Word>
-        <Word>asm</Word>
-        <Word>fortran</Word>
+        <Word>and</Word>
+        <Word>continue</Word>
+        <Word>for</Word>
+        <Word>lambda</Word>
+        <Word>try</Word>
+        <Word>as</Word>
+        <Word>def</Word>
+        <Word>from</Word>
+        <Word>while</Word>
+        <Word>assert</Word>
+        <Word>del</Word>
+        <Word>not</Word>
+        <Word>with</Word>
+        <Word>elif</Word>
+        <Word>if</Word>
+        <Word>or</Word>
+        <Word>yield</Word>
       </Keywords>
 
+    <Keywords color="ValueTypeKeywords">
+      <Word>none</Word>
+      <Word>None</Word>
+      <Word>class</Word>
+      <Word>nonlocal</Word>
+      <Word>async</Word>
+      <Word>await</Word>
+      <Word>global</Word>
+    </Keywords>
 
-      <Keywords color="ValueTypeKeywords">
-        <Word>bool</Word>
-        <Word>char</Word>
-        <Word>_Decimal128</Word>
-        <Word>_Decimal64</Word>
-        <Word>_Decimal32</Word>
-        <Word>float</Word>
-        <Word>int</Word>
-        <Word>short</Word>
-        <Word>double</Word>
-        <Word>long</Word>
-        <Word>extern</Word>
-        <Word>enum</Word>
-        <Word>signed</Word>
-        <Word>static</Word>
-        <Word>struct</Word>
-        <Word>static</Word>
-        <Word>typedef</Word>
-        <Word>union</Word>
-        <Word>unsigned</Word>
-        <Word>void</Word>
-        <Word>volatile</Word>
-      </Keywords>
-
-   
-      <Keywords color="NullOrValueKeywords">
-        <Word>NULL</Word>
-      </Keywords>
 
 
       <!-- Mark previous rule-->
