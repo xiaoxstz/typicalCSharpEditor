@@ -14,7 +14,7 @@
         </Grid.RowDefinitions>
 
         <cb:CodeBoxControl Name="cbc" DefaultTheme="DarkTheme"
-                           ProgrammingLanguage="JS"/>
+                           ProgrammingLanguage="CSharp" Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Grid.Row="1">
             <Button Click="Button_Click" Height="30"/>
         </StackPanel>

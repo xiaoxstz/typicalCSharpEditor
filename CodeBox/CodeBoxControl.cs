@@ -20,11 +20,15 @@ using CodeBox.Completions.CSCompletion;
 using ICSharpCode.AvalonEdit;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using System.Collections;
 
 namespace CodeBox
 {
-    public class CodeBoxControl:TextEditor, INotifyPropertyChanged
+    public class CodeBoxControl : TextEditor, INotifyPropertyChanged
     {
+
+        private UndoStack undoOperations { get; set; } = new UndoStack();
+
         #region OnPropertyChanged
 
         public event PropertyChangedEventHandler PropertyChanged;
@@ -42,18 +46,26 @@ namespace CodeBox
             SetFolding();
             TextArea.TextEntered += textEditor_TextArea_TextEntered;
             TextArea.TextEntering += textEditor_TextArea_TextEntering;
+            KeyDown += textEditor_KeyDown;
+            PreviewKeyDown += textEditor_prKeyDown;
             TextArea.SelectionChanged += SelectionChanged;
-            FontFamily = new FontFamily("Consolas") ;
+            FontFamily = new FontFamily("Consolas");
             FontSize = 15;
             ShowLineNumbers = true;
             TextChanged += TextEditor_TextChanged;
             PreviewTextInput += TextEditor_PreviewTextInput;
+
+
+            Document.UndoStack.SizeLimit = 0;
         }
 
         #region Events
         #region TextChanged
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
+            UndoOperation op = new UndoOperation(CaretOffset, Text);
+            undoOperations.Push(op);
+            var ajjj = TextArea;
             Text = Document.Text;
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
@@ -61,7 +73,6 @@ namespace CodeBox
             regionFolding.UpdateFoldings(foldings, Document);
             foldings.Sort((a, b) => a.StartOffset.CompareTo(b.StartOffset));
             foldingManager.UpdateFoldings(foldings, -1);
-            var cf = TextArea.Caret.Offset;
         }
 
         #endregion
@@ -177,7 +188,7 @@ namespace CodeBox
                 for (int i = currentText.Length - 1; currentText[i] == ' '; i--)
                     currentText = currentText.Remove(i, 1);
                 Document.Replace(currentLine.Offset, currentLine.Length, currentText + insertString);
-                TextArea.Caret.Offset--;
+                CaretOffset--;
             }
         }
         #endregion
@@ -329,6 +340,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
               DefaultValue = default(string),
               BindsTwoWayByDefault = true,
               PropertyChangedCallback = OnTextChanged
+
           });
 
         public new string Text
@@ -354,7 +366,9 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
             {
                 int caretOffset = TextArea.Caret.Offset;
                 Document.Text = e.NewValue.ToString();
-                TextArea.Caret.Offset = caretOffset;
+                if (caretOffset >= Document.Lines.Last().EndOffset)
+                    caretOffset = Document.Lines.Last().EndOffset;
+                CaretOffset = caretOffset;
             }
         }
 
@@ -382,7 +396,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
             }
         }
 
-   
+
 
         #endregion
 
@@ -426,21 +440,45 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
         public static bool IsSnippetCompletion { get; set; }
         private void textEditor_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.Key == Key.Enter && IsSnippetCompletion && EnterAction != null)
+            if (IsCompletionEnable)
             {
-                e.Handled = true;
-                EnterAction();
-                EnterAction = null;
+                if (e.Key == Key.Enter && IsSnippetCompletion && EnterAction != null)
+                {
+                    e.Handled = true;
+                    EnterAction();
+                    EnterAction = null;
+                }
+                if (e.Key == Key.Tab && IsSnippetCompletion)
+                {
+                    e.Handled = true;
+                    TabAction();
+                }
+                else if ((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return || e.Key == Key.Back
+                    || e.Key == Key.LeftCtrl || e.Key == Key.LeftAlt) && IsSnippetCompletion)
+                {
+                    CodeSnippet.Clear(TextArea);
+                }
             }
-            if (e.Key == Key.Tab && IsSnippetCompletion)
+           
+        }
+
+        private void textEditor_prKeyDown(object sender, KeyEventArgs e)
+        {
+            if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Z)
+                && undoOperations.Count != 0)
             {
-                e.Handled = true;
-                TabAction();
-            }
-            else if ((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return || e.Key == Key.Back
-                || e.Key == Key.LeftCtrl || e.Key == Key.LeftAlt) && IsSnippetCompletion)
-            {
-                CodeSnippet.Clear(TextArea);
+                int offset = undoOperations.Pop().CaretOffset;
+                if (undoOperations.Count > 0)
+                {
+                    UndoOperation op = undoOperations.Peek();
+                    offset -= Document.TextLength - op.Text.Length;
+                    Document.Text = op.Text;
+                    if (Document.Lines.Last().EndOffset < offset)
+                        TextArea.Caret.Offset = Document.Lines.Last().EndOffset;
+                    else
+                        TextArea.Caret.Offset = offset;
+                    undoOperations.Pop();
+                }
             }
         }
     }

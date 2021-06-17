@@ -14,12 +14,13 @@ namespace typicalIDE
         {
             InitializeComponent();
             DataContext = new MVM();
-            
+
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            cbc.ProgrammingLanguage = CodeBox.Enums.Languages.Assembly;
+            cbc.Text = "fds";
         }
     }
+
 }                
