@@ -65,7 +65,6 @@ namespace CodeBox
         {
             UndoOperation op = new UndoOperation(CaretOffset, Text);
             undoOperations.Push(op);
-            var ajjj = TextArea;
             Text = Document.Text;
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
@@ -114,7 +113,6 @@ namespace CodeBox
 
         private void TextEditor_PreviewTextInput(object sender, TextCompositionEventArgs e)
         {
-
             IsBrace = e.Text == "{";
             IsBracket = e.Text == "(";
         }
@@ -467,18 +465,12 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Z)
                 && undoOperations.Count != 0)
             {
-                int offset = undoOperations.Pop().CaretOffset;
-                if (undoOperations.Count > 0)
-                {
-                    UndoOperation op = undoOperations.Peek();
-                    offset -= Document.TextLength - op.Text.Length;
-                    Document.Text = op.Text;
-                    if (Document.Lines.Last().EndOffset < offset)
-                        TextArea.Caret.Offset = Document.Lines.Last().EndOffset;
-                    else
-                        TextArea.Caret.Offset = offset;
-                    undoOperations.Pop();
-                }
+                undoOperations.Undo(Document, TextArea);
+            }
+            else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Y)
+               && undoOperations.RedoCount != 0)
+            {
+                undoOperations.Redo(Document, TextArea);
             }
         }
     }
