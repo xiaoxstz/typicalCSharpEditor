@@ -26,7 +26,9 @@ namespace CodeBox
 {
     public class CodeBoxControl : TextEditor, INotifyPropertyChanged
     {
-
+        /// <summary>
+        /// Stack with the history of operations (contains undo and redo operations -> ctrl+z; ctrl+y).
+        /// </summary>
         private UndoStack undoOperations { get; set; } = new UndoStack();
 
         #region OnPropertyChanged
@@ -453,9 +455,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
                 }
                 else if ((e.Key == Key.Enter || e.Key == Key.Escape || e.Key == Key.Return || e.Key == Key.Back
                     || e.Key == Key.LeftCtrl || e.Key == Key.LeftAlt) && IsSnippetCompletion)
-                {
                     CodeSnippet.Clear(TextArea);
-                }
             }
            
         }
@@ -464,14 +464,10 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
         {
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Z)
                 && undoOperations.Count != 0)
-            {
                 undoOperations.Undo(Document, TextArea);
-            }
             else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Y)
                && undoOperations.RedoCount != 0)
-            {
                 undoOperations.Redo(Document, TextArea);
-            }
         }
     }
 }

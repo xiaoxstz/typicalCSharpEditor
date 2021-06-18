@@ -112,8 +112,6 @@ C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\CodeBox.dll
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\CodeBox.pdb
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\ICSharpCode.AvalonEdit.dll
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\IDETHemes.dll
-C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\ICSharpCode.AvalonEdit.xml
-C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\IDETHemes.pdb
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.csprojAssemblyReference.cache
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionListStyle.baml
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\Completions\CSCompletion\Styles\CompletionToolTipStyle.baml
@@ -128,3 +126,5 @@ C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.csproj.CoreCom
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.csproj.CopyComplete
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.dll
 C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\obj\Debug\CodeBox.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\ICSharpCode.AvalonEdit.xml
+C:\Users\HP\Desktop\typicalCSharpEditor\CodeBox\bin\Debug\IDETHemes.pdb

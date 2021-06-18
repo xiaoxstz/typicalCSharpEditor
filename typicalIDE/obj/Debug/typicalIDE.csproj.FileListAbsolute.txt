@@ -186,9 +186,7 @@ C:\files\Programming\Projects\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csproj.
 C:\files\Programming\Projects\typicalIDE\typicalIDE\obj\Debug\typicalIDE.csproj.CopyComplete
 C:\files\Programming\Projects\typicalIDE\typicalIDE\obj\Debug\typicalIDE.exe
 C:\files\Programming\Projects\typicalIDE\typicalIDE\obj\Debug\typicalIDE.pdb
-C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\typicalIDE.exe.config
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\typicalIDE.exe
-C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\typicalIDE.pdb
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\CodeBox.dll
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\ICSharpCode.AvalonEdit.dll
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\IDETHemes.dll
@@ -216,6 +214,8 @@ C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.g.resour
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.Properties.Resources.resources
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.csproj.GenerateResource.cache
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.csproj.CoreCompileInputs.cache
-C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.csproj.CopyComplete
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.exe
 C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\typicalIDE.exe.config
+C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\bin\Debug\typicalIDE.pdb
+C:\Users\HP\Desktop\typicalCSharpEditor\typicalIDE\obj\Debug\typicalIDE.csproj.CopyComplete
