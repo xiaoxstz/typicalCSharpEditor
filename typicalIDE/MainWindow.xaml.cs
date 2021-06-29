@@ -19,7 +19,7 @@ namespace typicalIDE
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            cbc.Text = "fds";
+            (DataContext as MVM).UndoStack.Clear();
         }
     }
 

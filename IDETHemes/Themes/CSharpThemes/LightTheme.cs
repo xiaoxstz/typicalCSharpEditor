@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace IDEThemes.Themes.CSharpThemes
 {
-    public class LightTheme: CSharpThemeBase
+    public class LightTheme: ThemeBase
     {
         public override string FilePath { get; set; }
         public LightTheme(Languages lang) : base(lang, DefaultThemesEnum.LightTheme)

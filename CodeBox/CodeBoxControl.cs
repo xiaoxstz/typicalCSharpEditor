@@ -20,16 +20,11 @@ using CodeBox.Completions.CSCompletion;
 using ICSharpCode.AvalonEdit;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
-using System.Collections;
 
 namespace CodeBox
 {
     public class CodeBoxControl : TextEditor, INotifyPropertyChanged
     {
-        /// <summary>
-        /// Stack with the history of operations (contains undo and redo operations -> ctrl+z; ctrl+y).
-        /// </summary>
-        private UndoStack undoOperations { get; set; } = new UndoStack();
 
         #region OnPropertyChanged
 
@@ -39,6 +34,8 @@ namespace CodeBox
             PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(prop));
         }
         #endregion
+
+
         public CodeBoxControl()
         {
             InitializeResources();
@@ -66,7 +63,7 @@ namespace CodeBox
         private void TextEditor_TextChanged(object sender, EventArgs e)
         {
             UndoOperation op = new UndoOperation(CaretOffset, Text);
-            undoOperations.Push(op);
+            UndoOperations.Push(op);
             Text = Document.Text;
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
@@ -328,7 +325,25 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
             }
         }
 
+        #endregion
 
+        #region UndoStack
+
+        public static readonly DependencyProperty UndoOperationsProperty =
+    DependencyProperty.Register("UndoOperations", typeof(UndoStack), typeof(CodeBoxControl),
+        new PropertyMetadata(new UndoStack()));
+
+        /// <summary>
+        /// Stack with the history of operations (contains undo and redo operations -> ctrl+z; ctrl+y).
+        /// </summary>
+        public UndoStack UndoOperations
+        {
+            get { return (UndoStack)GetValue(UndoOperationsProperty); }
+            set
+            {
+                SetValue(ThemeProperty, value);
+            }
+        }
 
         #endregion
 
@@ -463,11 +478,11 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
         private void textEditor_prKeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Z)
-                && undoOperations.Count != 0)
-                undoOperations.Undo(Document, TextArea);
+                && UndoOperations.Count != 0)
+                UndoOperations.Undo(Document, TextArea);
             else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Y)
-               && undoOperations.RedoCount != 0)
-                undoOperations.Redo(Document, TextArea);
+               && UndoOperations.RedoCount != 0)
+                UndoOperations.Redo(Document, TextArea);
         }
     }
 }

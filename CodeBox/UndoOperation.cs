@@ -3,7 +3,7 @@
     /// <summary>
     /// Class with information about changes in text editor.
     /// </summary>
-    internal class UndoOperation
+    public class UndoOperation
     {
         /// <summary>
         /// Text change.

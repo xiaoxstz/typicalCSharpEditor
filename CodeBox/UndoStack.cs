@@ -22,7 +22,7 @@ namespace CodeBox
     /// <summary>
     /// Implementaion of history stack for TextEditor.
     /// </summary>
-    internal class UndoStack
+    public class UndoStack
     {
 
         #region Constants
@@ -151,6 +151,17 @@ namespace CodeBox
                 undoOperations.Push(redoOperations.Pop());
                 CheckRedoStackCapacity();
             }
+        }
+
+        /// <summary>
+        /// Clear history.
+        /// </summary>
+        public void Clear()
+        {
+            while (undoOperations.Count > 0)
+                undoOperations.Pop();
+            while (redoOperations.Count > 0)
+                redoOperations.Pop();
         }
         #endregion
 

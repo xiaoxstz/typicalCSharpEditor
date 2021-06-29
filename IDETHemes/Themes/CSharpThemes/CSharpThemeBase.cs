@@ -19,7 +19,7 @@ using IDETHemes.Themes.Enums;
 
 namespace IDEThemes.Themes.CSharpThemes
 {
-    public abstract class CSharpThemeBase: ITheme
+    public abstract class ThemeBase: ITheme
     {
 
         #region InterfaceProperties
@@ -46,7 +46,7 @@ namespace IDEThemes.Themes.CSharpThemes
 
         #region Ctor
         private const string DEFAULT_RESOURCE = "CSharpDarkTheme.xshd";
-        public CSharpThemeBase(Languages lang, DefaultThemesEnum dte)
+        public ThemeBase(Languages lang, DefaultThemesEnum dte)
         {
             FilePath = $"{lang}{dte}.xshd";
             Assembly assembly = Assembly.GetExecutingAssembly();

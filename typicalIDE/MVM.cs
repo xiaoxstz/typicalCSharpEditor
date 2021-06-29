@@ -1,4 +1,5 @@
-﻿using System;
+﻿using CodeBox;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -10,6 +11,13 @@ namespace typicalIDE
 {
     public class MVM: INotifyPropertyChanged
     {
+        public MVM()
+        {
+            UndoStack.Push(new UndoOperation(0, "first op"));
+            UndoStack.Push(new UndoOperation(0, "second op"));
+            UndoStack.Push(new UndoOperation(0, "third op"));
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
         public void OnPropertyChanged([CallerMemberName]string prop = "")
         {
@@ -25,6 +33,21 @@ namespace typicalIDE
             {
                 txt = value;
                 OnPropertyChanged("Txt");
+            }
+        }
+
+        #endregion
+
+        #region UndoStack
+
+        private UndoStack undoStack = new UndoStack();
+        public UndoStack UndoStack
+        {
+            get => undoStack;
+            set
+            {
+                undoStack = value;
+                OnPropertyChanged("UndoStack");
             }
         }
 
