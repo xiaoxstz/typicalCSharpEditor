@@ -4,6 +4,7 @@
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:typicalIDE"
+        xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
         xmlns:cb="clr-namespace:CodeBox;assembly=CodeBox"
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
@@ -15,9 +16,17 @@
 
         <cb:CodeBoxControl Name="cbc" DefaultTheme="DarkTheme"
                            UndoOperations="{Binding UndoStack, UpdateSourceTrigger=PropertyChanged}"
-                           ProgrammingLanguage="CSharp" Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged}"/>
+                           ProgrammingLanguage="CSharp" Text="{Binding Txt,UpdateSourceTrigger=PropertyChanged}"
+                           IndentationStrategy="{Binding IStrategy, UpdateSourceTrigger=PropertyChanged}"/>
         <StackPanel Grid.Row="1">
-            <Button Click="Button_Click" Height="30"/>
+            <Button Height="30">
+                <i:Interaction.Triggers>
+                    <i:EventTrigger EventName="Click">
+                        <i:InvokeCommandAction Command="{Binding ButtonClickCommand}"
+                                               CommandParameter="{Binding Source={x:Reference cbc}, Path=Document, UpdateSourceTrigger=PropertyChanged}"/>
+                    </i:EventTrigger>
+                </i:Interaction.Triggers>
+            </Button>
         </StackPanel>
     </Grid>
 </Window>

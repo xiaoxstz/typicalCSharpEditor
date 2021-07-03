@@ -36,7 +36,7 @@ namespace CodeBox
         private Stack<UndoOperation> undoOperations { get; set; } = new Stack<UndoOperation>();
         private Stack<UndoOperation> redoOperations { get; set; } = new Stack<UndoOperation>();
 
-        public int Count => undoOperations.Count;
+        public int UndoCount => undoOperations.Count;
         public int RedoCount => redoOperations.Count;
         #endregion
 
@@ -51,9 +51,9 @@ namespace CodeBox
         /// </summary>
         private bool IsContainsUndo(UndoOperation op)
         {
-            if (Count == 0 || op.Text != undoOperations.Peek().Text)
+            if (UndoCount == 0 || op.Text != undoOperations.Peek().Text)
             {
-                if (Count > 1 && op.Text == undoOperations.ToList()[1].Text)
+                if (UndoCount > 1 && op.Text == undoOperations.ToList()[1].Text)
                     return true;
                 return false;
             }
@@ -115,6 +115,26 @@ namespace CodeBox
         #endregion
 
         #region Public
+
+        public UndoOperation RedoPop()
+        {
+            if (RedoCount > 0)
+                return redoOperations.Pop();
+            return null;
+        }
+
+        public UndoOperation UndoPop()
+        {
+            if (UndoCount > 0)
+                return undoOperations.Pop();
+            return null;
+        }
+
+        public void RedoPush(UndoOperation op)
+        {
+            redoOperations.Push(op);
+        }
+
         public void Push(UndoOperation op)
         {
             if (!IsContainsUndo(op))
@@ -126,7 +146,7 @@ namespace CodeBox
             UndoOperation tempOp = undoOperations.Pop();
             redoOperations.Push(tempOp);
             int offset = tempOp.CaretOffset;
-            if (Count > 0)
+            if (UndoCount > 0)
             {
                 UndoOperation op = undoOperations.Peek();
                 offset -= doc.TextLength - op.Text.Length;
@@ -146,7 +166,7 @@ namespace CodeBox
                 offset -= doc.TextLength - op.Text.Length;
                 doc.Text = op.Text;
                 area.Caret.Offset = GetCaretOffset(doc, op.CaretOffset);
-                if (Count > 0)
+                if (UndoCount > 0)
                     undoOperations.Pop();
                 undoOperations.Push(redoOperations.Pop());
                 CheckRedoStackCapacity();

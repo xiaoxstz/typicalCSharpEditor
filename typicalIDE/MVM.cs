@@ -1,4 +1,6 @@
 ﻿using CodeBox;
+using ICSharpCode.AvalonEdit.Document;
+using ICSharpCode.AvalonEdit.Indentation;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -40,8 +42,8 @@ namespace typicalIDE
 
         #region UndoStack
 
-        private UndoStack undoStack = new UndoStack();
-        public UndoStack UndoStack
+        private CodeBox.UndoStack undoStack = new CodeBox.UndoStack();
+        public CodeBox.UndoStack UndoStack
         {
             get => undoStack;
             set
@@ -51,6 +53,35 @@ namespace typicalIDE
             }
         }
 
+        #endregion
+
+        #region IStrategy
+
+        private IIndentationStrategy iStrategy;
+        public IIndentationStrategy IStrategy
+        {
+            get => iStrategy;
+            set
+            {
+                iStrategy = value;
+                OnPropertyChanged("IStrategy");
+            }
+        }
+
+        #endregion
+
+ 
+
+        #region ButtonClickCommand
+        private RelayCommand buttonClickCommand;
+        public RelayCommand ButtonClickCommand
+        {
+            get => buttonClickCommand ?? (buttonClickCommand = new RelayCommand(obj =>
+            {
+                TextDocument doc = obj as TextDocument;
+                IStrategy.IndentLines(doc, 1, doc.LineCount);
+            }));
+        }
         #endregion
     }
 }

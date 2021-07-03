@@ -19,7 +19,9 @@ namespace typicalIDE
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            (DataContext as MVM).UndoStack.Clear();
+           cbc.TextArea.IndentationStrategy.IndentLines(cbc.Document, 1, cbc.Document.LineCount);
+            var a = (DataContext as MVM);
+            a.IStrategy.IndentLines(a.MyDoc, 1, a.MyDoc.LineCount);
         }
     }
 

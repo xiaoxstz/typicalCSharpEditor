@@ -20,6 +20,7 @@ using CodeBox.Completions.CSCompletion;
 using ICSharpCode.AvalonEdit;
 using System.ComponentModel;
 using System.Runtime.CompilerServices;
+using ICSharpCode.AvalonEdit.Indentation;
 
 namespace CodeBox
 {
@@ -53,8 +54,7 @@ namespace CodeBox
             ShowLineNumbers = true;
             TextChanged += TextEditor_TextChanged;
             PreviewTextInput += TextEditor_PreviewTextInput;
-
-
+            IndentationStrategy = TextArea.IndentationStrategy;
             Document.UndoStack.SizeLimit = 0;
         }
 
@@ -64,7 +64,11 @@ namespace CodeBox
         {
             UndoOperation op = new UndoOperation(CaretOffset, Text);
             UndoOperations.Push(op);
+            int beforeEntersCount = Text.Count(c => c == '\n');
             Text = Document.Text;
+            int afterEntersCount = Text.Count(c => c == '\n');
+            if (afterEntersCount - beforeEntersCount > 1)
+                TextArea.IndentationStrategy.IndentLines(Document, beforeEntersCount+1, afterEntersCount+1);//prettyfier
             CheckAutoSymbols();
             List<NewFolding> foldings = new List<NewFolding>();
             braceFolding.UpdateFoldings(foldings, Document);
@@ -80,6 +84,7 @@ namespace CodeBox
         {
             SelectedTextLength = SelectionLength;
             SelectionOffset = SelectionStart;
+            SelectedText = TextArea.Selection.GetText();
         }
 
         #endregion
@@ -352,7 +357,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
       DependencyProperty.Register("Text", typeof(string), typeof(CodeBoxControl),
           new FrameworkPropertyMetadata
           {
-              DefaultValue = default(string),
+              DefaultValue = "",
               BindsTwoWayByDefault = true,
               PropertyChangedCallback = OnTextChanged
 
@@ -384,6 +389,85 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
                 if (caretOffset >= Document.Lines.Last().EndOffset)
                     caretOffset = Document.Lines.Last().EndOffset;
                 CaretOffset = caretOffset;
+                int afterChangingLineCount = Document.LineCount;
+
+            }
+        }
+
+        #endregion
+
+        #region SelectedText
+        public static readonly DependencyProperty SelectedTextProperty =
+      DependencyProperty.Register("SelectedText", typeof(string), typeof(CodeBoxControl),
+          new FrameworkPropertyMetadata
+          {
+              DefaultValue = default(string),
+              BindsTwoWayByDefault = true,
+              PropertyChangedCallback = OnSelectedTextChanged
+
+          });
+
+        public new string SelectedText
+        {
+            get => (string)GetValue(SelectedTextProperty);
+            set
+            {
+                SetValue(SelectedTextProperty, value);
+                OnPropertyChanged("SelectedText");
+            }
+        }
+
+        private static void OnSelectedTextChanged(DependencyObject d,
+           DependencyPropertyChangedEventArgs e)
+        {
+            CodeBoxControl UserControl1Control = d as CodeBoxControl;
+            UserControl1Control.OnSelectedTextChanged(e);
+        }
+
+        private void OnSelectedTextChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                SelectedText = e.NewValue.ToString();
+            }
+        }
+
+        #endregion
+
+        #region IndentationStrategy
+        public static readonly DependencyProperty IndentationStrategyProperty =
+      DependencyProperty.Register("IndentationStrategy", typeof(IIndentationStrategy), typeof(CodeBoxControl),
+          new FrameworkPropertyMetadata
+          {
+              DefaultValue = default(IIndentationStrategy),
+              BindsTwoWayByDefault = true,
+              PropertyChangedCallback = OnIndentationStrategyChanged
+
+          });
+
+        public IIndentationStrategy IndentationStrategy
+        {
+            get => (IIndentationStrategy)GetValue(IndentationStrategyProperty);
+            set
+            {
+                SetValue(IndentationStrategyProperty, value);
+                OnPropertyChanged("IndentationStrategy");
+            }
+        }
+
+        private static void OnIndentationStrategyChanged(DependencyObject d,
+           DependencyPropertyChangedEventArgs e)
+        {
+            CodeBoxControl UserControl1Control = d as CodeBoxControl;
+            UserControl1Control.OnIndentationStrategyChanged(e);
+        }
+
+        private void OnIndentationStrategyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            if (e.NewValue != null)
+            {
+                IndentationStrategy = e.NewValue as IIndentationStrategy;
+                TextArea.IndentationStrategy = IndentationStrategy;
             }
         }
 
@@ -478,7 +562,7 @@ DependencyProperty.Register("ProgrammingLanguage", typeof(Languages), typeof(Cod
         private void textEditor_prKeyDown(object sender, KeyEventArgs e)
         {
             if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Z)
-                && UndoOperations.Count != 0)
+                && UndoOperations.UndoCount != 0)
                 UndoOperations.Undo(Document, TextArea);
             else if ((Keyboard.Modifiers & ModifierKeys.Control) == ModifierKeys.Control && Keyboard.IsKeyDown(Key.Y)
                && UndoOperations.RedoCount != 0)
