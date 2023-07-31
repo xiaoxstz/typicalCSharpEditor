@@ -4,7 +4,7 @@ using IDEThemes.Themes.Interfaces;
 using IDETHemes.Themes.Enums;
 using System;
 using System.Windows;
-using CodeBox.Enums;
+using Common.Enums;
 using System.Windows.Controls;
 using Foldings;
 using System.Linq;

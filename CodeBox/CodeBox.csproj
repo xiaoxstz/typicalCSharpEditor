@@ -122,5 +122,15 @@
     <Resource Include="Completions\CSCompletion\Images\Snippet.png" />
     <Resource Include="Completions\CSCompletion\Images\Struct.png" />
   </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Common\Common.csproj">
+      <Project>{0ce9ba34-48f4-4311-8866-6377a31b73d6}</Project>
+      <Name>Common</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\IDETHemes\IDEThemes.csproj">
+      <Project>{f6956604-0d1f-4c2e-8591-5fff806a3d84}</Project>
+      <Name>IDEThemes</Name>
+    </ProjectReference>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
