@@ -16,13 +16,6 @@ namespace typicalIDE
             DataContext = new MVM();
 
         }
-
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-           cbc.TextArea.IndentationStrategy.IndentLines(cbc.Document, 1, cbc.Document.LineCount);
-            var a = (DataContext as MVM);
-            a.IStrategy.IndentLines(a.MyDoc, 1, a.MyDoc.LineCount);
-        }
     }
 
 }                
