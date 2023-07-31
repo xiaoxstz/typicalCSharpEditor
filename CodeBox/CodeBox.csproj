@@ -67,7 +67,6 @@
     <Compile Include="Completions\CSCompletion\Snippets\CWSnippet.cs" />
     <Compile Include="Completions\CSCompletion\Snippets\RegionSnippet.cs" />
     <Compile Include="CodeBoxControl.cs" />
-    <Compile Include="Enums\Languages.cs" />
     <Compile Include="Foldings\BraceFoldingStrategy.cs" />
     <Compile Include="Foldings\Abstract\AbstractFolding.cs" />
     <Compile Include="Foldings\RegionFoldingStrategy.cs" />

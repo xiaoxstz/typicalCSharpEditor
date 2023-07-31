@@ -1,11 +1,11 @@
-﻿using CodeBox.Enums;
-using IDEThemes.Themes.CSharpThemes;
+﻿using IDEThemes.Themes.CSharpThemes;
 using System;
 using IDETHemes.Themes.Enums;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Common.Enums;
 
 namespace IDEThemes.Themes.CSharpThemes
 {

@@ -1,4 +1,4 @@
-﻿using CodeBox.Enums;
+﻿using Common.Enums;
 using IDETHemes.Themes.Enums;
 
 namespace IDEThemes.Themes.CSharpThemes

@@ -13,9 +13,9 @@ using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using IDEThemes.Themes.Interfaces;
 using CodeBox.Completions;
-using CodeBox.Enums;
 using IDETHemes.Themes;
 using IDETHemes.Themes.Enums;
+using Common.Enums;
 
 namespace IDEThemes.Themes.CSharpThemes
 {

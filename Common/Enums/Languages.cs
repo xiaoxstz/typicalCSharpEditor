@@ -1,4 +1,4 @@
-﻿namespace CodeBox.Enums
+﻿namespace Common.Enums
 {
     /// <summary>
     /// Programming language.
