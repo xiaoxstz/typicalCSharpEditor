@@ -1,6 +1,6 @@
 ﻿using System.Windows.Media;
 
-namespace CodeBox.Completions
+namespace Common.Completions
 {
     public class CompletionTheme
     {

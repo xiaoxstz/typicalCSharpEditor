@@ -4,6 +4,7 @@
     <TargetFramework>net4.6.2</TargetFramework>
     <ImplicitUsings>disable</ImplicitUsings>
     <Nullable>disable</Nullable>
+	<UseWPF>true</UseWPF>
   </PropertyGroup>
 
 </Project>

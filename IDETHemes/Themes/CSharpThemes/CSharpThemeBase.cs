@@ -6,16 +6,14 @@ using System.Windows;
 using System.Windows.Documents;
 using System.Windows.Media;
 using System.Xml;
-using CodeBox;
-using Completions;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using ICSharpCode.AvalonEdit.Highlighting.Xshd;
 using IDEThemes.Themes.Interfaces;
-using CodeBox.Completions;
 using IDETHemes.Themes;
 using IDETHemes.Themes.Enums;
 using Common.Enums;
+using Common.Completions;
 
 namespace IDEThemes.Themes.CSharpThemes
 {

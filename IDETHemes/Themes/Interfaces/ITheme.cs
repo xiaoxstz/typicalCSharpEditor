@@ -1,5 +1,4 @@
-﻿using CodeBox.Completions;
-using CodeBox.Enums;
+﻿using Common.Completions;
 using ICSharpCode.AvalonEdit;
 using ICSharpCode.AvalonEdit.Highlighting;
 using System.Collections.Generic;

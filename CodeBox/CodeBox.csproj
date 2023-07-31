@@ -54,7 +54,6 @@
     <Reference Include="PresentationFramework" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Completions\CompletionTheme.cs" />
     <Compile Include="Completions\CSCompletion\CSharpCompletion.cs" />
     <Compile Include="Completions\CSCompletion\Helper\CompletionImage.cs" />
     <Compile Include="Completions\CSCompletion\Helper\CompletionTypes.cs" />
